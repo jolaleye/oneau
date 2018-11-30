@@ -1,0 +1,12 @@
+{
+  "private": true,
+  "name": "au",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Jonathan Olaleye",
+  "license": "MIT",
+  "scripts": {},
+  "repository": "github:jolaleye/au",
+  "bugs": "https://github.com/jolaleye/au/issues",
+  "homepage": "https://github.com/jolaleye/au#readme"
+}
