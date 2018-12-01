@@ -5,7 +5,10 @@
   "description": "",
   "author": "Jonathan Olaleye",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "start": "parcel index.html --out-dir build",
+    "build": "parcel build index.html --out-dir build"
+  },
   "repository": "github:jolaleye/au",
   "bugs": "https://github.com/jolaleye/au/issues",
   "homepage": "https://github.com/jolaleye/au#readme"
