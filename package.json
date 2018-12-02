@@ -11,5 +11,8 @@
   },
   "repository": "github:jolaleye/au",
   "bugs": "https://github.com/jolaleye/au/issues",
-  "homepage": "https://github.com/jolaleye/au#readme"
+  "homepage": "https://github.com/jolaleye/au#readme",
+  "dependencies": {
+    "three": "^0.99.0"
+  }
 }
