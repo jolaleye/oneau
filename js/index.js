@@ -1,25 +1,33 @@
 import * as THREE from 'three';
 
-// set up the scene, camera, and renderer
+import POV from './pov';
+
+// create a new POV
+const pov = new POV();
+
+// set up the scene and renderer
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 const renderer = new THREE.WebGLRenderer();
 
 // set up the canvas
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// resize the canvas when needed
+// handle window resizes
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
+  pov.onResize();
 });
 
 // animation loop
+let lastTick = performance.now();
 function animate() {
   requestAnimationFrame(animate);
-  renderer.render(scene, camera);
+  const timestep = performance.now() - lastTick;
+  const ts = timestep / 1000; // scales speeds to be 1 unit/second regardless of frame rate
+  lastTick = performance.now();
+
+  renderer.render(scene, pov.camera);
 }
 
 animate();
