@@ -1,6 +1,6 @@
-// helper class to fly around the scene
 import * as THREE from 'three';
 
+// helper class to fly around the scene
 class Inspector {
   constructor(camera) {
     this.camera = camera;
@@ -13,13 +13,11 @@ class Inspector {
     this.yaw = new THREE.Object3D();
     this.yaw.add(this.pitch);
 
-    this.speed = 10;
+    this.speed = 20;
     this.moving = { forward: false, back: false };
     this.velocity = new THREE.Vector3();
     this.direction = new THREE.Vector3();
-  }
 
-  init() {
     document.addEventListener('pointerlockchange', () => (this.locked = document.pointerLockElement === document.body));
     document.querySelector('canvas').addEventListener('click', () => document.body.requestPointerLock());
     document.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -29,7 +27,6 @@ class Inspector {
 
   update(ts) {
     if (!this.locked) return;
-    if (!(this.moving.forward || this.moving.back)) return;
 
     this.camera.getWorldDirection(this.direction);
     const backOrForth = Number(this.moving.forward) - Number(this.moving.back);
