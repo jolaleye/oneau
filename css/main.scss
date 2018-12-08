@@ -7,6 +7,6 @@ body {
   overflow: hidden;
 
   &.locked {
-    cursor: none;
+    cursor: url('../img/cursor.svg'), auto;
   }
 }
