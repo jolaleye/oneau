@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 
 import POV from './pov';
+import Earth from './earth';
+import Sun from './sun';
 
 // create a new POV
 const pov = new POV();
@@ -19,6 +21,18 @@ window.addEventListener('resize', () => {
   pov.onResize();
 });
 
+// "lock" when clicked - mouse disappears & can look around
+document.querySelector('canvas').addEventListener('click', () => {
+  document.body.classList.add('locked');
+  pov.locked = true;
+});
+
+const earth = new Earth();
+scene.add(earth);
+
+const sun = new Sun();
+scene.add(sun);
+
 // animation loop
 let lastTick = performance.now();
 function animate() {
@@ -26,6 +40,8 @@ function animate() {
   const timestep = performance.now() - lastTick;
   const ts = timestep / 1000; // scales speeds to be 1 unit/second regardless of frame rate
   lastTick = performance.now();
+
+  pov.update(ts);
 
   renderer.render(scene, pov.camera);
 }
