@@ -3,17 +3,11 @@ import * as THREE from 'three';
 // helper class to fly around the scene
 class Inspector {
   constructor(camera) {
-    this.camera = camera;
-    this.camera.rotation.set(0, 0, 0);
     this.locked = false;
+    this.camera = camera;
+    this.camera.rotation.order = 'YXZ';
 
-    this.pitch = new THREE.Object3D();
-    this.pitch.add(this.camera);
-
-    this.yaw = new THREE.Object3D();
-    this.yaw.add(this.pitch);
-
-    this.speed = 20;
+    this.speed = 200000;
     this.moving = { forward: false, back: false };
     this.velocity = new THREE.Vector3();
     this.direction = new THREE.Vector3();
@@ -32,7 +26,7 @@ class Inspector {
     const backOrForth = Number(this.moving.forward) - Number(this.moving.back);
     this.velocity = this.direction.multiplyScalar(this.speed * backOrForth * ts);
 
-    this.yaw.position.add(this.velocity);
+    this.camera.position.add(this.velocity);
   }
 
   onMouseMove(event) {
@@ -41,11 +35,11 @@ class Inspector {
     const dx = event.movementX || 0;
     const dy = event.movementY || 0;
 
-    this.yaw.rotation.y -= dx * 0.002;
-    this.pitch.rotation.x -= dy * 0.002;
+    this.camera.rotation.y -= dx * 0.002;
+    this.camera.rotation.x -= dy * 0.002;
 
     const pi2 = Math.PI / 2;
-    this.pitch.rotation.x = Math.max(-pi2, Math.min(pi2, this.pitch.rotation.x));
+    this.camera.rotation.x = Math.max(-pi2, Math.min(pi2, this.camera.rotation.x));
   }
 
   onKeyDown(event) {
