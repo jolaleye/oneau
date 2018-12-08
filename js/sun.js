@@ -1,9 +1,12 @@
 import * as THREE from 'three';
 
+import _ from '../settings.json';
+
 class Sun extends THREE.Mesh {
   constructor() {
-    // pass a geometry and material to the parent Mesh class
-    super(new THREE.SphereBufferGeometry(10, 20, 20), new THREE.MeshBasicMaterial({ color: '#FFBF62' }));
+    super(new THREE.SphereBufferGeometry(_.sun.radius, 100, 100), new THREE.MeshBasicMaterial({ color: '#FFBF62' }));
+
+    this.position.set(0, 0, -_.earth.orbit.radius);
   }
 }
 
