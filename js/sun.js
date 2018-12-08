@@ -4,7 +4,10 @@ import _ from '../settings.json';
 
 class Sun extends THREE.Mesh {
   constructor() {
-    super(new THREE.SphereBufferGeometry(_.sun.radius, 100, 100), new THREE.MeshBasicMaterial({ color: '#FFBF62' }));
+    super(
+      new THREE.SphereBufferGeometry(_.sun.radius, _.sun.segments, _.sun.segments),
+      new THREE.MeshBasicMaterial({ color: '#FFBF62' })
+    );
   }
 }
 
