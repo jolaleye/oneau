@@ -1,9 +1,10 @@
 import * as THREE from 'three';
 
+import _ from '../settings.json';
+
 class Earth extends THREE.Mesh {
   constructor() {
-    // pass a geometry and material to the parent Mesh class
-    super(new THREE.SphereBufferGeometry(10, 20, 20), new THREE.MeshBasicMaterial({ color: '#62A9FF' }));
+    super(new THREE.SphereBufferGeometry(_.earth.radius, 100, 100), new THREE.MeshBasicMaterial({ color: '#62A9FF' }));
   }
 }
 
