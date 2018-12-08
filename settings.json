@@ -1,15 +1,21 @@
 {
-  "earth": {
-    "radius": 63.71,
-    "orbitRadius": 1495975
+  "system": {
+    "radius": 1000,
+    "segments": 100
   },
   "sun": {
-    "radius": 6957
+    "radius": 0.6957,
+    "segments": 10
+  },
+  "earth": {
+    "radius": 0.006371,
+    "segments": 10,
+    "orbit": 149.5975
   },
   "camera": {
     "fov": 75,
-    "near": 0.1,
-    "far": 10000000,
+    "near": 0.0001,
+    "far": 2100,
     "yawSpeed": 0.4,
     "yawCorrectionSpeed": 0.3,
     "pitchSpeed": 0.4,
