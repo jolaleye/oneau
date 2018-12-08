@@ -15,7 +15,7 @@ class POV {
 
     this.camera.rotation.order = 'YXZ';
     // place camera just in front of Earth
-    this.camera.position.z = _.earth.orbitRadius - (_.earth.radius + _.earth.radius / 2);
+    this.camera.position.z = _.earth.orbit - _.earth.radius * 1.5;
 
     // yaw & pitch based on mouse position
     this.yaw = 0;
