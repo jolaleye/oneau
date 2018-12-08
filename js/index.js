@@ -1,15 +1,22 @@
 import * as THREE from 'three';
 
+import _ from '../settings.json'; // 1 unit(u) = 1,000,000km, speeds in u/s
 import POV from './pov';
-import Earth from './earth';
+import MilkyWay from './milkyway';
 import Sun from './sun';
-
-// create a new POV
-const pov = new POV();
+import Earth from './earth';
 
 // set up the scene and renderer
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
+
+const pov = new POV();
+
+const milkyway = new MilkyWay();
+const sun = new Sun();
+const earth = new Earth();
+
+scene.add(milkyway, sun, earth);
 
 // set up the canvas
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -21,24 +28,18 @@ window.addEventListener('resize', () => {
   pov.onResize();
 });
 
-// "lock" when clicked - mouse disappears & can look around
+// "lock" when clicked - mouse cursor changes & can look around
 document.querySelector('canvas').addEventListener('click', () => {
   document.body.classList.add('locked');
   pov.locked = true;
 });
-
-const earth = new Earth();
-scene.add(earth);
-
-const sun = new Sun();
-scene.add(sun);
 
 // animation loop
 let lastTick = performance.now();
 function animate() {
   requestAnimationFrame(animate);
   const timestep = performance.now() - lastTick;
-  const ts = timestep / 1000; // scales speeds to be 1 unit/second regardless of frame rate
+  const ts = timestep / 1000; // scales speeds to be 1 u/s regardless of frame rate
   lastTick = performance.now();
 
   pov.update(ts);
