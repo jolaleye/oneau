@@ -12,10 +12,10 @@ class POV {
       _.camera.near,
       _.camera.far
     );
-
     this.camera.rotation.order = 'YXZ';
-    // place camera just in front of Earth
-    this.camera.position.z = _.earth.orbit - _.earth.radius * 1.5;
+
+    // rotation to return to when user yields control (e.g. mouseleave)
+    this.desiredRotation = { x: 0, y: 0 };
 
     // yaw & pitch based on mouse position
     this.yaw = 0;
@@ -32,19 +32,33 @@ class POV {
   }
 
   update(ts) {
-    // if yaw is 0/falsy but the camera isn't centered about its y axis
-    if (!this.yaw && (this.camera.rotation.y > 0.001 || this.camera.rotation.y < -0.001)) {
-      this.camera.rotateY(-this.camera.rotation.y * _.camera.yawCorrectionSpeed * ts);
+    // if yaw is 0/falsy but the camera isn't rotated correctly around its y
+    const y0 = this.camera.rotation.y - this.desiredRotation.y;
+    if (!this.yaw && (y0 > _.camera.correctionThreshold || y0 < -_.camera.correctionThreshold)) {
+      this.camera.rotateY(-y0 * _.camera.yawCorrectionSpeed * ts);
     }
 
-    // if pitch is 0/falsy but the camera isn't centered about its x axis
-    if (!this.pitch && (this.camera.rotation.x > 0.001 || this.camera.rotation.x < -0.001)) {
-      this.camera.rotateX(-this.camera.rotation.x * _.camera.pitchCorrectionSpeed * ts);
+    // if pitch is 0/falsy but the camera isn't rotated correctly around its x
+    const x0 = this.camera.rotation.x - this.desiredRotation.x;
+    if (!this.pitch && (x0 > _.camera.correctionThreshold || x0 < -_.camera.correctionThreshold)) {
+      this.camera.rotateX(-x0 * _.camera.pitchCorrectionSpeed * ts);
     }
 
-    // rotate towards the mouse *note: this won't happen if the above happens b/c pitch/yaw are 0
+    // rotate towards the mouse *note: this won't do anything if the above happens b/c pitch/yaw would be 0
     this.camera.rotateY(-this.yaw * _.camera.yawSpeed * ts);
     this.camera.rotateX(-this.pitch * _.camera.pitchSpeed * ts);
+  }
+
+  enterOrbit() {
+    // adjust position & rotation for Earth orbit
+    this.camera.position.y = _.earth.orbitHeight;
+    this.camera.rotateY(-Math.PI / 2);
+    this.desiredRotation.y = -Math.PI / 2;
+  }
+
+  exitOrbit() {
+    // adjust position & rotation for camera independence
+    this.camera.position.z = _.earth.sunOrbitRadius - _.earth.radius * 1.5;
   }
 
   onResize() {
