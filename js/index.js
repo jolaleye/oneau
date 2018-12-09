@@ -31,10 +31,10 @@ window.addEventListener('resize', () => {
   pov.onResize();
 });
 
-// "lock" when clicked - mouse cursor changes & can look around
+// "focus" when clicked - transition from landing page
 document.querySelector('canvas').addEventListener('click', () => {
-  document.body.classList.add('locked');
-  pov.locked = true;
+  document.body.classList.add('focused');
+  pov.lock();
 });
 
 // animation loop

@@ -6,7 +6,7 @@
 body {
   overflow: hidden;
 
-  &.locked {
+  &.focused {
     cursor: url('../img/cursor.svg'), auto;
   }
 }
