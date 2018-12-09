@@ -32,21 +32,16 @@ class POV {
     });
   }
 
-  update(ts) {
-    // if yaw is 0/falsy but the camera isn't rotated correctly around its y
-    const y0 = this.camera.rotation.y - this.desiredRotation.y;
-    if (!this.yaw && (y0 > _.camera.correctionThreshold || y0 < -_.camera.correctionThreshold)) {
-      this.camera.rotateY(-y0 * _.camera.yawCorrectionSpeed * ts);
-    }
-
-    // if pitch is 0/falsy but the camera isn't rotated correctly around its x
-    const x0 = this.camera.rotation.x - this.desiredRotation.x;
-    if (!this.pitch && (x0 > _.camera.correctionThreshold || x0 < -_.camera.correctionThreshold)) {
-      this.camera.rotateX(-x0 * _.camera.pitchCorrectionSpeed * ts);
-    }
-
-    // keep roll at whatever it should be (0)
+  update(ts, phase, phaseData) {
+    // camera corrections
+    this.fixYaw(ts);
     this.camera.rotation.z = this.desiredRotation.z;
+    if (phase === 'intro') {
+      // while in the intro phase, rotate against the orbit
+      this.camera.rotateX(phaseData.orbitSpeed * ts);
+    } else {
+      this.fixPitch(ts);
+    }
 
     // if we're not locked, rotate based on mouse movement
     if (!this.locked) {
@@ -62,18 +57,20 @@ class POV {
     this.pitch = 0;
   }
 
-  enterOrbit() {
-    // adjust position & rotation for Earth orbit
-    this.camera.position.set(0, _.earth.orbitHeight, 0);
-    this.camera.rotation.set(0, -Math.PI / 2, 0);
-    this.desiredRotation.set(0, -Math.PI / 2, 0);
+  fixYaw(ts) {
+    // if yaw is 0/falsy but the camera isn't rotated correctly around its y
+    const dy = this.camera.rotation.y - this.desiredRotation.y;
+    if (!this.yaw && (dy > _.camera.correctionThreshold || dy < -_.camera.correctionThreshold)) {
+      this.camera.rotateY(-dy * _.camera.yawCorrectionSpeed * ts);
+    }
   }
 
-  exitOrbit() {
-    // adjust position & rotation for camera independence
-    this.camera.position.set(0, 0, _.earth.sunOrbitRadius - _.earth.radius - _.earth.orbitHeight);
-    this.camera.rotation.set(0, 0, 0);
-    this.desiredRotation.set(0, 0, 0);
+  fixPitch(ts) {
+    // if pitch is 0/falsy but the camera isn't rotated correctly around its x
+    const dx = this.camera.rotation.x - this.desiredRotation.x;
+    if (!this.pitch && (dx > _.camera.correctionThreshold || dx < -_.camera.correctionThreshold)) {
+      this.camera.rotateX(-dx * _.camera.pitchCorrectionSpeed * ts);
+    }
   }
 
   onResize() {
