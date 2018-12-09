@@ -16,6 +16,9 @@ const milkyway = new MilkyWay();
 const sun = new Sun();
 const earth = new Earth();
 
+earth.orbit.add(pov.camera);
+pov.enterOrbit();
+
 scene.add(milkyway, sun, earth);
 
 // set up the canvas
@@ -43,6 +46,7 @@ function animate() {
   lastTick = performance.now();
 
   pov.update(ts);
+  earth.update(ts);
 
   renderer.render(scene, pov.camera);
 }
