@@ -11,7 +11,7 @@
     "radius": 0.006371,
     "segments": 10,
     "sunOrbitRadius": 149.5975,
-    "orbitSpeed": 0.00766,
+    "orbitSpeed": 0.005,
     "orbitHeight": 0.0067
   },
   "camera": {
