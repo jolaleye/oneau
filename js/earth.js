@@ -15,13 +15,16 @@ class Earth extends THREE.Mesh {
     this.orbit = new THREE.Group();
     this.add(this.orbit);
     this.orbit.rotateY(Math.PI / 2);
+    this.orbit.rotateZ(Math.PI / 8);
 
     // orbit visualization
     // const orbitPath = new THREE.Line(
-    //   new THREE.CircleBufferGeometry(_.earth.radius * 1.75),
-    //   new THREE.LineBasicMaterial()
+    //   new THREE.CircleBufferGeometry(_.earth.radius * 1.75, 12),
+    //   new THREE.LineBasicMaterial({ transparent: true, opacity: 0.25 })
     // );
-    // this.orbit.add(orbitPath);
+    // const orbitAxes = new THREE.AxesHelper(0.003);
+    // orbitAxes.position.y = _.earth.radius * 1.75;
+    // this.orbit.add(orbitPath, orbitAxes);
   }
 
   update(ts) {
