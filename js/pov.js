@@ -4,6 +4,7 @@ import _ from '../settings.json';
 
 class POV {
   constructor() {
+    // when true, disables looking around freely
     this.locked = false;
 
     this.camera = new THREE.PerspectiveCamera(
@@ -15,14 +16,14 @@ class POV {
     this.camera.rotation.order = 'YXZ';
 
     // rotation to return to when user yields control (e.g. mouseleave)
-    this.desiredRotation = { x: 0, y: 0 };
+    this.desiredRotation = new THREE.Euler();
 
     // yaw & pitch based on mouse position
     this.yaw = 0;
     this.pitch = 0;
 
     // track mouse movement
-    document.addEventListener('mousemove', this.onMouseMove.bind(this));
+    document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
 
     // look at the sun when the mouse leaves the screen
     document.body.addEventListener('mouseleave', () => {
@@ -44,21 +45,35 @@ class POV {
       this.camera.rotateX(-x0 * _.camera.pitchCorrectionSpeed * ts);
     }
 
-    // rotate towards the mouse *note: this won't do anything if the above happens b/c pitch/yaw would be 0
-    this.camera.rotateY(-this.yaw * _.camera.yawSpeed * ts);
-    this.camera.rotateX(-this.pitch * _.camera.pitchSpeed * ts);
+    // keep roll at whatever it should be (0)
+    this.camera.rotation.z = this.desiredRotation.z;
+
+    // if we're not locked, rotate based on mouse movement
+    if (!this.locked) {
+      this.camera.rotateY(-this.yaw * _.camera.yawSpeed * ts);
+      this.camera.rotateX(-this.pitch * _.camera.pitchSpeed * ts);
+    }
+  }
+
+  lock() {
+    // temporarily disable looking around
+    this.locked = true;
+    this.yaw = 0;
+    this.pitch = 0;
   }
 
   enterOrbit() {
     // adjust position & rotation for Earth orbit
-    this.camera.position.y = _.earth.orbitHeight;
-    this.camera.rotateY(-Math.PI / 2);
-    this.desiredRotation.y = -Math.PI / 2;
+    this.camera.position.set(0, _.earth.orbitHeight, 0);
+    this.camera.rotation.set(0, -Math.PI / 2, 0);
+    this.desiredRotation.set(0, -Math.PI / 2, 0);
   }
 
   exitOrbit() {
     // adjust position & rotation for camera independence
-    this.camera.position.z = _.earth.sunOrbitRadius - _.earth.radius * 1.5;
+    this.camera.position.set(0, 0, _.earth.sunOrbitRadius - _.earth.radius - _.earth.orbitHeight);
+    this.camera.rotation.set(0, 0, 0);
+    this.desiredRotation.set(0, 0, 0);
   }
 
   onResize() {
@@ -67,8 +82,6 @@ class POV {
   }
 
   onMouseMove(event) {
-    if (!this.locked) return;
-
     const halfwidth = window.innerWidth / 2;
     const halfheight = window.innerHeight / 2;
 
