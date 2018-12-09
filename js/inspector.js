@@ -1,13 +1,21 @@
 import * as THREE from 'three';
 
+import _ from '../settings.json';
+
 // helper class to fly around the scene
 class Inspector {
-  constructor(camera) {
+  constructor() {
     this.locked = false;
-    this.camera = camera;
+    this.camera = new THREE.PerspectiveCamera(
+      _.camera.fov,
+      window.innerWidth / window.innerHeight,
+      _.camera.near,
+      _.camera.far
+    );
     this.camera.rotation.order = 'YXZ';
+    this.camera.position.z = _.earth.sunOrbitRadius - _.earth.radius - _.earth.orbitHeight;
 
-    this.speed = 200000;
+    this.speed = 0.2;
     this.moving = { forward: false, back: false };
     this.velocity = new THREE.Vector3();
     this.direction = new THREE.Vector3();
