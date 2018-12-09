@@ -12,7 +12,8 @@
     "segments": 10,
     "sunOrbitRadius": 149.5975,
     "orbitSpeed": 0.005,
-    "orbitHeight": 0.0067
+    "orbitHeight": 0.0067,
+    "orbitIntroSpeed": 0.1
   },
   "camera": {
     "fov": 75,
