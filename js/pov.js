@@ -20,7 +20,7 @@ class POV {
     // temporary quaternion to calculate new camera orientation
     this.tmpQuaternion = new THREE.Quaternion();
     // rotation to return to when user yields control
-    this.desiredRotation = new THREE.Euler();
+    this.desiredRotation = new THREE.Quaternion();
 
     // track mouse movement
     document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -32,7 +32,10 @@ class POV {
   }
 
   update(ts, phase) {
-    this.fixCameraOrientation(ts);
+    // fix camera orientation if the rotationVector has been cleared
+    if (!this.rotationVector.x && !this.rotationVector.y) {
+      this.camera.quaternion.slerp(this.desiredRotation, _.camera.correctionSpeed * ts);
+    }
 
     // if we're not locked, rotate based on mouse position stored in the rotationVector
     if (!this.locked) {
@@ -48,20 +51,6 @@ class POV {
     // temporarily disable looking around
     this.locked = true;
     this.rotationVector.set(0, 0, 0);
-  }
-
-  fixCameraOrientation(ts) {
-    // if pitch is 0/falsy but the camera isn't rotated correctly around its x
-    const dx = this.camera.rotation.x - this.desiredRotation.x;
-    if (!this.rotationVector.x && (dx > _.camera.correctionThreshold || dx < -_.camera.correctionThreshold)) {
-      this.camera.rotateX(-dx * _.camera.pitchCorrectionSpeed * ts);
-    }
-
-    // if yaw is 0/falsy but the camera isn't rotated correctly around its y
-    const dy = this.camera.rotation.y - this.desiredRotation.y;
-    if (!this.rotationVector.y && (dy > _.camera.correctionThreshold || dy < -_.camera.correctionThreshold)) {
-      this.camera.rotateY(-dy * _.camera.yawCorrectionSpeed * ts);
-    }
   }
 
   onMouseMove(event) {

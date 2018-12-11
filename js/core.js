@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 import _ from '../settings.json'; // 1 unit(u) = 1,000,000km, speeds in u/s
 import POV from './pov';
 import MilkyWay from './milkyway';
@@ -45,7 +47,7 @@ class Core {
     this.earth.orbit.add(this.pov.camera);
     this.pov.camera.position.z = _.earth.orbitalHeight;
     this.pov.camera.rotation.set(Math.PI / 2.5, 0, 0);
-    this.pov.desiredRotation.set(Math.PI / 2.5, 0, 0);
+    this.pov.desiredRotation.setFromEuler(new THREE.Euler(Math.PI / 2.5, 0, 0));
   }
 
   // intro phase runs after the user has clicked to start

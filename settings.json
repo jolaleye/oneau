@@ -21,10 +21,8 @@
     "fov": 75,
     "near": 0.0001,
     "far": 2100,
-    "correctionThreshold": 0.005,
     "yawSpeed": 0.4,
-    "yawCorrectionSpeed": 0.3,
     "pitchSpeed": 0.4,
-    "pitchCorrectionSpeed": 0.3
+    "correctionSpeed": 0.4
   }
 }
