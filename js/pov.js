@@ -15,8 +15,8 @@ class POV {
     );
     this.camera.rotation.order = 'YXZ';
 
-    // normalized mouse position for rotation
-    this.rotationVector = new THREE.Vector3();
+    // normalized mouse position used for rotating camera
+    this.orientation = new THREE.Vector3();
     // temporary quaternion to calculate new camera orientation
     this.tmpQuaternion = new THREE.Quaternion();
     // rotation to return to when user yields control
@@ -27,20 +27,20 @@ class POV {
 
     // yield camera rotation control on mouseleave
     document.body.addEventListener('mouseleave', () => {
-      this.rotationVector.set(0, 0, 0);
+      this.orientation.set(0, 0, 0);
     });
   }
 
   update(ts, phase) {
-    // fix camera orientation if the rotationVector has been cleared
-    if (!this.rotationVector.x && !this.rotationVector.y) {
+    // fix camera if orientation has been cleared
+    if (!this.orientation.x && !this.orientation.y) {
       this.camera.quaternion.slerp(this.desiredRotation, _.camera.correctionSpeed * ts);
     }
 
-    // if we're not locked, rotate based on mouse position stored in the rotationVector
+    // if we're not locked, rotate based on mouse position stored in orientation
     if (!this.locked) {
       this.tmpQuaternion
-        .set(this.rotationVector.x * _.camera.pitchSpeed * ts, this.rotationVector.y * _.camera.yawSpeed * ts, 0, 1)
+        .set(this.orientation.x * _.camera.pitchSpeed * ts, this.orientation.y * _.camera.yawSpeed * ts, 0, 1)
         .normalize();
       this.camera.quaternion.multiply(this.tmpQuaternion);
       this.camera.rotation.setFromQuaternion(this.camera.quaternion, this.camera.rotation.order);
@@ -50,7 +50,7 @@ class POV {
   lock() {
     // temporarily disable looking around
     this.locked = true;
-    this.rotationVector.set(0, 0, 0);
+    this.orientation.set(0, 0, 0);
   }
 
   onMouseMove(event) {
@@ -59,12 +59,12 @@ class POV {
     const halfheight = window.innerHeight / 2;
     const halfwidth = window.innerWidth / 2;
 
-    // top left is -1 pitch -1 yaw, bottom right is 1,1
-    const pitch = (event.y - halfheight) / halfheight;
-    const yaw = (event.x - halfwidth) / halfwidth;
+    // top left is 1 pitch, 1 yaw; bottom right is -1,-1
+    const pitch = -(event.y - halfheight) / halfheight;
+    const yaw = -(event.x - halfwidth) / halfwidth;
 
     // store mouse position for rotation
-    this.rotationVector.set(-pitch, -yaw, 0);
+    this.orientation.set(pitch, yaw, 0);
   }
 
   onResize() {
