@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import EventEmitter from 'events';
 
 import _ from '../settings.json';
 
@@ -9,35 +10,40 @@ class Earth extends THREE.Mesh {
       new THREE.MeshBasicMaterial({ color: '#62A9FF' })
     );
 
-    this.position.z = _.earth.sunOrbitRadius;
+    this.events = new EventEmitter();
 
-    // create an orbit around Earth
+    this.position.z = _.earth.orbitRadius;
+
+    // create an orbit object
     this.orbit = new THREE.Group();
+    this.orbit.rotateX(-Math.PI / 4);
     this.add(this.orbit);
-    this.orbit.rotation.order = 'YZX';
-    this.orbit.rotateY(Math.PI / 2);
-    this.orbit.rotateZ(Math.PI / 8);
 
-    // orbit visualization
-    // const orbitPath = new THREE.Line(
-    //   new THREE.CircleBufferGeometry(_.earth.radius * 1.75, 12),
-    //   new THREE.LineBasicMaterial({ transparent: true, opacity: 0.25 })
-    // );
-    // const orbitAxes = new THREE.AxesHelper(0.003);
-    // const orbitBall = new THREE.Mesh(new THREE.SphereBufferGeometry(0.0002, 10, 10), new THREE.MeshBasicMaterial());
-    // this.orbitBall = orbitBall;
-    // orbitBall.rotation.y = -Math.PI / 2;
-    // orbitBall.position.y = _.earth.radius * 1.75;
-    // orbitBall.add(orbitAxes);
-    // this.orbit.add(orbitPath, orbitBall);
+    const ball = new THREE.Mesh(new THREE.SphereBufferGeometry(0.0005, 20, 20), new THREE.MeshBasicMaterial());
+    ball.position.z = _.earth.orbitalHeight;
+    ball.add(new THREE.AxesHelper(0.003));
+    this.orbit.add(ball);
   }
 
-  update(ts, phase, phaseData) {
-    // rotate orbit as usual while in "wait" phase
-    if (phase === 'wait') this.orbit.rotateZ(-_.earth.orbitSpeed * ts);
+  update(ts, phase) {
+    // rotate the orbit at the usual speed while in the wait phase
+    if (phase === 'wait') this.orbit.rotateX(-_.earth.orbitalSpeed * ts);
 
-    // if in intro phase, move the orbit to the desired rotation
-    if (phase === 'intro') this.orbit.rotateZ(-phaseData.orbitSpeed * ts);
+    // while in the intro phase, rotate the orbit so that the camera is between the Earth & Sun
+    if (phase === 'intro') {
+      // radians left to rotate until the camera is in position
+      const rotationLeft = this.orbit.rotation.x + Math.PI;
+
+      // if the rotation remaining is insignificant, just stop
+      if (rotationLeft < 0.01) return this.events.emit('introDone');
+
+      const speed = Math.max(
+        rotationLeft * _.earth.orbitalSpeedIntro,
+        rotationLeft > 0.075 ? _.earth.slowOrbitalSpeedIntro : _.earth.slowestOrbitalSpeedIntro
+      );
+
+      this.orbit.rotateX(-speed * ts);
+    }
   }
 }
 
