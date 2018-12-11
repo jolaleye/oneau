@@ -13,7 +13,7 @@ class Inspector {
       _.camera.far
     );
     this.camera.rotation.order = 'YXZ';
-    this.camera.position.z = _.earth.sunOrbitRadius - _.earth.radius - _.earth.orbitHeight;
+    this.camera.position.z = _.earth.orbitRadius - _.earth.radius * 1.5;
 
     this.speed = 0.2;
     this.moving = { forward: false, back: false };
