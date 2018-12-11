@@ -10,10 +10,12 @@
   "earth": {
     "radius": 0.006371,
     "segments": 10,
-    "sunOrbitRadius": 149.5975,
-    "orbitSpeed": 0.005,
-    "orbitHeight": 0.0067,
-    "orbitIntroSpeed": 0.1
+    "orbitRadius": 149.5975,
+    "orbitalHeight": 0.007,
+    "orbitalSpeed": 0.01,
+    "orbitalSpeedIntro": 0.06,
+    "slowOrbitalSpeedIntro": 0.04,
+    "slowestOrbitalSpeedIntro": 0.02
   },
   "camera": {
     "fov": 75,
