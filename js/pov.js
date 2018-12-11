@@ -15,76 +15,72 @@ class POV {
     );
     this.camera.rotation.order = 'YXZ';
 
-    // rotation to return to when user yields control (e.g. mouseleave)
+    // normalized mouse position for rotation
+    this.rotationVector = new THREE.Vector3();
+    // temporary quaternion to calculate new camera orientation
+    this.tmpQuaternion = new THREE.Quaternion();
+    // rotation to return to when user yields control
     this.desiredRotation = new THREE.Euler();
-
-    // yaw & pitch based on mouse position
-    this.yaw = 0;
-    this.pitch = 0;
 
     // track mouse movement
     document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
 
-    // look at the sun when the mouse leaves the screen
+    // yield camera rotation control on mouseleave
     document.body.addEventListener('mouseleave', () => {
-      this.yaw = 0;
-      this.pitch = 0;
+      this.rotationVector.set(0, 0, 0);
     });
   }
 
-  update(ts, phase, phaseData) {
-    // camera corrections
-    this.fixYaw(ts);
-    this.camera.rotation.z = this.desiredRotation.z;
-    if (phase === 'intro') {
-      // while in the intro phase, rotate against the orbit
-      this.camera.rotateX(phaseData.orbitSpeed * ts);
-    } else {
-      this.fixPitch(ts);
-    }
+  update(ts, phase) {
+    this.fixCameraOrientation(ts);
 
-    // if we're not locked, rotate based on mouse movement
+    // if we're not locked, rotate based on mouse position stored in the rotationVector
     if (!this.locked) {
-      this.camera.rotateY(-this.yaw * _.camera.yawSpeed * ts);
-      this.camera.rotateX(-this.pitch * _.camera.pitchSpeed * ts);
+      this.tmpQuaternion
+        .set(this.rotationVector.x * _.camera.pitchSpeed * ts, this.rotationVector.y * _.camera.yawSpeed * ts, 0, 1)
+        .normalize();
+      this.camera.quaternion.multiply(this.tmpQuaternion);
+      this.camera.rotation.setFromQuaternion(this.camera.quaternion, this.camera.rotation.order);
     }
   }
 
   lock() {
     // temporarily disable looking around
     this.locked = true;
-    this.yaw = 0;
-    this.pitch = 0;
+    this.rotationVector.set(0, 0, 0);
   }
 
-  fixYaw(ts) {
+  fixCameraOrientation(ts) {
+    // if pitch is 0/falsy but the camera isn't rotated correctly around its x
+    const dx = this.camera.rotation.x - this.desiredRotation.x;
+    if (!this.rotationVector.x && (dx > _.camera.correctionThreshold || dx < -_.camera.correctionThreshold)) {
+      this.camera.rotateX(-dx * _.camera.pitchCorrectionSpeed * ts);
+    }
+
     // if yaw is 0/falsy but the camera isn't rotated correctly around its y
     const dy = this.camera.rotation.y - this.desiredRotation.y;
-    if (!this.yaw && (dy > _.camera.correctionThreshold || dy < -_.camera.correctionThreshold)) {
+    if (!this.rotationVector.y && (dy > _.camera.correctionThreshold || dy < -_.camera.correctionThreshold)) {
       this.camera.rotateY(-dy * _.camera.yawCorrectionSpeed * ts);
     }
   }
 
-  fixPitch(ts) {
-    // if pitch is 0/falsy but the camera isn't rotated correctly around its x
-    const dx = this.camera.rotation.x - this.desiredRotation.x;
-    if (!this.pitch && (dx > _.camera.correctionThreshold || dx < -_.camera.correctionThreshold)) {
-      this.camera.rotateX(-dx * _.camera.pitchCorrectionSpeed * ts);
-    }
+  onMouseMove(event) {
+    if (this.locked) return;
+
+    const halfheight = window.innerHeight / 2;
+    const halfwidth = window.innerWidth / 2;
+
+    // top left is -1 pitch -1 yaw, bottom right is 1,1
+    const pitch = (event.y - halfheight) / halfheight;
+    const yaw = (event.x - halfwidth) / halfwidth;
+
+    // store mouse position for rotation
+    this.rotationVector.set(-pitch, -yaw, 0);
   }
 
   onResize() {
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
-  }
-
-  onMouseMove(event) {
-    const halfwidth = window.innerWidth / 2;
-    const halfheight = window.innerHeight / 2;
-
-    // top left is -1 yaw -1 pitch, bottom right is 1,1
-    this.yaw = (event.x - halfwidth) / halfwidth;
-    this.pitch = (event.y - halfheight) / halfheight;
   }
 }
 
