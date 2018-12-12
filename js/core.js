@@ -76,6 +76,15 @@ class Core {
   // AU phase runs when the camera has been orbited into place and is ready to travel
   startAU() {
     this.phase = 'au';
+
+    // release the camera from Earth's orbit
+    this.pov.camera.position.setFromMatrixPosition(this.pov.camera.matrixWorld);
+    this.pov.camera.rotation.setFromRotationMatrix(new THREE.Matrix4().extractRotation(this.pov.camera.matrixWorld));
+    this.earth.orbit.remove(this.pov.camera);
+
+    // unlock camera controls
+    this.pov.locked = false;
+    this.pov.desiredRotation.setFromEuler(new THREE.Euler(0, 0, 0));
   }
 }
 
