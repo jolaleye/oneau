@@ -38,7 +38,7 @@ class Earth extends THREE.Mesh {
       if (rotationLeft < 0.01) return this.events.emit('introDone');
 
       // if the rotation remaining is almost none, tell the camera to rotate
-      if (rotationLeft < 0.1) return this.events.emit('introAlmostDone');
+      if (rotationLeft < 0.1) this.events.emit('introAlmostDone');
 
       const speed = Math.max(
         rotationLeft * _.earth.orbitalSpeedIntro,
