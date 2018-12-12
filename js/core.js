@@ -54,6 +54,10 @@ class Core {
   // - orbit rotates to bring camera down
   startIntro() {
     this.phase = 'intro';
+    this.earth.events.once('introAlmostDone', () => {
+      this.phase = 'finishingIntro';
+      this.pov.desiredRotation.setFromEuler(new THREE.Euler(Math.PI, 0, 0));
+    });
     this.earth.events.once('introDone', this.startAU.bind(this));
     this.pov.lock();
   }

@@ -30,12 +30,15 @@ class Earth extends THREE.Mesh {
     if (phase === 'wait') this.orbit.rotateX(-_.earth.orbitalSpeed * ts);
 
     // while in the intro phase, rotate the orbit so that the camera is between the Earth & Sun
-    if (phase === 'intro') {
+    if (phase === 'intro' || phase === 'finishingIntro') {
       // radians left to rotate until the camera is in position
       const rotationLeft = this.orbit.rotation.x + Math.PI;
 
       // if the rotation remaining is insignificant, just stop
       if (rotationLeft < 0.01) return this.events.emit('introDone');
+
+      // if the rotation remaining is almost none, tell the camera to rotate
+      if (rotationLeft < 0.1) return this.events.emit('introAlmostDone');
 
       const speed = Math.max(
         rotationLeft * _.earth.orbitalSpeedIntro,
