@@ -54,12 +54,23 @@ class Core {
   // - orbit rotates to bring camera down
   startIntro() {
     this.phase = 'intro';
+    this.pov.lock();
+
     this.earth.events.once('introAlmostDone', () => {
       this.phase = 'finishingIntro';
       this.pov.desiredRotation.setFromEuler(new THREE.Euler(Math.PI, 0, 0));
     });
-    this.earth.events.once('introDone', this.startAU.bind(this));
-    this.pov.lock();
+
+    // wait for both the earth and pov to say they're done
+    const done = { earth: false, pov: false };
+    this.earth.events.once('introDone', () => {
+      done.earth = true;
+      if (done.earth && done.pov) this.startAU();
+    });
+    this.pov.events.once('introDone', () => {
+      done.pov = true;
+      if (done.earth && done.pov) this.startAU();
+    });
   }
 
   // AU phase runs when the camera has been orbited into place and is ready to travel

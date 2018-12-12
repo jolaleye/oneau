@@ -1,9 +1,12 @@
 import * as THREE from 'three';
+import EventEmitter from 'events';
 
 import _ from '../settings.json';
 
 class POV {
   constructor() {
+    this.events = new EventEmitter();
+
     // when true, disables looking around freely
     this.locked = false;
 
@@ -34,9 +37,13 @@ class POV {
   update(ts, phase) {
     // fix camera if orientation has been cleared
     if (!this.orientation.x && !this.orientation.y) {
+      // use the cinematic correction speed during certain phases
       const correctionSpeed = phase === 'finishingIntro' ? _.camera.cinematicCorrectionSpeed : _.camera.correctionSpeed;
       this.camera.quaternion.slerp(this.desiredRotation, correctionSpeed * ts);
     }
+
+    // if we're finishing up the intro phase, check the camera's rotation progress
+    if (phase === 'finishingIntro' && this.camera.rotation.x < 0.05) this.events.emit('introDone');
 
     // if we're not locked, rotate based on mouse position stored in orientation
     if (!this.locked) {
