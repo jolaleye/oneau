@@ -23,6 +23,7 @@
     "far": 2100,
     "yawSpeed": 0.4,
     "pitchSpeed": 0.4,
-    "correctionSpeed": 0.4
+    "correctionSpeed": 0.4,
+    "cinematicCorrectionSpeed": 0.15
   }
 }

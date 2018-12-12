@@ -34,7 +34,8 @@ class POV {
   update(ts, phase) {
     // fix camera if orientation has been cleared
     if (!this.orientation.x && !this.orientation.y) {
-      this.camera.quaternion.slerp(this.desiredRotation, _.camera.correctionSpeed * ts);
+      const correctionSpeed = phase === 'finishingIntro' ? _.camera.cinematicCorrectionSpeed : _.camera.correctionSpeed;
+      this.camera.quaternion.slerp(this.desiredRotation, correctionSpeed * ts);
     }
 
     // if we're not locked, rotate based on mouse position stored in orientation
