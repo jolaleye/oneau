@@ -19,10 +19,10 @@ class Earth extends THREE.Mesh {
     this.orbit.rotateX(-Math.PI / 4);
     this.add(this.orbit);
 
-    const ball = new THREE.Mesh(new THREE.SphereBufferGeometry(0.0005, 20, 20), new THREE.MeshBasicMaterial());
-    ball.position.z = _.earth.orbitalHeight;
-    ball.add(new THREE.AxesHelper(0.003));
-    this.orbit.add(ball);
+    // const ball = new THREE.Mesh(new THREE.SphereBufferGeometry(0.0005, 20, 20), new THREE.MeshBasicMaterial());
+    // ball.position.z = _.earth.orbitalHeight;
+    // ball.add(new THREE.AxesHelper(0.003));
+    // this.orbit.add(ball);
   }
 
   update(ts, phase) {
