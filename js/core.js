@@ -78,7 +78,7 @@ class Core {
     this.phase = 'au';
 
     // release the camera from Earth's orbit
-    this.pov.camera.position.setFromMatrixPosition(this.pov.camera.matrixWorld);
+    this.pov.camera.position.set(0, 0, _.camera.auStartingPosition);
     this.pov.camera.rotation.setFromRotationMatrix(new THREE.Matrix4().extractRotation(this.pov.camera.matrixWorld));
     this.earth.orbit.remove(this.pov.camera);
 

@@ -24,6 +24,7 @@
     "rotationSpeed": 0.3,
     "slowRotationSpeed": 0.15,
     "correctionSpeed": 0.4,
-    "cinematicCorrectionSpeed": 0.15
+    "cinematicCorrectionSpeed": 0.15,
+    "auStartingPosition": 149.585
   }
 }
