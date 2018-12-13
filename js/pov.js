@@ -39,10 +39,10 @@ class POV {
     if (!this.orientation.x && !this.orientation.y) {
       // use the cinematic correction speed during certain phases
       const correctionSpeed = phase === 'finishingIntro' ? _.camera.cinematicCorrectionSpeed : _.camera.correctionSpeed;
-      this.camera.quaternion.slerp(this.desiredRotation, correctionSpeed * ts);
+      this.camera.quaternion.slerp(this.desiredRotation, Math.min(correctionSpeed * ts, 1));
     }
 
-    // if we're finishing up the intro phase, check the camera's rotation progress
+    // check the camera's rotation progress while we're nearing the end of the intro phase
     if (phase === 'finishingIntro' && this.camera.rotation.x < 0.05) this.events.emit('introDone');
 
     // if we're not locked, rotate based on mouse position stored in orientation
