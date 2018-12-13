@@ -47,8 +47,10 @@ class POV {
 
     // if we're not locked, rotate based on mouse position stored in orientation
     if (!this.locked) {
+      // use a slower camera rotation speed at times
+      const rotationSpeed = phase === 'wait' ? _.camera.slowRotationSpeed : _.camera.rotationSpeed;
       this.tmpQuaternion
-        .set(this.orientation.x * _.camera.pitchSpeed * ts, this.orientation.y * _.camera.yawSpeed * ts, 0, 1)
+        .set(this.orientation.x * rotationSpeed * ts, this.orientation.y * rotationSpeed * ts, 0, 1)
         .normalize();
       this.camera.quaternion.multiply(this.tmpQuaternion);
       this.camera.rotation.setFromQuaternion(this.camera.quaternion, this.camera.rotation.order);
