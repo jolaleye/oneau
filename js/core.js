@@ -17,10 +17,13 @@ class Core {
     this.earth = new Earth();
     this.scene.add(this.milkyway, this.sun, this.earth);
 
+    // add some ambient light so Earth isn't so dark on one side
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.1));
+
     this.pov = new POV();
 
     this.phase = '';
-
+    // begin the first phase
     this.startWait();
   }
 
@@ -52,6 +55,7 @@ class Core {
 
   // intro phase runs after the user has clicked to start
   // - orbit rotates to bring camera down
+  // - camera rotates towards the Sun & moves further from Earth
   startIntro() {
     this.phase = 'intro';
     this.pov.lock();
@@ -73,7 +77,8 @@ class Core {
     });
   }
 
-  // AU phase runs when the camera has been orbited into place and is ready to travel
+  // AU phase runs after the camera has been orbited into place and is ready to travel / traveling to the Sun
+  // - pov camera is unlocked & velocity can be adjusted by scrolling
   startAU() {
     this.phase = 'au';
 
