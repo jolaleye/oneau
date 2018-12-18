@@ -2,12 +2,34 @@ import * as THREE from 'three';
 import EventEmitter from 'events';
 
 import _ from '../settings.json';
+import earthImg from '../img/earth.png';
+import earthBumpImg from '../img/earth-bump.png';
+import earthWaterImg from '../img/earth-water.png';
+import earthCloudsImg from '../img/earth-clouds.png';
 
 class Earth extends THREE.Mesh {
   constructor() {
+    const loader = new THREE.TextureLoader();
+
     super(
       new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments),
-      new THREE.MeshBasicMaterial({ color: '#62A9FF' })
+      new THREE.MeshPhongMaterial({
+        map: loader.load(earthImg),
+        bumpMap: loader.load(earthBumpImg),
+        bumpScale: 0.0002,
+        specularMap: loader.load(earthWaterImg)
+      })
+    );
+
+    // add a sphere of clouds
+    this.add(
+      new THREE.Mesh(
+        new THREE.SphereBufferGeometry(_.earth.radius * 1.01, _.earth.segments, _.earth.segments),
+        new THREE.MeshPhongMaterial({
+          map: loader.load(earthCloudsImg),
+          transparent: true
+        })
+      )
     );
 
     this.events = new EventEmitter();
