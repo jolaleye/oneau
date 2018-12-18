@@ -9,7 +9,7 @@
   },
   "earth": {
     "radius": 0.006371,
-    "segments": 32,
+    "segments": 75,
     "orbitRadius": 149.5975,
     "orbitalHeight": 0.007,
     "orbitalSpeed": 0.01,
