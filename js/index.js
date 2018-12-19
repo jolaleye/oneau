@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import * as THREE from 'three';
 
 import Core from './core';
@@ -18,10 +19,17 @@ window.addEventListener('resize', () => {
   core.pov.onResize();
 });
 
+const start = async () => {
+  await core.load();
+  core.init();
+  core.startWait();
+  core.run();
+};
+
+start();
+
 // "focus" when clicked - transition from landing page
 document.querySelector('canvas').addEventListener('click', () => {
   document.body.classList.add('focused');
   core.startIntro();
 });
-
-core.start();
