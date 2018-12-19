@@ -6,28 +6,54 @@ import MilkyWay from './milkyway';
 import Sun from './sun';
 import Earth from './earth';
 
+import milkyWayImg from '../img/milkyway.jpg';
+
+import earthImg from '../img/earth.png';
+import earthBumpImg from '../img/earth-bump.png';
+import earthWaterImg from '../img/earth-water.png';
+import earthCloudsImg from '../img/earth-clouds.png';
+
 // controls the whole scene
 class Core {
   constructor(scene, renderer) {
     this.scene = scene;
     this.renderer = renderer;
 
-    this.milkyway = new MilkyWay();
-    this.sun = new Sun();
-    this.earth = new Earth();
-    this.scene.add(this.milkyway, this.sun, this.earth);
-
-    // add some ambient light so Earth isn't so dark on one side
-    this.scene.add(new THREE.AmbientLight(0xffffff, 0.1));
+    this.textures = {
+      milkyway: {},
+      earth: {}
+    };
 
     this.pov = new POV();
-
     this.phase = '';
-    // begin the first phase
-    this.startWait();
   }
 
-  start() {
+  // load all the textures
+  load() {
+    const loader = new THREE.TextureLoader();
+    return new Promise((resolve, reject) => {
+      this.textures.milkyway.stars = loader.load(milkyWayImg, undefined, undefined, reject);
+
+      this.textures.earth.surface = loader.load(earthImg, undefined, undefined, reject);
+      this.textures.earth.bump = loader.load(earthBumpImg, undefined, undefined, reject);
+      this.textures.earth.water = loader.load(earthWaterImg, undefined, undefined, reject);
+      this.textures.earth.clouds = loader.load(earthCloudsImg, undefined, undefined, reject);
+      resolve();
+    });
+  }
+
+  // set the scene
+  init() {
+    this.milkyway = new MilkyWay(this.textures.milkyway);
+    this.sun = new Sun();
+    this.earth = new Earth(this.textures.earth);
+    this.scene.add(this.milkyway, this.sun, this.earth);
+
+    this.scene.add(new THREE.AmbientLight(0xffffff, 0.1));
+  }
+
+  // grab the current time and start the update loop
+  run() {
     this.lastTick = performance.now();
     this.update();
   }

@@ -2,22 +2,16 @@ import * as THREE from 'three';
 import EventEmitter from 'events';
 
 import _ from '../settings.json';
-import earthImg from '../img/earth.png';
-import earthBumpImg from '../img/earth-bump.png';
-import earthWaterImg from '../img/earth-water.png';
-import earthCloudsImg from '../img/earth-clouds.png';
 
 class Earth extends THREE.Mesh {
-  constructor() {
-    const loader = new THREE.TextureLoader();
-
+  constructor(textures) {
     super(
       new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments),
       new THREE.MeshPhongMaterial({
-        map: loader.load(earthImg),
-        bumpMap: loader.load(earthBumpImg),
+        map: textures.surface,
+        bumpMap: textures.bump,
         bumpScale: 0.0002,
-        specularMap: loader.load(earthWaterImg)
+        specularMap: textures.water
       })
     );
 
@@ -26,7 +20,7 @@ class Earth extends THREE.Mesh {
       new THREE.Mesh(
         new THREE.SphereBufferGeometry(_.earth.radius * 1.01, _.earth.segments, _.earth.segments),
         new THREE.MeshPhongMaterial({
-          map: loader.load(earthCloudsImg),
+          map: textures.clouds,
           transparent: true
         })
       )
