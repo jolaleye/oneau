@@ -3,5 +3,9 @@
     "fov": 75,
     "near": 0.1,
     "far": 1000
+  },
+  "inspector": {
+    "speed": 1,
+    "sensitivity": 0.002
   }
 }
