@@ -15,5 +15,10 @@
   "sun": {
     "radius": 6.957,
     "segments": 30
+  },
+  "earth": {
+    "radius": 0.06371,
+    "segments": 30,
+    "orbitRadius": 1495.975
   }
 }
