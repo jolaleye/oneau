@@ -46,7 +46,7 @@ class POV {
 
   lock() {
     this.locked = true;
-    this.orientation.set(0, 0, 0);
+    this.mouse.set(0, 0);
   }
 
   unlock() {
