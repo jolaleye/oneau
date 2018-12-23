@@ -10,6 +10,10 @@ class Earth extends THREE.Mesh {
     );
 
     this.position.z = _.earth.orbitRadius;
+
+    // low earth orbit
+    this.leo = new THREE.Group();
+    this.add(this.leo);
   }
 }
 
