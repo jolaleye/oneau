@@ -13,8 +13,7 @@
   "bugs": "https://github.com/jolaleye/au/issues",
   "homepage": "https://github.com/jolaleye/au#readme",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "events": "^3.0.0",
+    "@tweenjs/tween.js": "^17.2.0",
     "three": "^0.99.0"
   },
   "devDependencies": {

@@ -1,35 +1,62 @@
-import '@babel/polyfill';
 import * as THREE from 'three';
+import TWEEN from '@tweenjs/tween.js';
 
-import Core from './core';
+import _ from '../settings.json'; // 1 u = 100,000 km (10^-5)
+import POV from './POV';
+import Sun from './Sun';
+import Earth from './Earth';
+import Director from './Director';
+import TextureManager from './TextureManager';
 
-// set up the scene and renderer
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
+const camera = new THREE.PerspectiveCamera(
+  _.camera.fov,
+  window.innerWidth / window.innerHeight,
+  _.camera.near,
+  _.camera.far
+);
 
-// set up the canvas
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const core = new Core(scene, renderer);
-
-// handle window resizes
 window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
-  core.pov.onResize();
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
 });
 
-const start = async () => {
-  await core.load();
-  core.init();
-  core.startWait();
-  core.run();
+const textures = new TextureManager();
+textures.load();
+
+const pov = new POV(camera);
+const sun = new Sun();
+const earth = new Earth({
+  map: textures.earth,
+  elev: textures.earthElev,
+  water: textures.earthWater,
+  clouds: textures.earthClouds
+});
+scene.add(sun, earth);
+
+scene.add(new THREE.AmbientLight(0xffffff, 0.1));
+
+const director = new Director(pov, earth);
+director.startWait();
+
+let lastTick;
+const animate = () => {
+  requestAnimationFrame(animate);
+  // scales speeds to 1 u/s regardless of frame rate
+  const ts = (performance.now() - lastTick) / 1000;
+  lastTick = performance.now();
+
+  TWEEN.update();
+
+  pov.update(ts);
+
+  renderer.render(scene, camera);
 };
 
-start();
-
-// "focus" when clicked - transition from landing page
-document.querySelector('canvas').addEventListener('click', () => {
-  document.body.classList.add('focused');
-  core.startIntro();
-});
+lastTick = performance.now();
+animate();
