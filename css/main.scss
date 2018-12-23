@@ -1,5 +1,44 @@
-body {
+* {
   margin: 0;
   padding: 0;
+}
+
+@font-face {
+  font-family: 'GeoNMS';
+  src: url('../fonts/geonms.ttf') format('opentype');
+}
+
+body {
   overflow: hidden;
+}
+
+canvas {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+}
+
+.landing {
+  width: 100vw;
+  height: 100vh;
+}
+
+.title {
+  margin-top: 20vh;
+  color: white;
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'GeoNMS', sans-serif;
+
+  span {
+    vertical-align: middle;
+
+    &:nth-child(1) {
+      font-size: 4em;
+      margin-right: 0.1em;
+    }
+    &:nth-child(2) {
+      font-size: 8em;
+    }
+  }
 }
