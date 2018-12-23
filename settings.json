@@ -11,5 +11,9 @@
   "pov": {
     "rotationSpeed": 0.3,
     "rotationCorrectionSpeed": 0.4
+  },
+  "sun": {
+    "radius": 6.957,
+    "segments": 30
   }
 }
