@@ -20,5 +20,9 @@
     "radius": 0.06371,
     "segments": 30,
     "orbitRadius": 1495.975
+  },
+  "wait": {
+    "povOrbitRadius": 0.12,
+    "povOrbitPeriod": 10000
   }
 }
