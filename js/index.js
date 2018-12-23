@@ -31,7 +31,12 @@ textures.load();
 
 const pov = new POV(camera);
 const sun = new Sun();
-const earth = new Earth();
+const earth = new Earth({
+  map: textures.earth,
+  elev: textures.earthElev,
+  water: textures.earthWater,
+  clouds: textures.earthClouds
+});
 scene.add(sun, earth);
 
 const director = new Director(pov, earth);
