@@ -1,7 +1,11 @@
 import * as THREE from 'three';
+import TWEEN from '@tweenjs/tween.js';
 
-import _ from '../settings.json';
+import _ from '../settings.json'; // 1 u = 100,000 km (10^-5)
 import POV from './POV';
+import Sun from './Sun';
+import Earth from './Earth';
+import Director from './Director';
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
@@ -22,6 +26,12 @@ window.addEventListener('resize', () => {
 });
 
 const pov = new POV(camera);
+const sun = new Sun();
+const earth = new Earth();
+scene.add(sun, earth);
+
+const director = new Director(pov, earth);
+director.startWait();
 
 let lastTick;
 const animate = () => {
@@ -29,6 +39,8 @@ const animate = () => {
   // scales speeds to 1 u/s regardless of frame rate
   const ts = (performance.now() - lastTick) / 1000;
   lastTick = performance.now();
+
+  TWEEN.update();
 
   pov.update(ts);
 
