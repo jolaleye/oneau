@@ -23,6 +23,6 @@
   },
   "wait": {
     "povOrbitRadius": 0.12,
-    "povOrbitPeriod": 120000
+    "povOrbitPeriod": 240000
   }
 }
