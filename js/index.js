@@ -6,6 +6,7 @@ import POV from './POV';
 import Sun from './Sun';
 import Earth from './Earth';
 import Director from './Director';
+import TextureManager from './TextureManager';
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
@@ -24,6 +25,9 @@ window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 });
+
+const textures = new TextureManager();
+textures.load();
 
 const pov = new POV(camera);
 const sun = new Sun();
