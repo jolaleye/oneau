@@ -39,6 +39,8 @@ const earth = new Earth({
 });
 scene.add(sun, earth);
 
+scene.add(new THREE.AmbientLight(0xffffff, 0.1));
+
 const director = new Director(pov, earth);
 director.startWait();
 
