@@ -7,5 +7,9 @@
   "inspector": {
     "speed": 1,
     "sensitivity": 0.002
+  },
+  "pov": {
+    "rotationSpeed": 0.3,
+    "rotationCorrectionSpeed": 0.4
   }
 }
