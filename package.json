@@ -17,6 +17,6 @@
     "three": "^0.99.0"
   },
   "devDependencies": {
-    "sass": "^1.15.1"
+    "sass": "^1.15.2"
   }
 }
