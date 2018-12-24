@@ -33,7 +33,7 @@ textures.load();
 
 const pov = new POV(camera);
 const galaxy = new Galaxy(textures.galaxy);
-const sun = new Sun(new GlowShader(0.8, 6, '#FFBF62', camera.position));
+const sun = new Sun({ flare: textures.flare }, new GlowShader(0.8, 6, '#FFBF62', camera.position));
 const earth = new Earth({
   map: textures.earth,
   elev: textures.earthElev,
