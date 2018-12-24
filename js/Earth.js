@@ -4,8 +4,10 @@ import _ from '../settings.json';
 
 class Earth extends THREE.Mesh {
   constructor(textures) {
+    const sphere = new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments);
+
     super(
-      new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments),
+      sphere.clone(),
       new THREE.MeshPhongMaterial({
         map: textures.map,
         bumpMap: textures.elev,
@@ -15,18 +17,16 @@ class Earth extends THREE.Mesh {
     );
 
     // add a sphere of clouds
-    this.add(
-      new THREE.Mesh(
-        new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments),
-        new THREE.MeshPhongMaterial({ map: textures.clouds, transparent: true })
-      )
+    const clouds = new THREE.Mesh(
+      sphere.clone(),
+      new THREE.MeshPhongMaterial({ map: textures.clouds, transparent: true })
     );
-
-    this.position.z = _.earth.orbitRadius;
 
     // low earth orbit
     this.leo = new THREE.Group();
-    this.add(this.leo);
+
+    this.add(clouds, this.leo);
+    this.position.z = _.earth.orbitRadius;
   }
 }
 
