@@ -2,7 +2,7 @@
   "camera": {
     "fov": 75,
     "near": 0.01,
-    "far": 10000
+    "far": 20000
   },
   "inspector": {
     "speed": 1,
@@ -11,6 +11,10 @@
   "pov": {
     "rotationSpeed": 0.3,
     "rotationCorrectionSpeed": 0.4
+  },
+  "galaxy": {
+    "radius": 10000,
+    "segments": 100
   },
   "sun": {
     "radius": 6.957,
