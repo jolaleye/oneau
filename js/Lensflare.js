@@ -85,7 +85,7 @@ class Lensflare extends THREE.Mesh {
       },
       vertexShader: vs1,
       fragmentShader: fs1,
-      depthTest: false,
+      depthTest: true,
       depthWrite: false,
       transparent: false
     });
