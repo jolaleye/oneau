@@ -3,6 +3,7 @@ import TWEEN from '@tweenjs/tween.js';
 
 import _ from '../settings.json'; // 1 u = 100,000 km (10^-5)
 import POV from './POV';
+import Galaxy from './Galaxy';
 import Sun from './Sun';
 import Earth from './Earth';
 import Director from './Director';
@@ -31,6 +32,7 @@ const textures = new TextureManager();
 textures.load();
 
 const pov = new POV(camera);
+const galaxy = new Galaxy(textures.galaxy);
 const sun = new Sun(new GlowShader(0.8, 6, '#FFBF62', camera.position));
 const earth = new Earth({
   map: textures.earth,
@@ -38,7 +40,7 @@ const earth = new Earth({
   water: textures.earthWater,
   clouds: textures.earthClouds
 });
-scene.add(sun, earth);
+scene.add(galaxy, sun, earth);
 
 scene.add(new THREE.AmbientLight(0xffffff, 0.1));
 
