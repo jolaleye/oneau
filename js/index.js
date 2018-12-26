@@ -27,12 +27,17 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 });
 
-const textures = new TextureManager();
+const textures = new TextureManager(renderer);
 textures.load();
 
 const pov = new POV(camera);
 const galaxy = new Galaxy(textures.galaxy);
-const sun = new Sun({ flare: textures.flare });
+const sun = new Sun({
+  flare: textures.flare,
+  sun: textures.sun,
+  colorShift: textures.sunColorShift,
+  color: textures.sunColor
+});
 const earth = new Earth({
   map: textures.earth,
   elev: textures.earthElev,
@@ -55,6 +60,7 @@ const animate = () => {
 
   TWEEN.update();
 
+  sun.update();
   pov.update(ts);
 
   renderer.render(scene, camera);
