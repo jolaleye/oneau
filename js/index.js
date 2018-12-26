@@ -8,7 +8,6 @@ import Sun from './Sun';
 import Earth from './Earth';
 import Director from './Director';
 import TextureManager from './TextureManager';
-import GlowShader from './GlowShader';
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
@@ -33,7 +32,7 @@ textures.load();
 
 const pov = new POV(camera);
 const galaxy = new Galaxy(textures.galaxy);
-const sun = new Sun({ flare: textures.flare }, new GlowShader(0.8, 6, '#FFBF62', camera.position));
+const sun = new Sun({ flare: textures.flare });
 const earth = new Earth({
   map: textures.earth,
   elev: textures.earthElev,
