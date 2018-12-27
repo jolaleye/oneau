@@ -8,6 +8,9 @@ import sunFS from '../shaders/sunFS';
 
 class Sun extends THREE.Mesh {
   constructor(textures) {
+    textures.sun.wrapS = THREE.RepeatWrapping;
+    textures.sun.wrapT = THREE.RepeatWrapping;
+
     super(
       new THREE.SphereBufferGeometry(_.sun.radius, _.sun.segments, _.sun.segments),
       new THREE.ShaderMaterial({
