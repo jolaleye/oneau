@@ -29,10 +29,10 @@ class Sun extends THREE.Mesh {
     const light = new THREE.PointLight();
 
     const lensflare = new Lensflare();
-    lensflare.addElement(new LensflareElement(textures.flare, 60, 0.6));
-    lensflare.addElement(new LensflareElement(textures.flare, 70, 0.7));
-    lensflare.addElement(new LensflareElement(textures.flare, 120, 0.9));
-    lensflare.addElement(new LensflareElement(textures.flare, 70, 1));
+    lensflare.addElement(new LensflareElement(textures.lensflare, 60, 0.6));
+    lensflare.addElement(new LensflareElement(textures.lensflare, 70, 0.7));
+    lensflare.addElement(new LensflareElement(textures.lensflare, 120, 0.9));
+    lensflare.addElement(new LensflareElement(textures.lensflare, 70, 1));
 
     this.add(light, lensflare);
   }

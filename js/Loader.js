@@ -5,7 +5,7 @@ import earth from '../img/earth.jpg';
 import earthElev from '../img/earth-elev.jpg';
 import earthWater from '../img/earth-water.png';
 import earthClouds from '../img/earth-clouds.png';
-import flare from '../img/flare.png';
+import lensflare from '../img/lensflare.png';
 import sun from '../img/sun.png';
 import sunColorShift from '../img/colorShiftRamp.png';
 import sunColor from '../img/colorRamp.png';
@@ -16,7 +16,7 @@ const textures = {
   earthElev,
   earthWater,
   earthClouds,
-  flare,
+  lensflare,
   sun,
   sunColorShift,
   sunColor
