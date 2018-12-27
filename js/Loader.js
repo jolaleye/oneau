@@ -23,8 +23,7 @@ const textures = {
 };
 
 class Loader {
-  constructor(renderer) {
-    this.renderer = renderer;
+  constructor() {
     this.textureLoader = new THREE.TextureLoader();
 
     this.textures = {};

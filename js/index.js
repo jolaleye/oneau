@@ -7,7 +7,7 @@ import Galaxy from './Galaxy';
 import Sun from './Sun';
 import Earth from './Earth';
 import Director from './Director';
-import TextureManager from './TextureManager';
+import Loader from './Loader';
 
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
@@ -27,29 +27,12 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 });
 
-const textures = new TextureManager(renderer);
-textures.load();
-
-const pov = new POV(camera);
-const galaxy = new Galaxy(textures.galaxy);
-const sun = new Sun({
-  flare: textures.flare,
-  sun: textures.sun,
-  colorShift: textures.sunColorShift,
-  color: textures.sunColor
-});
-const earth = new Earth({
-  map: textures.earth,
-  elev: textures.earthElev,
-  water: textures.earthWater,
-  clouds: textures.earthClouds
-});
-scene.add(galaxy, sun, earth);
-
-scene.add(new THREE.AmbientLight(0xffffff, 0.1));
-
-const director = new Director(pov, earth);
-director.startWait();
+let textures;
+let director;
+let pov;
+let galaxy;
+let sun;
+let earth;
 
 let lastTick;
 const animate = () => {
@@ -59,12 +42,45 @@ const animate = () => {
   lastTick = performance.now();
 
   TWEEN.update();
-
   sun.update();
   pov.update(ts);
 
   renderer.render(scene, camera);
 };
 
-lastTick = performance.now();
-animate();
+const init = () => {
+  pov = new POV(camera);
+
+  galaxy = new Galaxy(textures.galaxy);
+
+  textures.sun.anisotropy = renderer.capabilities.getMaxAnisotropy();
+  sun = new Sun({
+    flare: textures.flare,
+    sun: textures.sun,
+    colorShift: textures.sunColorShift,
+    color: textures.sunColor
+  });
+
+  earth = new Earth({
+    map: textures.earth,
+    elev: textures.earthElev,
+    water: textures.earthWater,
+    clouds: textures.earthClouds
+  });
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+
+  scene.add(galaxy, sun, earth, ambientLight);
+
+  director = new Director(pov, earth);
+  director.startWait();
+
+  lastTick = performance.now();
+  animate();
+};
+
+const loader = new Loader();
+loader.loadTextures().then(() => {
+  textures = loader.textures;
+  init();
+});
