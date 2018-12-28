@@ -18,7 +18,7 @@ class Sun extends THREE.Mesh {
           texture: { value: textures.sun },
           colorShiftRamp: { value: textures.sunColorShift },
           colorRamp: { value: textures.sunColor },
-          colorLookup: { value: 0.66 },
+          colorLookup: { value: _.sun.colorLookup },
           time: { value: 0 }
         },
         vertexShader: sunVS,

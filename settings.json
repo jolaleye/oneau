@@ -18,7 +18,8 @@
   },
   "sun": {
     "radius": 6.957,
-    "segments": 30
+    "segments": 30,
+    "colorLookup": 0.66
   },
   "earth": {
     "radius": 0.06371,
