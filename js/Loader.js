@@ -9,6 +9,7 @@ import lensflare from '../img/lensflare.png';
 import sun from '../img/sun.png';
 import sunColorShift from '../img/colorShiftRamp.png';
 import sunColor from '../img/colorRamp.png';
+import flare0 from '../img/flare0.png';
 
 const textures = {
   galaxy,
@@ -19,7 +20,8 @@ const textures = {
   lensflare,
   sun,
   sunColorShift,
-  sunColor
+  sunColor,
+  flare0
 };
 
 class Loader {
