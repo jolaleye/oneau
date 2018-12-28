@@ -46,7 +46,7 @@ class Sun extends THREE.Mesh {
         opacity: 0.6
       })
     );
-    flare0.scale.multiplyScalar(250);
+    flare0.scale.multiplyScalar(400);
 
     const flare1 = new THREE.Sprite(
       new THREE.SpriteMaterial({
