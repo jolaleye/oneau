@@ -10,6 +10,7 @@ import sun from '../img/sun.png';
 import sunColorShift from '../img/colorShiftRamp.png';
 import sunColor from '../img/colorRamp.png';
 import flare0 from '../img/flare0.png';
+import flare1 from '../img/flare1.png';
 
 const textures = {
   galaxy,
@@ -21,7 +22,8 @@ const textures = {
   sun,
   sunColorShift,
   sunColor,
-  flare0
+  flare0,
+  flare1
 };
 
 class Loader {

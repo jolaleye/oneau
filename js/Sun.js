@@ -48,13 +48,21 @@ class Sun extends THREE.Mesh {
     );
     flare0.scale.multiplyScalar(250);
 
+    const flare1 = new THREE.Sprite(
+      new THREE.SpriteMaterial({
+        map: textures.flare1,
+        blending: THREE.AdditiveBlending
+      })
+    );
+    flare1.scale.multiplyScalar(250);
+
     const lensflare = new Lensflare();
     lensflare.addElement(new LensflareElement(textures.lensflare, 60, 0.6));
     lensflare.addElement(new LensflareElement(textures.lensflare, 70, 0.7));
     lensflare.addElement(new LensflareElement(textures.lensflare, 120, 0.9));
     lensflare.addElement(new LensflareElement(textures.lensflare, 70, 1));
 
-    this.add(light, flare0, lensflare);
+    this.add(light, flare0, flare1, lensflare);
   }
 
   update() {
