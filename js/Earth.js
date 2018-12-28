@@ -9,17 +9,17 @@ class Earth extends THREE.Mesh {
     super(
       sphere.clone(),
       new THREE.MeshPhongMaterial({
-        map: textures.map,
-        bumpMap: textures.elev,
+        map: textures.earth,
+        bumpMap: textures.earthElev,
         bumpScale: 0.001,
-        specularMap: textures.water
+        specularMap: textures.earthWater
       })
     );
 
     // add a sphere of clouds
     const clouds = new THREE.Mesh(
       sphere.clone(),
-      new THREE.MeshPhongMaterial({ map: textures.clouds, transparent: true })
+      new THREE.MeshPhongMaterial({ map: textures.earthClouds, transparent: true })
     );
 
     // low earth orbit

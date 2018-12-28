@@ -3,10 +3,10 @@ import * as THREE from 'three';
 import _ from '../settings.json';
 
 class Galaxy extends THREE.Mesh {
-  constructor(texture) {
+  constructor(textures) {
     super(
       new THREE.SphereBufferGeometry(_.galaxy.radius, _.galaxy.segments, _.galaxy.segments),
-      new THREE.MeshBasicMaterial({ map: texture, side: THREE.BackSide })
+      new THREE.MeshBasicMaterial({ map: textures.galaxy, side: THREE.BackSide })
     );
   }
 }

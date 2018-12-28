@@ -56,22 +56,12 @@ const animate = () => {
 const init = () => {
   pov = new POV(camera);
 
-  galaxy = new Galaxy(textures.galaxy);
+  galaxy = new Galaxy(textures);
 
   textures.sun.anisotropy = renderer.capabilities.getMaxAnisotropy();
-  sun = new Sun({
-    lensflare: textures.lensflare,
-    sun: textures.sun,
-    colorShift: textures.sunColorShift,
-    color: textures.sunColor
-  });
+  sun = new Sun(textures);
 
-  earth = new Earth({
-    map: textures.earth,
-    elev: textures.earthElev,
-    water: textures.earthWater,
-    clouds: textures.earthClouds
-  });
+  earth = new Earth(textures);
 
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 

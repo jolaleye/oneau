@@ -16,8 +16,8 @@ class Sun extends THREE.Mesh {
       new THREE.ShaderMaterial({
         uniforms: {
           texture: { value: textures.sun },
-          colorShiftRamp: { value: textures.colorShift },
-          colorRamp: { value: textures.color },
+          colorShiftRamp: { value: textures.sunColorShift },
+          colorRamp: { value: textures.sunColor },
           colorLookup: { value: 0.66 },
           time: { value: 0 }
         },
