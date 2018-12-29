@@ -45,7 +45,7 @@ class Sun extends THREE.Mesh {
         blending: THREE.AdditiveBlending,
         color: flareColor,
         transparent: true,
-        opacity: 0.6,
+        opacity: 0.5,
         depthWrite: false
       })
     );
