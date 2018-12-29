@@ -6,6 +6,8 @@ import LensflareElement from './LensflareElement';
 import sunVS from '../shaders/sunVS';
 import sunFS from '../shaders/sunFS';
 import ColorRamp from './ColorRamp';
+import coronaVS from '../shaders/coronaVS';
+import coronaFS from '../shaders/coronaFS';
 
 class Sun extends THREE.Mesh {
   constructor(textures) {
@@ -43,7 +45,8 @@ class Sun extends THREE.Mesh {
         blending: THREE.AdditiveBlending,
         color: flareColor,
         transparent: true,
-        opacity: 0.6
+        opacity: 0.6,
+        depthWrite: false
       })
     );
     flare0.scale.multiplyScalar(400);
@@ -51,10 +54,28 @@ class Sun extends THREE.Mesh {
     const flare1 = new THREE.Sprite(
       new THREE.SpriteMaterial({
         map: textures.flare1,
-        blending: THREE.AdditiveBlending
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
       })
     );
     flare1.scale.multiplyScalar(250);
+
+    const corona = new THREE.Mesh(
+      new THREE.PlaneBufferGeometry(125, 125),
+      new THREE.ShaderMaterial({
+        uniforms: {
+          texture: { value: textures.corona },
+          colorRamp: { value: textures.sunColor },
+          colorLookup: { value: _.sun.colorLookup }
+        },
+        vertexShader: coronaVS,
+        fragmentShader: coronaFS,
+        blending: THREE.AdditiveBlending,
+        color: 0xffffff,
+        transparent: true,
+        depthWrite: false
+      })
+    );
 
     const lensflare = new Lensflare();
     lensflare.addElement(new LensflareElement(textures.lensflare, 60, 0.6));
@@ -62,7 +83,7 @@ class Sun extends THREE.Mesh {
     lensflare.addElement(new LensflareElement(textures.lensflare, 120, 0.9));
     lensflare.addElement(new LensflareElement(textures.lensflare, 70, 1));
 
-    this.add(light, flare0, flare1, lensflare);
+    this.add(light, flare0, flare1, corona, lensflare);
   }
 
   update() {
