@@ -16,11 +16,22 @@ class Director {
     this.pov.position.z = _.wait.povOrbitRadius;
     this.pov.lock();
 
-    const leoTween = new TWEEN.Tween(this.earth.leo.rotation);
-    leoTween
+    // rotate Earth's orbit
+    const leoTween = new TWEEN.Tween(this.earth.leo.rotation)
       .to({ x: 0, y: 2 * Math.PI, z: 0 }, _.wait.povOrbitPeriod)
       .repeat(Infinity)
       .start();
+
+    // fade out the landing page ui
+    document.querySelector('.pulse').addEventListener('click', () => {
+      const ui = document.querySelector('.landing');
+
+      const uiTween = new TWEEN.Tween({ opacity: 1 })
+        .to({ opacity: 0 }, _.wait.uiFadeOut)
+        .onUpdate(({ opacity }) => (ui.style.opacity = opacity))
+        .onComplete(() => (ui.style.display = 'none'))
+        .start();
+    });
   }
 }
 
