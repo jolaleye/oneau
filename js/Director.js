@@ -22,16 +22,32 @@ class Director {
       .repeat(Infinity)
       .start();
 
-    // fade out the landing page ui
     document.querySelector('.pulse').addEventListener('click', () => {
       const ui = document.querySelector('.landing');
 
+      // fade out the landing page ui
       const uiTween = new TWEEN.Tween({ opacity: 1 })
         .to({ opacity: 0 }, _.wait.uiFadeOut)
         .onUpdate(({ opacity }) => (ui.style.opacity = opacity))
         .onComplete(() => (ui.style.display = 'none'))
         .start();
+
+      // stop rotation and start intro phase
+      leoTween.stop();
+      this.startIntro();
     });
+  }
+
+  // INTRO phase
+  // - camera moves into position between Earth & Sun
+  startIntro() {
+    const rotation = (this.earth.leo.rotation.y + Math.PI) % (2 * Math.PI); // rotation of Earth orbit past the destination
+    const diff = 2 * Math.PI - rotation; // amount to rotate
+
+    const leoTween = new TWEEN.Tween(this.earth.leo.rotation)
+      .to({ x: 0, y: `+${diff}`, z: 0 }, _.intro.povOrbitPeriod)
+      .easing(TWEEN.Easing.Cubic.Out)
+      .start();
   }
 }
 
