@@ -28,6 +28,7 @@
   },
   "wait": {
     "povOrbitRadius": 0.12,
-    "povOrbitPeriod": 240000
+    "povOrbitPeriod": 240000,
+    "uiFadeOut": 1500
   }
 }
