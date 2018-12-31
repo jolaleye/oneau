@@ -71,7 +71,6 @@ class Sun extends THREE.Mesh {
         vertexShader: coronaVS,
         fragmentShader: coronaFS,
         blending: THREE.AdditiveBlending,
-        color: 0xffffff,
         transparent: true,
         depthWrite: false
       })
