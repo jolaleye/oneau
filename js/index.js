@@ -9,8 +9,6 @@ import Earth from './Earth';
 import Director from './Director';
 import Loader from './Loader';
 
-import Inspector from './Inspector';
-
 const scene = new THREE.Scene();
 const renderer = new THREE.WebGLRenderer();
 const camera = new THREE.PerspectiveCamera(
@@ -36,8 +34,6 @@ let galaxy;
 let sun;
 let earth;
 
-const inspector = new Inspector(camera);
-
 let lastTick;
 const animate = () => {
   requestAnimationFrame(animate);
@@ -47,8 +43,7 @@ const animate = () => {
 
   TWEEN.update();
   sun.update();
-  // pov.update(ts);
-  inspector.update(ts);
+  pov.update(ts);
 
   renderer.render(scene, camera);
 };
@@ -68,7 +63,7 @@ const init = () => {
   scene.add(galaxy, sun, earth, ambientLight);
 
   director = new Director(pov, earth);
-  // director.startWait();
+  director.startWait();
 
   lastTick = performance.now();
   animate();
