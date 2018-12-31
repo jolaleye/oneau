@@ -31,7 +31,10 @@ class Director {
 
     return new Promise(resolve => {
       fadeIn.chain(fadeOut).start();
-      fadeOut.onComplete(resolve);
+      fadeOut.onComplete(() => {
+        document.querySelector('.overlay').removeChild(el);
+        resolve();
+      });
     });
   }
 
