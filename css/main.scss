@@ -113,7 +113,7 @@ canvas {
   transform: translateX(-50%);
   text-decoration: none;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   font-weight: 100;
 
   opacity: 0.3;
@@ -121,4 +121,20 @@ canvas {
   &:hover {
     opacity: 0.8;
   }
+}
+
+.overlay .text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  text-align: center;
+  opacity: 0.8;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 5px black;
 }
