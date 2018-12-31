@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
-import EventEmitter from 'events';
 
 import _ from '../settings.json';
 
@@ -12,28 +11,27 @@ class Director {
     this.earth = earth;
   }
 
-  overlayText(text, fadeDuration, duration) {
+  overlayText(text, fadeFor, showFor) {
     const el = document.createElement('p');
     el.appendChild(document.createTextNode(text));
     el.classList.add('text');
     document.querySelector('.overlay').appendChild(el);
 
-    const e = new EventEmitter();
-
     const fadeIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 1 }, fadeDuration)
+      .to({ opacity: 1 }, fadeFor)
       .easing(TWEEN.Easing.Quintic.Out)
       .onUpdate(({ opacity }) => (el.style.opacity = opacity));
 
     const fadeOut = new TWEEN.Tween({ opacity: 1 })
-      .to({ opacity: 0 }, fadeDuration)
+      .to({ opacity: 0 }, fadeFor)
       .easing(TWEEN.Easing.Quintic.Out)
       .onUpdate(({ opacity }) => (el.style.opacity = opacity))
-      .delay(duration)
-      .onComplete(() => e.emit('done'));
+      .delay(showFor);
 
-    fadeIn.chain(fadeOut).start();
-    return e;
+    return new Promise(resolve => {
+      fadeIn.chain(fadeOut).start();
+      fadeOut.onComplete(resolve);
+    });
   }
 
   // WAIT phase
