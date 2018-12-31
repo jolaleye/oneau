@@ -32,7 +32,7 @@
     "uiFadeOut": 1500
   },
   "intro": {
-    "povOrbitDuration": 10000,
-    "povRotationDuration": 10000
+    "povOrbitDuration": 22000,
+    "povRotationDuration": 12000
   }
 }
