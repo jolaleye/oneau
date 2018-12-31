@@ -45,14 +45,14 @@ class Director {
     const diff = 2 * Math.PI - rotation; // amount to rotate
 
     const cameraTween = new TWEEN.Tween(this.pov.camera.rotation)
-      .to({ x: 0, y: -Math.PI, z: 0 }, _.intro.povRotationPeriod)
-      .easing(TWEEN.Easing.Cubic.Out)
+      .to({ x: 0, y: -Math.PI, z: 0 }, _.intro.povRotationDuration)
+      .easing(TWEEN.Easing.Cubic.InOut)
       .onComplete(() => {
         this.pov.target.setFromEuler(new THREE.Euler(0, -Math.PI, 0));
       });
 
     const leoTween = new TWEEN.Tween(this.earth.leo.rotation)
-      .to({ x: 0, y: `+${diff}`, z: 0 }, _.intro.povOrbitPeriod)
+      .to({ x: 0, y: `+${diff}`, z: 0 }, _.intro.povOrbitDuration)
       .easing(TWEEN.Easing.Cubic.Out)
       .chain(cameraTween)
       .start();
