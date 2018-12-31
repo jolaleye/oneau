@@ -57,6 +57,7 @@ class Lensflare extends THREE.Mesh {
 
     super(geometry, new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 }));
 
+    this.name = 'lensflare';
     this.geometry = geometry;
     this.frustumCulled = false;
     this.renderOrder = Infinity;

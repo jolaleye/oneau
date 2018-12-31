@@ -76,18 +76,23 @@ class Sun extends THREE.Mesh {
       })
     );
 
-    const lensflare = new Lensflare();
-    lensflare.addElement(new LensflareElement(textures.lensflare, 60, 0.6));
-    lensflare.addElement(new LensflareElement(textures.lensflare, 70, 0.7));
-    lensflare.addElement(new LensflareElement(textures.lensflare, 120, 0.9));
-    lensflare.addElement(new LensflareElement(textures.lensflare, 70, 1));
+    this.lensflare = new Lensflare();
+    this.lensflare.addElement(new LensflareElement(textures.lensflare, 60, 0.6));
+    this.lensflare.addElement(new LensflareElement(textures.lensflare, 70, 0.7));
+    this.lensflare.addElement(new LensflareElement(textures.lensflare, 120, 0.9));
+    this.lensflare.addElement(new LensflareElement(textures.lensflare, 70, 1));
 
-    this.add(light, flare0, flare1, corona, lensflare);
+    this.add(light, flare0, flare1, corona, this.lensflare);
   }
 
   update() {
     // update the shader time value for nice glowy fx
     this.material.uniforms.time.value = performance.now() / 1000;
+  }
+
+  toggleLensflare(on) {
+    if (on && !this.getObjectByName('lensflare')) this.add(this.lensflare);
+    else if (!on) this.remove(this.lensflare);
   }
 }
 

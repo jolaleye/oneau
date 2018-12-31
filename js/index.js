@@ -62,7 +62,7 @@ const init = () => {
 
   scene.add(galaxy, sun, earth, ambientLight);
 
-  director = new Director(pov, earth);
+  director = new Director(pov, sun, earth);
   director.startWait();
 
   lastTick = performance.now();
