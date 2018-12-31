@@ -1,0 +1,28 @@
+{
+  "intro": [
+    {
+      "text": "1 astronomical unit (AU) is roughly the distance from Earth to the Sun.",
+      "delay": 1750,
+      "fadeFor": 2000,
+      "showFor": 3000
+    },
+    {
+      "text": "You are about to make that journey...",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 3000
+    },
+    {
+      "text": "...149,597,500 km...",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 3000
+    },
+    {
+      "text": "It may take a while...",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 3000
+    }
+  ]
+}

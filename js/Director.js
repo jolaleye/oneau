@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
 
 import _ from '../settings.json';
+import script from '../script.json';
 
 // coordinates phases and flow
 class Director {
@@ -65,7 +66,7 @@ class Director {
 
   // INTRO phase
   // - camera moves into position between Earth & Sun
-  startIntro() {
+  async startIntro() {
     const rotation = (this.earth.leo.rotation.y + Math.PI) % (2 * Math.PI); // rotation of Earth orbit past the destination
     const diff = 2 * Math.PI - rotation; // amount to rotate
 
@@ -80,6 +81,12 @@ class Director {
       .onComplete(() => this.sun.toggleLensflare(false))
       .chain(cameraTween)
       .start();
+
+    // run through the intro lines
+    for (const line of script.intro) {
+      await new Promise(resolve => setTimeout(resolve, line.delay));
+      await this.overlayText(line.text, line.fadeFor, line.showFor);
+    }
   }
 }
 
