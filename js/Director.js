@@ -90,6 +90,30 @@ class Director {
       await new Promise(resolve => setTimeout(resolve, line.delay));
       await this.overlayText(line.text, line.fadeFor, line.showFor);
     }
+
+    // end it with the title
+    const el = document.createElement('div');
+    el.classList.add('text', 'intro-title');
+    el.innerHTML = `
+      <span>ONE</span>
+      <span>AU</span>
+    `;
+    el.style.opacity = 0;
+    document.querySelector('.overlay').appendChild(el);
+
+    const fadeIn = new TWEEN.Tween({ opacity: 0 })
+      .to({ opacity: 1 }, 3000)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .delay(500)
+      .onUpdate(({ opacity }) => (el.style.opacity = opacity));
+
+    const fadeOut = new TWEEN.Tween({ opacity: 1 })
+      .to({ opacity: 0 }, 3000)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .onUpdate(({ opacity }) => (el.style.opacity = opacity))
+      .delay(3000);
+
+    fadeIn.chain(fadeOut).start();
   }
 }
 

@@ -137,4 +137,21 @@ canvas {
   opacity: 0.8;
   letter-spacing: 0.02em;
   text-shadow: 0 0 5px black;
+
+  &.intro-title {
+    letter-spacing: 0.2em;
+    font-family: 'GeoNMS', sans-serif;
+
+    span {
+      vertical-align: middle;
+
+      &:nth-child(1) {
+        font-size: 3em;
+        margin-right: 0.1em;
+      }
+      &:nth-child(2) {
+        font-size: 5.75em;
+      }
+    }
+  }
 }
