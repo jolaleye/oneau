@@ -70,6 +70,7 @@ class Director {
   // INTRO phase
   // - camera moves into position between Earth & Sun
   async startIntro() {
+    this.pov.fixCamera = false;
     const rotation = (this.earth.leo.rotation.y + Math.PI) % (2 * Math.PI); // rotation of Earth orbit past the destination
     const diff = 2 * Math.PI - rotation; // amount to rotate
 
