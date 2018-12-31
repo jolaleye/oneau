@@ -44,9 +44,17 @@ class Director {
     const rotation = (this.earth.leo.rotation.y + Math.PI) % (2 * Math.PI); // rotation of Earth orbit past the destination
     const diff = 2 * Math.PI - rotation; // amount to rotate
 
+    const cameraTween = new TWEEN.Tween(this.pov.camera.rotation)
+      .to({ x: 0, y: -Math.PI, z: 0 }, _.intro.povRotationPeriod)
+      .easing(TWEEN.Easing.Cubic.Out)
+      .onComplete(() => {
+        this.pov.target.setFromEuler(new THREE.Euler(0, -Math.PI, 0));
+      });
+
     const leoTween = new TWEEN.Tween(this.earth.leo.rotation)
       .to({ x: 0, y: `+${diff}`, z: 0 }, _.intro.povOrbitPeriod)
       .easing(TWEEN.Easing.Cubic.Out)
+      .chain(cameraTween)
       .start();
   }
 }
