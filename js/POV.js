@@ -63,9 +63,12 @@ class POV {
     this.mouse.set(-(event.x - halfWidth) / halfWidth, -(event.y - halfHeight) / halfHeight);
   }
 
-  // position alias
+  // aliases
   get position() {
     return this.camera.position;
+  }
+  get rotation() {
+    return this.camera.rotation;
   }
 }
 
