@@ -112,9 +112,27 @@ class Director {
       .to({ opacity: 0 }, 3000)
       .easing(TWEEN.Easing.Quintic.Out)
       .onUpdate(({ opacity }) => (el.style.opacity = opacity))
+      .onComplete(() => {
+        document.querySelector('.overlay').removeChild(el);
+        this.startInstruction();
+      })
       .delay(3000);
 
     fadeIn.chain(fadeOut).start();
+  }
+
+  // INSTRUCTION phase
+  // - subtitles explain the thing
+  // - hud appears w/ distance & speed
+  startInstruction() {
+    // remove the pov from earth orbit and reset
+    const povWorldPos = new THREE.Vector3();
+    this.pov.camera.getWorldPosition(povWorldPos);
+    this.earth.leo.remove(this.pov.camera);
+    this.pov.position.copy(povWorldPos);
+    this.pov.target.setFromEuler(new THREE.Euler(0, 0, 0));
+    this.pov.rotation.set(0, 0, 0);
+    this.pov.fixCamera = true;
   }
 }
 
