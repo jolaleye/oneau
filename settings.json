@@ -1,5 +1,5 @@
 {
-  "conversionFactor": 100000,
+  "uToKm": 100000,
   "camera": {
     "fov": 75,
     "near": 0.01,
