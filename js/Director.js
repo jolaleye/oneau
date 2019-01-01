@@ -17,7 +17,7 @@ class Director {
   update() {
     if (!this.hudVisible) return;
 
-    const distFromEarth = (this.earth.position.z - this.pov.position.z) * 100000;
+    const distFromEarth = (this.earth.position.z - this.pov.position.z) * _.conversionFactor;
     this.distanceHUD.innerText = distFromEarth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // round to 2 decimals & insert commas
   }
 
