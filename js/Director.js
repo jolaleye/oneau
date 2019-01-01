@@ -19,6 +19,9 @@ class Director {
 
     const distFromEarth = (this.earth.position.z - this.pov.position.z) * _.uToKm;
     this.distanceHUD.innerText = distFromEarth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // round to 2 decimals & insert commas
+
+    const speed = -this.pov.velocity.z * _.uToKm * 3600; // convert from u/s to km/h
+    this.speedHUD.innerText = speed.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   overlayText(text, fadeFor, showFor) {
@@ -151,9 +154,15 @@ class Director {
     document.querySelector('.overlay').appendChild(distance);
     this.distanceHUD = document.querySelector('.distance .value');
 
-    const fadeIn = new TWEEN.Tween({ opacity: 0 }).to({ opacity: 0.6 }, 3000).easing(TWEEN.Easing.Quintic.Out);
+    const speed = document.createElement('p');
+    speed.classList.add('speed');
+    speed.innerHTML = `<span class="value"></span> km/h`;
+    speed.style.opacity = 0;
+    document.querySelector('.overlay').appendChild(speed);
+    this.speedHUD = document.querySelector('.speed .value');
 
     this.hudVisible = true;
+    const fadeIn = new TWEEN.Tween({ opacity: 0 }).to({ opacity: 0.5 }, 3000).easing(TWEEN.Easing.Quintic.Out);
 
     // run through the instruction lines
     for (let i = 0; i < script.instructions.length; i++) {
@@ -163,6 +172,10 @@ class Director {
 
       // add the distance overlay after the first line
       if (i === 0) fadeIn.onUpdate(({ opacity }) => (distance.style.opacity = opacity)).start();
+      // start moving after the second line (at 277.87mph or 0.12422km/s)
+      if (i === 1) this.pov.setSpeed(0.12422);
+      // show the speed after the third line
+      if (i === 2) fadeIn.onUpdate(({ opacity }) => (speed.style.opacity = opacity)).start();
     }
   }
 }
