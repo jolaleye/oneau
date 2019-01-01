@@ -137,6 +137,10 @@ canvas {
   letter-spacing: 0.02em;
   text-shadow: 0 0 5px black;
 
+  & p {
+    padding: 0 20%;
+  }
+
   &.intro-title {
     letter-spacing: 0.2em;
     font-family: 'GeoNMS', sans-serif;
