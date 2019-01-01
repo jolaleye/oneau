@@ -22,6 +22,9 @@ class POV {
     this.tempQ = new THREE.Quaternion();
     this.tempE = new THREE.Euler();
 
+    // velocity in u/s (100,000 km/s)
+    this.velocity = new THREE.Vector3();
+
     document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
     document.body.addEventListener('mouseleave', () => this.mouse.set(0, 0));
   }
@@ -43,6 +46,15 @@ class POV {
 
       this.camera.rotation.copy(euler);
     }
+
+    // move with the current velocity
+    this.position.z += this.velocity.z * ts;
+  }
+
+  // speed passed as km/s
+  setSpeed(speed) {
+    // convert to u/s (100,000 km/s)
+    this.velocity.setZ(-speed / _.uToKm);
   }
 
   lock() {
