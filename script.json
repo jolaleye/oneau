@@ -37,6 +37,24 @@
       "delay": 0,
       "fadeFor": 2000,
       "showFor": 4000
+    },
+    {
+      "text": "You are now moving at 447 km/h (278 mph).",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 3000
+    },
+    {
+      "text": "That's the top speed of the fastest production car in the world, the Koenigsegg Agera RS.",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "But in space, you might as well be sitting still.",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 3000
     }
   ]
 }
