@@ -162,7 +162,14 @@ class Director {
     this.speedHUD = document.querySelector('.speed .value');
 
     this.hudVisible = true;
-    const fadeIn = new TWEEN.Tween({ opacity: 0 }).to({ opacity: 0.5 }, 3000).easing(TWEEN.Easing.Quintic.Out);
+    const fadeDistanceIn = new TWEEN.Tween({ opacity: 0 })
+      .to({ opacity: 0.5 }, 3000)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .onUpdate(({ opacity }) => (distance.style.opacity = opacity));
+    const fadeSpeedIn = new TWEEN.Tween({ opacity: 0 })
+      .to({ opacity: 0.5 }, 3000)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .onUpdate(({ opacity }) => (speed.style.opacity = opacity));
 
     // run through the instruction lines
     for (let i = 0; i < script.instructions.length; i++) {
@@ -171,13 +178,21 @@ class Director {
       await this.overlayText(line.text, line.fadeFor, line.showFor);
 
       // add the distance overlay after the first line
-      if (i === 0) fadeIn.onUpdate(({ opacity }) => (distance.style.opacity = opacity)).start();
+      if (i === 0) fadeDistanceIn.start();
       // start moving after the second line (at 277.87mph or 0.12422km/s)
       if (i === 1) this.pov.setSpeed(0.12422);
       // show the speed after the third line
-      if (i === 2) fadeIn.onUpdate(({ opacity }) => (speed.style.opacity = opacity)).start();
+      if (i === 2) fadeSpeedIn.start();
+      // unlock pov controls after line 6
+      if (i === 5) this.pov.unlock();
     }
+
+    this.startAU();
   }
+
+  // AU phase
+  // - user travels towards the sun with periodic subtitles
+  startAU() {}
 }
 
 export default Director;

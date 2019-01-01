@@ -55,6 +55,24 @@
       "delay": 0,
       "fadeFor": 2000,
       "showFor": 3000
+    },
+    {
+      "text": "You can use your mouse to look around now.",
+      "delay": 500,
+      "fadeFor": 2000,
+      "showFor": 2000
+    },
+    {
+      "text": "Use the scroll wheel to adjust your speed.",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 2000
+    },
+    {
+      "text": "Enjoy the ride :)",
+      "delay": 1000,
+      "fadeFor": 2000,
+      "showFor": 3000
     }
   ]
 }
