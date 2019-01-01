@@ -24,5 +24,19 @@
       "fadeFor": 2000,
       "showFor": 3000
     }
+  ],
+  "instructions": [
+    {
+      "text": "You are already over 12,000 kilometers from home.",
+      "delay": 1000,
+      "fadeFor": 2000,
+      "showFor": 3000
+    },
+    {
+      "text": "That's about 14,492 Burj Khalifas, the tallest building in the world, stacked on top of each other.",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 4000
+    }
   ]
 }

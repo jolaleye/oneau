@@ -17,13 +17,13 @@ class Director {
   update() {
     if (!this.hudVisible) return;
 
-    const distFromEarth = (this.earth.position.z - this.pov.position.z) * _.conversionFactor;
+    const distFromEarth = (this.earth.position.z - this.pov.position.z) * _.uToKm;
     this.distanceHUD.innerText = distFromEarth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // round to 2 decimals & insert commas
   }
 
   overlayText(text, fadeFor, showFor) {
-    const el = document.createElement('p');
-    el.appendChild(document.createTextNode(text));
+    const el = document.createElement('div');
+    el.innerHTML = `<p>${text}</p>`;
     el.classList.add('text');
     document.querySelector('.overlay').appendChild(el);
 
@@ -133,7 +133,7 @@ class Director {
   // INSTRUCTION phase
   // - subtitles explain the thing
   // - hud appears w/ distance & speed
-  startInstruction() {
+  async startInstruction() {
     // remove the pov from earth orbit and reset
     const povWorldPos = new THREE.Vector3();
     this.pov.camera.getWorldPosition(povWorldPos);
@@ -151,15 +151,19 @@ class Director {
     document.querySelector('.overlay').appendChild(distance);
     this.distanceHUD = document.querySelector('.distance .value');
 
-    const fadeHUDIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 0.6 }, 3000)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .onUpdate(({ opacity }) => {
-        distance.style.opacity = opacity;
-      })
-      .start();
+    const fadeIn = new TWEEN.Tween({ opacity: 0 }).to({ opacity: 0.6 }, 3000).easing(TWEEN.Easing.Quintic.Out);
 
     this.hudVisible = true;
+
+    // run through the instruction lines
+    for (let i = 0; i < script.instructions.length; i++) {
+      const line = script.instructions[i];
+      await new Promise(resolve => setTimeout(resolve, line.delay));
+      await this.overlayText(line.text, line.fadeFor, line.showFor);
+
+      // add the distance overlay after the first line
+      if (i === 0) fadeIn.onUpdate(({ opacity }) => (distance.style.opacity = opacity)).start();
+    }
   }
 }
 
