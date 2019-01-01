@@ -134,7 +134,6 @@ canvas {
   font-weight: 300;
   font-size: 1.5em;
   text-align: center;
-  opacity: 0.8;
   letter-spacing: 0.02em;
   text-shadow: 0 0 5px black;
 
@@ -154,4 +153,17 @@ canvas {
       }
     }
   }
+}
+
+.overlay .distance {
+  position: absolute;
+  top: 2em;
+  left: 50%;
+  transform: translate(-50%);
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.2em;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 5px black;
 }

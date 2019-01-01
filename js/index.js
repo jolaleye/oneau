@@ -45,6 +45,7 @@ const animate = () => {
   TWEEN.update();
   sun.update();
   pov.update(ts);
+  director.update();
 
   renderer.render(scene, camera);
 };

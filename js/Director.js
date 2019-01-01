@@ -10,6 +10,15 @@ class Director {
     this.pov = pov;
     this.sun = sun;
     this.earth = earth;
+
+    this.hudVisible = false;
+  }
+
+  update() {
+    if (!this.hudVisible) return;
+
+    const distFromEarth = (this.earth.position.z - this.pov.position.z) * 100000;
+    this.distanceHUD.innerText = distFromEarth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // round to 2 decimals & insert commas
   }
 
   overlayText(text, fadeFor, showFor) {
@@ -19,11 +28,11 @@ class Director {
     document.querySelector('.overlay').appendChild(el);
 
     const fadeIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 1 }, fadeFor)
+      .to({ opacity: 0.8 }, fadeFor)
       .easing(TWEEN.Easing.Quintic.Out)
       .onUpdate(({ opacity }) => (el.style.opacity = opacity));
 
-    const fadeOut = new TWEEN.Tween({ opacity: 1 })
+    const fadeOut = new TWEEN.Tween({ opacity: 0.8 })
       .to({ opacity: 0 }, fadeFor)
       .easing(TWEEN.Easing.Quintic.Out)
       .onUpdate(({ opacity }) => (el.style.opacity = opacity))
@@ -133,6 +142,24 @@ class Director {
     this.pov.target.setFromEuler(new THREE.Euler(0, 0, 0));
     this.pov.rotation.set(0, 0, 0);
     this.pov.fixCamera = true;
+
+    // add distance & speed overlays
+    const distance = document.createElement('p');
+    distance.classList.add('distance');
+    distance.innerHTML = `<span class="value"></span> km from Earth`;
+    distance.style.opacity = 0;
+    document.querySelector('.overlay').appendChild(distance);
+    this.distanceHUD = document.querySelector('.distance .value');
+
+    const fadeHUDIn = new TWEEN.Tween({ opacity: 0 })
+      .to({ opacity: 0.6 }, 3000)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .onUpdate(({ opacity }) => {
+        distance.style.opacity = opacity;
+      })
+      .start();
+
+    this.hudVisible = true;
   }
 }
 
