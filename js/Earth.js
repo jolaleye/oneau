@@ -6,6 +6,12 @@ class Earth extends THREE.Mesh {
   constructor(textures) {
     const sphere = new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments);
 
+    // turn the textures a bit for subtitle positioning/readability
+    textures.earth.wrapS = THREE.RepeatWrapping;
+    textures.earth.offset.x = -Math.PI / 6 / (2 * Math.PI);
+    textures.earthClouds.wrapS = THREE.RepeatWrapping;
+    textures.earthClouds.offset.x = Math.PI / 6 / (2 * Math.PI);
+
     super(
       sphere.clone(),
       new THREE.MeshPhongMaterial({
