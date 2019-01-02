@@ -22,6 +22,11 @@ class Director {
 
     const speed = -this.pov.velocity.z * _.uToKm * 3600; // convert from u/s to km/h
     this.speedHUD.innerText = speed.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    // check checkpoints
+    if (script.checkpoints.length && this.earth.position.z - this.pov.position.z >= script.checkpoints[0].distance) {
+      const checkpoint = script.checkpoints.shift();
+    }
   }
 
   overlayText(text, fadeFor, showFor) {

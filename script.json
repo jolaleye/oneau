@@ -74,5 +74,11 @@
       "fadeFor": 2000,
       "showFor": 3000
     }
+  ],
+  "checkpoints": [
+    {
+      "distance": 3.84,
+      "msgs": ["You are now more than 384,000 km from Earth. This is about how far away the Moon is."]
+    }
   ]
 }
