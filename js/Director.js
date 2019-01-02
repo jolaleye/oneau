@@ -18,7 +18,7 @@ class Director {
   update() {
     // get the distance from Earth & current speed
     const distanceFromEarth = this.earth.position.z - this.pov.position.z;
-    const currentSpeed = -this.pov.velocity.z;
+    const currentSpeed = this.pov.velocity.z;
 
     this.ui.updateDistance(u2km(distanceFromEarth));
     this.ui.updateSpeed(u2km(currentSpeed) * 3600);

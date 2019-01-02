@@ -48,13 +48,13 @@ class POV {
     }
 
     // move with the current velocity
-    this.position.z += this.velocity.z * ts;
+    this.position.z -= this.velocity.z * ts;
   }
 
   // speed passed as km/s
   setSpeed(speed) {
     // convert to u/s (100,000 km/s)
-    this.velocity.setZ(-speed / _.uToKm);
+    this.velocity.setZ(speed / _.uToKm);
   }
 
   lock() {
