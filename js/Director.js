@@ -3,6 +3,8 @@ import TWEEN from '@tweenjs/tween.js';
 
 import _ from '../settings.json';
 import script from '../script.json';
+import { km2u, u2km } from './utils';
+import UI from './UI';
 
 // coordinates phases and flow
 class Director {
@@ -10,49 +12,21 @@ class Director {
     this.pov = pov;
     this.sun = sun;
     this.earth = earth;
-
-    this.hudVisible = false;
+    this.ui = new UI();
   }
 
   update() {
-    if (!this.hudVisible) return;
+    // get the distance from Earth & current speed
+    const distanceFromEarth = this.earth.position.z - this.pov.position.z;
+    const currentSpeed = -this.pov.velocity.z;
 
-    const distFromEarth = (this.earth.position.z - this.pov.position.z) * _.uToKm;
-    this.distanceHUD.innerText = distFromEarth.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); // round to 2 decimals & insert commas
-
-    const speed = -this.pov.velocity.z * _.uToKm * 3600; // convert from u/s to km/h
-    this.speedHUD.innerText = speed.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    this.ui.updateDistance(u2km(distanceFromEarth));
+    this.ui.updateSpeed(u2km(currentSpeed) * 3600);
 
     // check checkpoints
-    if (script.checkpoints.length && this.earth.position.z - this.pov.position.z >= script.checkpoints[0].distance) {
+    if (script.checkpoints.length && distanceFromEarth >= script.checkpoints[0].distance) {
       const checkpoint = script.checkpoints.shift();
     }
-  }
-
-  overlayText(text, fadeFor, showFor) {
-    const el = document.createElement('div');
-    el.innerHTML = `<p>${text}</p>`;
-    el.classList.add('text');
-    document.querySelector('.overlay').appendChild(el);
-
-    const fadeIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 0.8 }, fadeFor)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .onUpdate(({ opacity }) => (el.style.opacity = opacity));
-
-    const fadeOut = new TWEEN.Tween({ opacity: 0.8 })
-      .to({ opacity: 0 }, fadeFor)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .onUpdate(({ opacity }) => (el.style.opacity = opacity))
-      .delay(showFor);
-
-    return new Promise(resolve => {
-      fadeIn.chain(fadeOut).start();
-      fadeOut.onComplete(() => {
-        document.querySelector('.overlay').removeChild(el);
-        resolve();
-      });
-    });
   }
 
   // WAIT phase
@@ -62,8 +36,8 @@ class Director {
     this.pov.position.z = _.wait.povOrbitRadius;
     this.pov.lock();
 
-    // rotate Earth's orbit
-    const leoTween = new TWEEN.Tween(this.earth.leo.rotation)
+    // rotate Earth's orbit continuously
+    const orbitTween = new TWEEN.Tween(this.earth.leo.rotation)
       .to({ x: 0, y: 2 * Math.PI, z: 0 }, _.wait.povOrbitPeriod)
       .repeat(Infinity)
       .start();
@@ -79,7 +53,7 @@ class Director {
         .start();
 
       // stop rotation and start intro phase
-      leoTween.stop();
+      orbitTween.stop();
       this.startIntro();
     });
   }
@@ -96,7 +70,7 @@ class Director {
       .easing(TWEEN.Easing.Cubic.InOut)
       .onComplete(() => this.pov.target.setFromEuler(new THREE.Euler(0, -Math.PI, 0)));
 
-    const leoTween = new TWEEN.Tween(this.earth.leo.rotation)
+    const orbitTween = new TWEEN.Tween(this.earth.leo.rotation)
       .to({ x: 0, y: `+${diff}`, z: 0 }, _.intro.povOrbitDuration)
       .easing(TWEEN.Easing.Cubic.Out)
       .onComplete(() => this.sun.toggleLensflare(false))
@@ -105,43 +79,19 @@ class Director {
 
     // run through the intro lines
     for (const line of script.intro) {
-      await new Promise(resolve => setTimeout(resolve, line.delay));
-      await this.overlayText(line.text, line.fadeFor, line.showFor);
+      await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
     }
 
-    // end it with the title
-    const el = document.createElement('div');
-    el.classList.add('text', 'intro-title');
-    el.innerHTML = `
-      <span>ONE</span>
-      <span>AU</span>
-    `;
-    el.style.opacity = 0;
-    document.querySelector('.overlay').appendChild(el);
+    // title line
+    await this.ui.subtitle('ONE AU', 500, 3000, 3000, 0, 1, '<span>ONE</span><span>AU</span>', ['intro-title']);
 
-    const fadeIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 1 }, 3000)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .delay(500)
-      .onUpdate(({ opacity }) => (el.style.opacity = opacity));
-
-    const fadeOut = new TWEEN.Tween({ opacity: 1 })
-      .to({ opacity: 0 }, 3000)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .onUpdate(({ opacity }) => (el.style.opacity = opacity))
-      .onComplete(() => {
-        document.querySelector('.overlay').removeChild(el);
-        this.startInstruction();
-      })
-      .delay(3000);
-
-    fadeIn.chain(fadeOut).start();
+    this.startInstructions();
   }
 
-  // INSTRUCTION phase
+  // INSTRUCTIONS phase
   // - subtitles explain the thing
   // - hud appears w/ distance & speed
-  async startInstruction() {
+  async startInstructions() {
     // remove the pov from earth orbit and reset
     const povWorldPos = new THREE.Vector3();
     this.pov.camera.getWorldPosition(povWorldPos);
@@ -151,45 +101,20 @@ class Director {
     this.pov.rotation.set(0, 0, 0);
     this.pov.fixCamera = true;
 
-    // add distance & speed overlays
-    const distance = document.createElement('p');
-    distance.classList.add('distance');
-    distance.innerHTML = `<span class="value"></span> km from Earth`;
-    distance.style.opacity = 0;
-    document.querySelector('.overlay').appendChild(distance);
-    this.distanceHUD = document.querySelector('.distance .value');
-
-    const speed = document.createElement('p');
-    speed.classList.add('speed');
-    speed.innerHTML = `<span class="value"></span> km/h`;
-    speed.style.opacity = 0;
-    document.querySelector('.overlay').appendChild(speed);
-    this.speedHUD = document.querySelector('.speed .value');
-
-    this.hudVisible = true;
-    const fadeDistanceIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 0.5 }, 3000)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .onUpdate(({ opacity }) => (distance.style.opacity = opacity));
-    const fadeSpeedIn = new TWEEN.Tween({ opacity: 0 })
-      .to({ opacity: 0.5 }, 3000)
-      .easing(TWEEN.Easing.Quintic.Out)
-      .onUpdate(({ opacity }) => (speed.style.opacity = opacity));
-
     // run through the instruction lines
     for (let i = 0; i < script.instructions.length; i++) {
       const line = script.instructions[i];
-      await new Promise(resolve => setTimeout(resolve, line.delay));
-      await this.overlayText(line.text, line.fadeFor, line.showFor);
+      await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
 
       // add the distance overlay after the first line
-      if (i === 0) fadeDistanceIn.start();
-      // start moving after the second line (at 277.87mph or 0.12422km/s)
-      if (i === 1) this.pov.setSpeed(0.12422);
-      // show the speed after the third line
-      if (i === 2) fadeSpeedIn.start();
-      // unlock pov controls after line 6
-      if (i === 5) this.pov.unlock();
+      if (i === 0) this.ui.show('distance');
+      // start moving and show the speed after the second line (at 277.87mph or 0.12422km/s)
+      if (i === 1) {
+        this.pov.setSpeed(0.12422);
+        this.ui.show('speed');
+      }
+      // unlock pov controls after line 5
+      if (i === 4) this.pov.unlock();
     }
 
     this.startAU();
