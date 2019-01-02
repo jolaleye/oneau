@@ -33,7 +33,7 @@ class Director {
   // - camera orbits Earth
   startWait() {
     this.earth.leo.add(this.pov.camera);
-    this.pov.position.z = _.wait.povOrbitRadius;
+    this.pov.position.z = km2u(_.wait.povOrbitRadius);
     this.pov.lock();
 
     // rotate Earth's orbit continuously

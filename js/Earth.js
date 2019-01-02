@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 
 import _ from '../settings.json';
+import { km2u } from './utils';
 
 class Earth extends THREE.Mesh {
   constructor(textures) {
-    const sphere = new THREE.SphereBufferGeometry(_.earth.radius, _.earth.segments, _.earth.segments);
+    const sphere = new THREE.SphereBufferGeometry(km2u(_.earth.radius), _.earth.segments, _.earth.segments);
 
     // turn the textures a bit for subtitle positioning/readability
     textures.earth.wrapS = THREE.RepeatWrapping;
@@ -32,7 +33,7 @@ class Earth extends THREE.Mesh {
     this.leo = new THREE.Group();
 
     this.add(clouds, this.leo);
-    this.position.z = _.earth.orbitRadius;
+    this.position.z = km2u(_.earth.orbitRadius);
   }
 }
 

@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 import _ from '../settings.json';
+import { km2u } from './utils';
 
 // user point of view
 class POV {
@@ -53,8 +54,7 @@ class POV {
 
   // speed passed as km/s
   setSpeed(speed) {
-    // convert to u/s (100,000 km/s)
-    this.velocity.setZ(speed / _.uToKm);
+    this.velocity.setZ(km2u(speed));
   }
 
   lock() {

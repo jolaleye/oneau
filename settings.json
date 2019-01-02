@@ -1,5 +1,4 @@
 {
-  "uToKm": 100000,
   "camera": {
     "fov": 75,
     "near": 0.01,
@@ -14,21 +13,21 @@
     "rotationCorrectionSpeed": 0.4
   },
   "galaxy": {
-    "radius": 10000,
+    "radius": 1000000000,
     "segments": 100
   },
   "sun": {
-    "radius": 6.957,
+    "radius": 695700,
     "segments": 30,
     "colorLookup": 0.66
   },
   "earth": {
-    "radius": 0.06371,
+    "radius": 6371,
     "segments": 30,
-    "orbitRadius": 1495.975
+    "orbitRadius": 149597500
   },
   "wait": {
-    "povOrbitRadius": 0.12,
+    "povOrbitRadius": 12000,
     "povOrbitPeriod": 240000,
     "uiFadeOut": 1000
   },

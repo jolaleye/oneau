@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 
 import _ from '../settings.json';
+import { km2u } from './utils';
 import Lensflare from './Lensflare';
 import LensflareElement from './LensflareElement';
 import sunVS from '../shaders/sunVS';
@@ -15,7 +16,7 @@ class Sun extends THREE.Mesh {
     textures.sun.wrapT = THREE.RepeatWrapping;
 
     super(
-      new THREE.SphereBufferGeometry(_.sun.radius, _.sun.segments, _.sun.segments),
+      new THREE.SphereBufferGeometry(km2u(_.sun.radius), _.sun.segments, _.sun.segments),
       new THREE.ShaderMaterial({
         uniforms: {
           texture: { value: textures.sun },
