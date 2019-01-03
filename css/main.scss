@@ -18,6 +18,22 @@ canvas {
   top: 0;
 }
 
+.title,
+.pulse,
+.credit,
+.overlay {
+  z-index: 2;
+}
+
+.placeholder {
+  z-index: 1;
+  height: 100vh;
+  width: 100vw;
+  background: url('../img/placeholder.jpg') center/auto no-repeat;
+  opacity: 1;
+  filter: blur(10px);
+}
+
 .title {
   position: absolute;
   top: 20%;

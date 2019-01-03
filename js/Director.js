@@ -29,13 +29,16 @@ class Director {
     }
   }
 
-  // WAIT phase
-  // - camera orbits Earth
-  startWait() {
+  // waiting for the scene to render and placeholder to fade out
+  preWait() {
     this.earth.leo.add(this.pov.camera);
     this.pov.position.z = km2u(_.wait.povOrbitRadius);
     this.pov.lock();
+  }
 
+  // WAIT phase
+  // - camera orbits Earth
+  startWait() {
     // rotate Earth's orbit continuously
     const orbitTween = new TWEEN.Tween(this.earth.leo.rotation)
       .to({ x: 0, y: 2 * Math.PI, z: 0 }, _.wait.povOrbitPeriod)

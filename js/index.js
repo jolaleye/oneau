@@ -65,14 +65,28 @@ const init = () => {
   scene.add(galaxy, sun, earth, ambientLight);
 
   director = new Director(pov, sun, earth);
-  director.startWait();
+  director.preWait();
 
   lastTick = performance.now();
   animate();
+
+  // remove the placeholder image after the animation loop starts
+  const placeholder = document.querySelector('.placeholder');
+  const placeholderFadeOut = new TWEEN.Tween({ opacity: 1, blur: 10 })
+    .to({ opacity: 0, blur: 0 }, 3000)
+    .easing(TWEEN.Easing.Quadratic.InOut)
+    .onUpdate(({ opacity, blur }) => {
+      placeholder.style.setProperty('opacity', opacity);
+      placeholder.style.setProperty('filter', `blur(${blur}px)`);
+    })
+    .onComplete(() => director.startWait())
+    .start();
 };
 
-const loader = new Loader();
-loader.loadTextures().then(() => {
-  textures = loader.textures;
-  init();
-});
+window.onload = () => {
+  const loader = new Loader();
+  loader.loadTextures().then(() => {
+    textures = loader.textures;
+    init();
+  });
+};
