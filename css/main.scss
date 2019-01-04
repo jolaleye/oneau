@@ -187,6 +187,13 @@ canvas {
     font-size: 1.2em;
     letter-spacing: 0.02em;
     text-shadow: 0 0 5px black;
+
+    span {
+      font-family: 'Roboto Mono', monospace;
+      font-weight: 300;
+      font-size: 0.95em;
+      letter-spacing: normal;
+    }
   }
 
   .distance {
