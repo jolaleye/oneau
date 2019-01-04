@@ -118,6 +118,8 @@ class Director {
       }
       // unlock pov controls after line 5
       if (i === 4) this.pov.unlock();
+      // unlock speed controls after line 6
+      if (i === 5) this.pov.scrollLocked = false;
     }
 
     this.startAU();

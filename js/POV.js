@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import _ from '../settings.json';
-import { km2u } from './utils';
+import { km2u, u2km } from './utils';
 
 // user point of view
 class POV {
@@ -25,6 +25,9 @@ class POV {
 
     // velocity in u/s (100,000 km/s)
     this.velocity = new THREE.Vector3();
+
+    this.scrollLocked = true;
+    window.addEventListener('wheel', this.onScroll.bind(this));
 
     document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
     document.body.addEventListener('mouseleave', () => this.mouse.set(0, 0));
@@ -55,6 +58,16 @@ class POV {
   // speed passed as km/s
   setSpeed(speed) {
     this.velocity.setZ(km2u(speed));
+  }
+
+  onScroll(event) {
+    if (this.scrollLocked) return;
+
+    const scroll = -event.deltaY;
+    const ds = scroll * _.au.scrollSensitivity;
+
+    const newSpeed = u2km(this.velocity.z) + ds;
+    this.setSpeed(newSpeed);
   }
 
   lock() {

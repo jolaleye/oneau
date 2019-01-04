@@ -34,5 +34,8 @@
   "intro": {
     "povOrbitDuration": 22000,
     "povRotationDuration": 12000
+  },
+  "au": {
+    "scrollSensitivity": 0.1
   }
 }
