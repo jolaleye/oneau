@@ -27,6 +27,7 @@ class POV {
     this.velocity = new THREE.Vector3();
 
     this.scrollLocked = true;
+    this.scrollStart = null;
     window.addEventListener('wheel', this.onScroll.bind(this));
 
     document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
@@ -64,8 +65,16 @@ class POV {
   onScroll(event) {
     if (this.scrollLocked) return;
 
-    const scroll = -event.deltaY;
-    const ds = scroll * _.au.scrollSensitivity;
+    if (!this.scrollStart) this.scrollStart = performance.now();
+    // boost factor based on how long they've been scrolling
+    const boost = (performance.now() - this.scrollStart) / 100000;
+    // clear and reset the expiration timer
+    clearTimeout(this.scrollBoost);
+    this.scrollBoost = setTimeout(() => {
+      this.scrollStart = null;
+    }, _.au.scrollBoostExpiry);
+
+    const ds = -event.deltaY * boost;
 
     const newSpeed = u2km(this.velocity.z) + ds;
     this.setSpeed(newSpeed);
