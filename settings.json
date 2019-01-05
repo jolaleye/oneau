@@ -36,6 +36,8 @@
     "povRotationDuration": 12000
   },
   "au": {
-    "scrollSensitivity": 0.1
+    "scrollSensitivity": 0.1,
+    "maxSpeed": 299792,
+    "minSpeed": 0.1
   }
 }

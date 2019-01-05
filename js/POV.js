@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 
 import _ from '../settings.json';
-import { km2u, u2km } from './utils';
+import { km2u, u2km, clamp } from './utils';
 
 // user point of view
 class POV {
@@ -57,7 +57,8 @@ class POV {
 
   // speed passed as km/s
   setSpeed(speed) {
-    this.velocity.setZ(km2u(speed));
+    const s = clamp(speed, _.au.minSpeed, _.au.maxSpeed);
+    this.velocity.setZ(km2u(s));
   }
 
   onScroll(event) {
