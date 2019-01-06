@@ -22,7 +22,7 @@ class UI {
 
     const fadeIn = new TWEEN.Tween({ opacity: o1 })
       .to({ opacity: o2 }, fadeFor)
-      .easing(TWEEN.Easing.Quintic.Out)
+      .easing(TWEEN.Easing.Quintic.In)
       .onUpdate(({ opacity }) => el.style.setProperty('opacity', opacity))
       .delay(delay);
     const fadeOut = new TWEEN.Tween({ opacity: o2 })
