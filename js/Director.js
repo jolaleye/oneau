@@ -45,7 +45,7 @@ class Director {
       .repeat(Infinity)
       .start();
 
-    document.querySelector('.pulse').addEventListener('click', () => {
+    document.querySelector('.landing__pulse').addEventListener('click', () => {
       const ui = document.querySelector('.landing');
 
       // fade out the landing page ui

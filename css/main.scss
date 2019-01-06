@@ -16,19 +16,13 @@ canvas {
   z-index: -1;
   position: absolute;
   top: 0;
-}
-
-.title,
-.pulse,
-.credit,
-.overlay {
-  z-index: 2;
+  left: 0;
 }
 
 .loading {
   z-index: 1;
 
-  .img {
+  .loading__img {
     height: 100vh;
     width: 100vw;
     background: url('../img/placeholder.jpg') center/auto no-repeat;
@@ -36,7 +30,7 @@ canvas {
     filter: blur(5px);
   }
 
-  .spinner {
+  .loading__spinner {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -62,7 +56,7 @@ canvas {
   }
 }
 
-.title {
+.landing__title {
   position: absolute;
   top: 20%;
   left: 50%;
@@ -85,7 +79,7 @@ canvas {
   }
 }
 
-.pulse {
+.landing__pulse {
   display: none;
   position: absolute;
   top: 50%;
@@ -98,7 +92,7 @@ canvas {
     cursor: pointer;
   }
 
-  // pulsating ring
+  // pulsing ring
   &:before {
     content: '';
     display: block;
@@ -112,7 +106,7 @@ canvas {
     animation: pulseRing 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
   }
 
-  // pulsating dot
+  // pulsing dot
   &:after {
     content: '';
     display: block;
@@ -150,7 +144,7 @@ canvas {
   }
 }
 
-.credit {
+.landing__by {
   position: absolute;
   bottom: 1.5em;
   left: 50%;
