@@ -66,8 +66,8 @@ class POV {
     if (this.scrollLocked) return;
 
     if (!this.scrollStart) this.scrollStart = performance.now();
-    // boost factor based on how long they've been scrolling
-    const boost = (performance.now() - this.scrollStart) / 100000;
+    // scrolling has a greater effect the longer you've been scrolling
+    const boost = (performance.now() - this.scrollStart) * _.au.scrollBoostFactor;
     // clear and reset the expiration timer
     clearTimeout(this.scrollBoost);
     this.scrollBoost = setTimeout(() => {
