@@ -44,5 +44,10 @@
     "scrollBoostExpiry": 500,
     "maxSpeed": 299792,
     "minSpeed": 0.1
+  },
+  "sol": {
+    "slowAt": 6000000,
+    "stopAt": 2500000,
+    "driftDuration": 5000
   }
 }

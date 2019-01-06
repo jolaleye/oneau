@@ -27,6 +27,12 @@ class Director {
     if (script.checkpoints.length && distanceFromEarth >= script.checkpoints[0].distance) {
       const checkpoint = script.checkpoints.shift();
     }
+
+    // check distance from Sun
+    if (this.traveling && !this.reachedSun && this.pov.position.z <= km2u(_.sol.slowAt)) {
+      this.reachedSun = true;
+      this.startSol();
+    }
   }
 
   // waiting for the scene to render and placeholder to fade out
@@ -125,7 +131,24 @@ class Director {
 
   // AU phase
   // - user travels towards the sun with periodic subtitles
-  startAU() {}
+  startAU() {
+    this.traveling = true;
+  }
+
+  // SOL phase
+  // - cinematic sun scene to conclude
+  startSol() {
+    this.pov.scrollLocked = true;
+    this.pov.lock();
+    this.pov.setSpeed(0);
+
+    // gradually approach the sun
+    const tween = new TWEEN.Tween({ z: this.pov.position.z })
+      .to({ z: km2u(_.sol.stopAt) }, _.sol.driftDuration)
+      .easing(TWEEN.Easing.Cubic.Out)
+      .onUpdate(({ z }) => this.pov.position.setZ(z))
+      .start();
+  }
 }
 
 export default Director;
