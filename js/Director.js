@@ -96,10 +96,8 @@ class Director {
   // - hud appears w/ distance & speed
   async startInstructions() {
     // remove the pov from earth orbit and reset
-    const povWorldPos = new THREE.Vector3();
-    this.pov.camera.getWorldPosition(povWorldPos);
     this.earth.leo.remove(this.pov.camera);
-    this.pov.position.copy(povWorldPos);
+    this.pov.position.set(0, 0, km2u(_.earth.orbitRadius - _.wait.povOrbitRadius));
     this.pov.target.setFromEuler(new THREE.Euler(0, 0, 0));
     this.pov.rotation.set(0, 0, 0);
     this.pov.cameraCorrection = true;
