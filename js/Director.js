@@ -64,7 +64,7 @@ class Director {
   // INTRO phase
   // - camera moves into position between Earth & Sun
   async startIntro() {
-    this.pov.fixCamera = false;
+    this.pov.cameraCorrection = false;
     const rotation = (this.earth.leo.rotation.y + Math.PI) % (2 * Math.PI); // rotation of Earth orbit past the destination
     const diff = 2 * Math.PI - rotation; // amount to rotate
 
@@ -102,7 +102,7 @@ class Director {
     this.pov.position.copy(povWorldPos);
     this.pov.target.setFromEuler(new THREE.Euler(0, 0, 0));
     this.pov.rotation.set(0, 0, 0);
-    this.pov.fixCamera = true;
+    this.pov.cameraCorrection = true;
 
     // run through the instruction lines
     for (let i = 0; i < script.instructions.length; i++) {

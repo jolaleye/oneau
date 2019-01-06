@@ -17,7 +17,7 @@ class POV {
 
     // desired camera rotation
     this.target = new THREE.Quaternion();
-    this.fixCamera = true;
+    this.cameraCorrection = true;
 
     // temporary quaternion & euler used to rotate camera
     this.tempQ = new THREE.Quaternion();
@@ -36,7 +36,7 @@ class POV {
 
   update(ts) {
     // rotate camera to target when mouse vector is cleared
-    if (!this.mouse.x && !this.mouse.y && this.fixCamera) {
+    if (!this.mouse.x && !this.mouse.y && this.cameraCorrection) {
       this.camera.quaternion.slerp(this.target, _.pov.rotationCorrectionSpeed * ts);
     }
 
