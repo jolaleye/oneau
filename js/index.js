@@ -71,7 +71,7 @@ const init = () => {
   animate();
 
   // remove the placeholder image after the animation loop starts
-  const placeholder = document.querySelector('.placeholder');
+  const placeholder = document.querySelector('.loading .img');
   const placeholderFadeOut = new TWEEN.Tween({ opacity: 1, blur: _.load.blur })
     .to({ opacity: 0, blur: 0 }, _.load.fadeOut)
     .easing(TWEEN.Easing.Quadratic.InOut)
@@ -79,7 +79,11 @@ const init = () => {
       placeholder.style.setProperty('opacity', opacity);
       placeholder.style.setProperty('filter', `blur(${blur}px)`);
     })
-    .onComplete(() => director.startWait())
+    .onComplete(() => {
+      director.startWait();
+      document.querySelector('.spinner').style.setProperty('display', 'none');
+      document.querySelector('.pulse').style.setProperty('display', 'block');
+    })
     .start();
 };
 

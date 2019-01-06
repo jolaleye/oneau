@@ -25,13 +25,41 @@ canvas {
   z-index: 2;
 }
 
-.placeholder {
+.loading {
   z-index: 1;
-  height: 100vh;
-  width: 100vw;
-  background: url('../img/placeholder.jpg') center/auto no-repeat;
-  opacity: 1;
-  filter: blur(5px);
+
+  .img {
+    height: 100vh;
+    width: 100vw;
+    background: url('../img/placeholder.jpg') center/auto no-repeat;
+    opacity: 1;
+    filter: blur(5px);
+  }
+
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: white;
+    border-left-color: white;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 
 .title {
@@ -58,7 +86,7 @@ canvas {
 }
 
 .pulse {
-  display: block;
+  display: none;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -95,7 +123,7 @@ canvas {
     height: 100%;
     border-radius: 50%;
     background-color: #fff;
-    opacity: 0.25;
+    opacity: 0.5;
     animation: pulseDot 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) -0.8s infinite;
   }
 }
