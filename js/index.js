@@ -72,8 +72,8 @@ const init = () => {
 
   // remove the placeholder image after the animation loop starts
   const placeholder = document.querySelector('.placeholder');
-  const placeholderFadeOut = new TWEEN.Tween({ opacity: 1, blur: 10 })
-    .to({ opacity: 0, blur: 0 }, 3000)
+  const placeholderFadeOut = new TWEEN.Tween({ opacity: 1, blur: _.load.blur })
+    .to({ opacity: 0, blur: 0 }, _.load.fadeOut)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(({ opacity, blur }) => {
       placeholder.style.setProperty('opacity', opacity);

@@ -26,6 +26,10 @@
     "segments": 30,
     "orbitRadius": 149597500
   },
+  "load": {
+    "blur": 5,
+    "fadeOut": 1500
+  },
   "wait": {
     "povOrbitRadius": 12000,
     "povOrbitPeriod": 240000,
