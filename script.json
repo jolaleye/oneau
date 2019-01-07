@@ -80,5 +80,55 @@
       "distance": 3.84,
       "msgs": ["You are now more than 384,000 km from Earth. This is about how far away the Moon is."]
     }
+  ],
+  "sol": [
+    {
+      "text": "You just traveled 149,597,500 km (92,955,577 mi).",
+      "delay": 500,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "That's like traveling around the Earth's equator 3,733 times.",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "You have reached the Sun... our very own star.",
+      "delay": 1000,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "A 10,000°F (5,500°C) ball of hydrogen and helium,",
+      "delay": 500,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "the source of 99.86% of all the mass in the Solar System,",
+      "delay": 0,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "and the fuel for almost all life on Earth.",
+      "delay": 500,
+      "fadeFor": 2000,
+      "showFor": 4000
+    },
+    {
+      "text": "\"Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist. Be curious.\" - Stephen Hawking",
+      "delay": 3000,
+      "fadeFor": 4000,
+      "showFor": 12000
+    },
+    {
+      "text": "Thank you for making this journey. I hope you enjoyed the experience :)",
+      "delay": 2000,
+      "fadeFor": 2000,
+      "showFor": 5000
+    }
   ]
 }

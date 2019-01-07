@@ -61,7 +61,7 @@ class Sun extends THREE.Mesh {
     );
     flare1.scale.multiplyScalar(250);
 
-    const corona = new THREE.Mesh(
+    this.corona = new THREE.Mesh(
       new THREE.PlaneBufferGeometry(125, 125),
       new THREE.ShaderMaterial({
         uniforms: {
@@ -83,7 +83,9 @@ class Sun extends THREE.Mesh {
     this.lensflare.addElement(new LensflareElement(textures.lensflare, 120, 0.9));
     this.lensflare.addElement(new LensflareElement(textures.lensflare, 70, 1));
 
-    this.add(light, flare0, flare1, corona, this.lensflare);
+    this.orbit = new THREE.Group();
+
+    this.add(light, flare0, flare1, this.corona, this.lensflare, this.orbit);
   }
 
   update() {

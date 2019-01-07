@@ -137,17 +137,39 @@ class Director {
 
   // SOL phase
   // - cinematic sun scene to conclude
-  startSol() {
+  async startSol() {
     this.pov.scrollLocked = true;
     this.pov.lock();
     this.pov.setSpeed(0);
 
+    // add pov to the Sun's orbit
+    this.sun.orbit.add(this.pov.camera);
+    this.pov.position.set(0, 0, km2u(_.sol.slowAt));
+
     // gradually approach the sun
-    const tween = new TWEEN.Tween({ z: this.pov.position.z })
+    const drift = new TWEEN.Tween({ z: this.pov.position.z })
       .to({ z: km2u(_.sol.stopAt) }, _.sol.driftDuration)
-      .easing(TWEEN.Easing.Cubic.Out)
-      .onUpdate(({ z }) => this.pov.position.setZ(z))
-      .start();
+      .easing(TWEEN.Easing.Quadratic.Out)
+      .onUpdate(({ z }) => this.pov.position.setZ(z));
+
+    // orbit the sun
+    const orbit = new TWEEN.Tween({ y: this.sun.orbit.rotation.y })
+      .to({ y: 2 * Math.PI }, _.sol.povOrbitPeriod)
+      .onUpdate(({ y }) => {
+        this.sun.orbit.rotation.y = y;
+        this.sun.corona.rotation.y = y;
+      })
+      .repeat(Infinity);
+
+    drift.chain(orbit).start();
+
+    this.ui.hideHUD();
+
+    await this.ui.subtitle('', 3000, 4000, 4000, 0, 1, '<span>THE</span><span>SUN</span>', ['sol-title']);
+
+    for (const line of script.sol) {
+      await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, null, ['black']);
+    }
   }
 }
 

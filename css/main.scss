@@ -179,6 +179,12 @@ canvas {
     padding: 0 20%;
   }
 
+  &.black {
+    color: black;
+    font-weight: 400;
+    text-shadow: none;
+  }
+
   &.intro-title {
     letter-spacing: 0.2em;
     font-family: 'GeoNMS', sans-serif;
@@ -192,6 +198,25 @@ canvas {
       }
       &:nth-child(2) {
         font-size: 5.75em;
+      }
+    }
+  }
+
+  &.sol-title {
+    letter-spacing: 0.2em;
+    font-family: 'GeoNMS', sans-serif;
+    text-shadow: none;
+    color: black;
+
+    span {
+      vertical-align: middle;
+
+      &:nth-child(1) {
+        font-size: 2em;
+        margin-right: 0.1em;
+      }
+      &:nth-child(2) {
+        font-size: 4em;
       }
     }
   }

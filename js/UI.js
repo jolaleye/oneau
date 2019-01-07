@@ -55,8 +55,21 @@ class UI {
     const el = document.querySelector(`.overlay .${element}`);
     const fadeIn = new TWEEN.Tween({ opacity: 0 })
       .to({ opacity: 0.5 }, 3000)
-      .easing(TWEEN.Easing.Quintic.Out)
+      .easing(TWEEN.Easing.Quintic.In)
       .onUpdate(({ opacity }) => el.style.setProperty('opacity', opacity))
+      .start();
+  }
+
+  hideHUD() {
+    const distance = document.querySelector('.overlay .distance');
+    const speed = document.querySelector('.overlay .speed');
+    const fadeOut = new TWEEN.Tween({ opacity: 0.5 })
+      .to({ opacity: 0 }, 3000)
+      .easing(TWEEN.Easing.Quintic.Out)
+      .onUpdate(({ opacity }) => {
+        distance.style.setProperty('opacity', opacity);
+        speed.style.setProperty('opacity', opacity);
+      })
       .start();
   }
 
