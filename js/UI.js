@@ -64,12 +64,14 @@ class UI {
   hideHUD() {
     const distance = document.querySelector('.overlay .distance');
     const speed = document.querySelector('.overlay .speed');
+    const boost = document.querySelector('.overlay .boost');
     const fadeOut = new TWEEN.Tween({ opacity: 0.5 })
       .to({ opacity: 0 }, 3000)
       .easing(TWEEN.Easing.Quintic.Out)
       .onUpdate(({ opacity }) => {
         distance.style.setProperty('opacity', opacity);
         speed.style.setProperty('opacity', opacity);
+        boost.style.setProperty('opacity', opacity);
       })
       .start();
   }
