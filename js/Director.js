@@ -119,7 +119,6 @@ class Director {
       if (i === 1) {
         this.pov.setSpeed(0.12422);
         this.ui.show('speed');
-        this.ui.show('boost');
       }
       // unlock pov controls after line 5
       if (i === 4) this.pov.unlock();
@@ -134,6 +133,8 @@ class Director {
   // - user travels towards the sun with periodic subtitles
   startAU() {
     this.traveling = true;
+    this.ui.show('boost');
+    document.querySelector('.overlay .boost').addEventListener('click', this.boost.bind(this));
   }
 
   // SOL phase
@@ -171,6 +172,18 @@ class Director {
     for (const line of script.sol) {
       await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, null, ['black']);
     }
+  }
+
+  // start moving real fast
+  async boost() {
+    if (document.querySelector('.overlay .speed-sub')) return;
+
+    this.pov.setSpeed(1498960, true);
+
+    const sub1 = "You're now moving at about five times the speed of light.";
+    await this.ui.subtitle(sub1, 0, 1000, 3500, 0, 0.6, null, ['speed-sub']);
+    const sub2 = "This really isn't possible, but for the sake of speeding things up a bit we'll ignore that.";
+    this.ui.subtitle(sub2, 0, 1000, 4500, 0, 0.6, null, ['speed-sub']);
   }
 }
 

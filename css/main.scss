@@ -220,6 +220,12 @@ canvas {
       }
     }
   }
+
+  &.speed-sub {
+    top: unset;
+    bottom: 4em;
+    font-size: 1.1em;
+  }
 }
 
 .overlay {
