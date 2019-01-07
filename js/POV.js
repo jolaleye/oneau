@@ -57,9 +57,9 @@ class POV {
   }
 
   // speed passed as km/s
-  setSpeed(speed) {
+  setSpeed(speed, override = false) {
     const s = clamp(speed, _.au.minSpeed, _.au.maxSpeed);
-    this.velocity.setZ(km2u(s));
+    this.velocity.setZ(km2u(override ? speed : s));
   }
 
   onScroll(event) {
