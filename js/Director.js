@@ -119,6 +119,7 @@ class Director {
       if (i === 1) {
         this.pov.setSpeed(0.12422);
         this.ui.show('speed');
+        this.ui.show('boost');
       }
       // unlock pov controls after line 5
       if (i === 4) this.pov.unlock();

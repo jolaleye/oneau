@@ -50,9 +50,10 @@ class UI {
     this.speed.innerHTML = speed.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
-  // fade in the distance or speed display
+  // fade in hud elements
   show(element) {
     const el = document.querySelector(`.overlay .${element}`);
+    el.style.setProperty('display', 'block');
     const fadeIn = new TWEEN.Tween({ opacity: 0 })
       .to({ opacity: 0.5 }, 3000)
       .easing(TWEEN.Easing.Quintic.In)

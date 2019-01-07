@@ -225,6 +225,7 @@ canvas {
 .overlay {
   .distance,
   .speed {
+    display: none;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
@@ -249,5 +250,25 @@ canvas {
 
   .speed {
     bottom: 2em;
+  }
+}
+
+.overlay .boost {
+  display: none;
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  width: 2.5em;
+  height: auto;
+  position: absolute;
+  bottom: 2em;
+  right: 2em;
+
+  opacity: 0;
+  transition: opacity 0.5s;
+  &:hover {
+    cursor: pointer;
+    opacity: 1 !important;
   }
 }
