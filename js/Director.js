@@ -13,6 +13,7 @@ class Director {
     this.sun = sun;
     this.earth = earth;
     this.ui = new UI();
+    this.updating = { distance: false, speed: false, eta: false };
   }
 
   update() {
@@ -20,8 +21,9 @@ class Director {
     const distanceFromEarth = this.earth.position.z - this.pov.position.z;
     const currentSpeed = this.pov.velocity.z;
 
-    this.ui.updateDistance(u2km(distanceFromEarth));
-    this.ui.updateSpeed(u2km(currentSpeed) * 3600);
+    if (this.updating.distance) this.ui.updateDistance(u2km(distanceFromEarth));
+    if (this.updating.speed) this.ui.updateSpeed(u2km(currentSpeed) * 3600);
+    if (this.updating.eta) this.ui.updateETA(u2km(this.pov.position.z - km2u(_.sol.slowAt)) / u2km(currentSpeed));
 
     // check checkpoints
     if (script.checkpoints.length && distanceFromEarth >= script.checkpoints[0].distance) {
@@ -101,6 +103,10 @@ class Director {
   // - subtitles explain the thing
   // - hud appears w/ distance & speed
   async startInstructions() {
+    this.updating.distance = true;
+    this.updating.speed = true;
+    this.updating.eta = true;
+
     // remove the pov from earth orbit and reset
     this.earth.leo.remove(this.pov.camera);
     this.pov.position.set(0, 0, km2u(_.earth.orbitRadius - _.wait.povOrbitRadius));
@@ -133,6 +139,7 @@ class Director {
   // - user travels towards the sun with periodic subtitles
   startAU() {
     this.traveling = true;
+    this.ui.show('eta', 0.3);
     this.ui.show('boost');
     document.querySelector('.overlay .boost').addEventListener('click', this.boost.bind(this));
   }
@@ -140,6 +147,8 @@ class Director {
   // SOL phase
   // - cinematic sun scene to conclude
   async startSol() {
+    this.updating.eta = false;
+
     this.pov.scrollLocked = true;
     this.pov.lock();
     this.pov.setSpeed(0);

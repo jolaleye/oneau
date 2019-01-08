@@ -223,7 +223,7 @@ canvas {
 
   &.speed-sub {
     top: unset;
-    bottom: 4em;
+    bottom: 5em;
     font-size: 1.1em;
   }
 }
@@ -255,7 +255,7 @@ canvas {
   }
 
   .speed {
-    bottom: 2em;
+    bottom: 2.5em;
   }
 }
 
@@ -276,5 +276,25 @@ canvas {
   &:hover {
     cursor: pointer;
     opacity: 1 !important;
+  }
+}
+
+.overlay .eta {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
+  letter-spacing: 0.02em;
+  text-shadow: 0 0 5px black;
+  bottom: 1.5em;
+
+  span {
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 300;
+    letter-spacing: normal;
   }
 }
