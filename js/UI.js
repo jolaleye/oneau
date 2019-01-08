@@ -45,13 +45,11 @@ class UI {
   }
 
   updateDistance(distance) {
-    // 2 decimals and commas
-    this.distance.innerHTML = distance.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    this.distance.innerHTML = distance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   updateSpeed(speed) {
-    // 2 decimals and commas
-    this.speed.innerHTML = speed.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    this.speed.innerHTML = speed.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   // eta passed in seconds
