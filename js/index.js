@@ -81,7 +81,7 @@ const init = () => {
     })
     .onComplete(() => {
       director.startWait();
-      document.querySelector('.loading__spinner').style.setProperty('display', 'none');
+      document.querySelector('.loading').style.setProperty('display', 'none');
       document.querySelector('.landing__pulse').style.setProperty('display', 'block');
     })
     .start();
