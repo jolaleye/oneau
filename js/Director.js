@@ -33,6 +33,9 @@ class Director {
     // check distance from Sun
     if (this.traveling && !this.reachedSun && this.pov.position.z <= km2u(_.sol.slowAt)) {
       this.reachedSun = true;
+      this.updating.distance = false;
+      this.updating.speed = false;
+      this.updating.eta = false;
       this.startSol();
     }
   }
@@ -147,8 +150,6 @@ class Director {
   // SOL phase
   // - cinematic sun scene to conclude
   async startSol() {
-    this.updating.eta = false;
-
     this.pov.scrollLocked = true;
     this.pov.lock();
     this.pov.setSpeed(0);
