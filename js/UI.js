@@ -88,6 +88,22 @@ class UI {
       .start();
   }
 
+  // show the title at the end
+  solTitle() {
+    const title = document.querySelector('.overlay .sol-title');
+    const by = document.querySelector('.overlay .sol-by');
+    title.style.setProperty('display', 'block');
+    by.style.setProperty('display', 'block');
+    const fadeIn = new TWEEN.Tween({ opacity: 0 })
+      .to({ opacity: 1 }, 5000)
+      .easing(TWEEN.Easing.Quintic.In)
+      .onUpdate(({ opacity }) => {
+        title.style.setProperty('opacity', opacity);
+        by.style.setProperty('opacity', opacity);
+      })
+      .start();
+  }
+
   createDistanceDisplay() {
     const el = document.createElement('p');
     el.classList.add('distance');

@@ -298,3 +298,42 @@ canvas {
     letter-spacing: normal;
   }
 }
+
+.sol-title {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  top: 8em;
+  left: 50%;
+  transform: translateX(-50%);
+  color: black;
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'GeoNMS', sans-serif;
+
+  span {
+    vertical-align: middle;
+
+    &:nth-child(1) {
+      font-size: 4em;
+      margin-right: 0.1em;
+    }
+    &:nth-child(2) {
+      font-size: 8em;
+    }
+  }
+}
+
+.sol-by {
+  display: none;
+  opacity: 0;
+  position: absolute;
+  bottom: 12em;
+  left: 50%;
+  transform: translateX(-50%);
+  text-decoration: none;
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
+}

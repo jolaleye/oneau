@@ -181,6 +181,8 @@ class Director {
     for (const line of script.sol) {
       await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, null, ['black']);
     }
+
+    this.ui.solTitle();
   }
 
   // start moving real fast
