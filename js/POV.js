@@ -30,8 +30,14 @@ class POV {
     this.scrollStart = null;
     window.addEventListener('wheel', this.onScroll.bind(this));
 
-    document.body.addEventListener('mousemove', this.onMouseMove.bind(this));
+    document.querySelector('canvas').addEventListener('mousemove', this.onMouseMove.bind(this));
     document.body.addEventListener('mouseleave', () => this.mouse.set(0, 0));
+
+    // mousing over a hud element is equivalent to a mouseleave
+    // this is so you dont start rotating fast while trying to click boost for example
+    document.querySelectorAll('.distance, .speed, .eta, .boost').forEach(el => {
+      el.addEventListener('mouseover', () => this.mouse.set(0, 0));
+    });
   }
 
   update(ts) {
