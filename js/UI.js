@@ -80,9 +80,9 @@ class UI {
   }
 
   // show the title at the end
-  solTitle() {
-    const title = document.querySelector('.overlay .sol-title');
-    const by = document.querySelector('.overlay .sol-by');
+  endTitle() {
+    const title = document.querySelector('.overlay .end-title');
+    const by = document.querySelector('.overlay .end-by');
     title.style.setProperty('display', 'block');
     by.style.setProperty('display', 'block');
     const fadeIn = new TWEEN.Tween({ opacity: 0 })
