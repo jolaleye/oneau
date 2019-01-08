@@ -222,10 +222,20 @@ canvas {
   }
 }
 
+// hidden at first
+.overlay {
+  .distance,
+  .speed,
+  .eta,
+  .boost {
+    display: none;
+    opacity: 0;
+  }
+}
+
 .overlay {
   .distance,
   .speed {
-    display: none;
     position: absolute;
     left: 50%;
     transform: translate(-50%);
@@ -254,7 +264,6 @@ canvas {
 }
 
 .overlay .boost {
-  display: none;
   fill: #fff;
   stroke: none;
   width: 2.5em;
@@ -263,7 +272,6 @@ canvas {
   bottom: 2em;
   right: 2.5em;
 
-  opacity: 0;
   transition: opacity 0.5s;
   &:hover {
     cursor: pointer;
@@ -272,7 +280,6 @@ canvas {
 }
 
 .overlay .eta {
-  display: none;
   position: absolute;
   left: 50%;
   transform: translate(-50%);

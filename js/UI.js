@@ -3,17 +3,8 @@ import TWEEN from '@tweenjs/tween.js';
 class UI {
   constructor() {
     this.overlay = document.querySelector('.overlay');
-
-    // create the distance display
-    this.overlay.appendChild(this.createDistanceDisplay());
     this.distance = document.querySelector('.distance span');
-
-    // create the speed display
-    this.overlay.appendChild(this.createSpeedDisplay());
     this.speed = document.querySelector('.speed span');
-
-    // create the ETA display
-    this.overlay.appendChild(this.createETADisplay());
     this.eta = document.querySelector('.eta span');
   }
 
@@ -102,30 +93,6 @@ class UI {
         by.style.setProperty('opacity', opacity);
       })
       .start();
-  }
-
-  createDistanceDisplay() {
-    const el = document.createElement('p');
-    el.classList.add('distance');
-    el.innerHTML = '<span>0</span> km from Earth';
-    el.style.setProperty('opacity', '0');
-    return el;
-  }
-
-  createSpeedDisplay() {
-    const el = document.createElement('p');
-    el.classList.add('speed');
-    el.innerHTML = '<span>0</span> km/h';
-    el.style.setProperty('opacity', '0');
-    return el;
-  }
-
-  createETADisplay() {
-    const el = document.createElement('p');
-    el.classList.add('eta');
-    el.innerHTML = `ETA <span>00:00:00</span>`;
-    el.style.setProperty('opacity', '0');
-    return el;
   }
 }
 
