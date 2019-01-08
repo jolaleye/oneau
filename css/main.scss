@@ -255,15 +255,13 @@ canvas {
 
 .overlay .boost {
   display: none;
-  fill: none;
-  stroke: #fff;
-  stroke-width: 5px;
-  stroke-linecap: round;
+  fill: #fff;
+  stroke: none;
   width: 2.5em;
   height: auto;
   position: absolute;
   bottom: 2em;
-  right: 2em;
+  right: 2.5em;
 
   opacity: 0;
   transition: opacity 0.5s;
