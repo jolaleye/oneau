@@ -1,133 +1,151 @@
 {
   "intro": [
     {
-      "text": "1 astronomical unit (AU) is roughly the distance from Earth to the Sun.",
-      "delay": 1750,
-      "fadeFor": 2000,
-      "showFor": 3000
+      "text": "You are about to embark on a journey...",
+      "delay": 2000,
+      "fadeFor": 1000,
+      "showFor": 4000
     },
     {
-      "text": "You are about to make that journey...",
+      "text": "...to the nearest star...",
       "delay": 0,
-      "fadeFor": 2000,
-      "showFor": 3000
+      "fadeFor": 1000,
+      "showFor": 4000
     },
     {
-      "text": "...149,597,500 km...",
+      "text": "...the center of our solar system...",
       "delay": 0,
-      "fadeFor": 2000,
-      "showFor": 3000
+      "fadeFor": 1000,
+      "showFor": 4000
     },
     {
-      "text": "This may take a while...",
+      "text": "...the Sun.",
+      "delay": 1500,
+      "fadeFor": 1000,
+      "showFor": 4000
+    },
+    {
+      "text": "You'll cover a distance of roughly 1 astronomical unit (AU)...",
+      "delay": 2000,
+      "fadeFor": 1000,
+      "showFor": 4000
+    },
+    {
+      "text": "...149,597,500 km (92,955,577 mi)...",
       "delay": 0,
-      "fadeFor": 2000,
-      "showFor": 3000
+      "fadeFor": 1000,
+      "showFor": 4000
+    },
+    {
+      "text": "...this may take a while.",
+      "delay": 1000,
+      "fadeFor": 1000,
+      "showFor": 4000
     }
   ],
   "instructions": [
     {
       "text": "You are already over 12,000 kilometers from home.",
       "delay": 1000,
-      "fadeFor": 2000,
-      "showFor": 3000
-    },
-    {
-      "text": "That's about 14,492 Burj Khalifas, the tallest building in the world, stacked on top of each other.",
-      "delay": 0,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
-      "text": "You are now moving at 447 km/h (278 mph).",
+      "text": "That's about 14,461 Burj Khalifas, the tallest building in the world, stacked on top of each other.",
       "delay": 0,
-      "fadeFor": 2000,
-      "showFor": 3000
+      "fadeFor": 1000,
+      "showFor": 4000
+    },
+    {
+      "text": "You're now moving at 447 km/h (278 mph).",
+      "delay": 1000,
+      "fadeFor": 1000,
+      "showFor": 4000
     },
     {
       "text": "That's the top speed of the fastest production car in the world, the Koenigsegg Agera RS.",
       "delay": 0,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
       "text": "But in space, you might as well be sitting still.",
       "delay": 0,
-      "fadeFor": 2000,
-      "showFor": 3000
+      "fadeFor": 1000,
+      "showFor": 4000
     },
     {
       "text": "You can use your mouse to look around now.",
-      "delay": 500,
-      "fadeFor": 2000,
-      "showFor": 2000
+      "delay": 2000,
+      "fadeFor": 1000,
+      "showFor": 3000
     },
     {
       "text": "Scroll to adjust your speed.",
       "delay": 0,
-      "fadeFor": 2000,
-      "showFor": 2000
+      "fadeFor": 1000,
+      "showFor": 3000
+    },
+    {
+      "text": "If you want to speed things up, try the button in the lower right corner.",
+      "delay": 0,
+      "fadeFor": 1000,
+      "showFor": 3000
     },
     {
       "text": "Enjoy the ride :)",
       "delay": 1000,
       "fadeFor": 2000,
-      "showFor": 3000
-    }
-  ],
-  "checkpoints": [
-    {
-      "distance": 3.84,
-      "msgs": ["You are now more than 384,000 km from Earth. This is about how far away the Moon is."]
+      "showFor": 5000
     }
   ],
   "sol": [
     {
       "text": "You just traveled 149,597,500 km (92,955,577 mi).",
-      "delay": 500,
-      "fadeFor": 2000,
+      "delay": 1000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
       "text": "That's like traveling around the Earth's equator 3,733 times.",
       "delay": 0,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
-      "text": "You have reached the Sun... our very own star.",
+      "text": "Finally... you have reached the Sun... our very own star.",
       "delay": 1000,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
       "text": "A 10,000°F (5,500°C) ball of hydrogen and helium,",
       "delay": 500,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
       "text": "the source of 99.86% of all the mass in the Solar System,",
       "delay": 0,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
       "text": "and the fuel for almost all life on Earth.",
       "delay": 500,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 4000
     },
     {
       "text": "\"Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist. Be curious.\" - Stephen Hawking",
-      "delay": 3000,
-      "fadeFor": 4000,
+      "delay": 2000,
+      "fadeFor": 3000,
       "showFor": 12000
     },
     {
       "text": "Thank you for making this journey. I hope you enjoyed the experience :)",
       "delay": 2000,
-      "fadeFor": 2000,
+      "fadeFor": 1000,
       "showFor": 5000
     }
   ]

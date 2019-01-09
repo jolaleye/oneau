@@ -59,8 +59,8 @@ function init() {
 
   // remove the loading div when ready
   const loadingImg = document.querySelector('.loading__img');
-  const fadeOut = new TWEEN.Tween({ opacity: 1, blur: _.load.blur })
-    .to({ opacity: 0, blur: 0 }, _.load.fadeOut)
+  const fadeOut = new TWEEN.Tween({ opacity: 1, blur: 5 })
+    .to({ opacity: 0, blur: 0 }, 1500)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(({ opacity, blur }) => {
       loadingImg.style.setProperty('opacity', opacity);

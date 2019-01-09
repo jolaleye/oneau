@@ -17,19 +17,21 @@ class Director {
 
     // initial setup
     this.earth.leo.add(this.pov.camera);
-    this.pov.position.z = km2u(_.wait.povOrbitRadius);
+    this.pov.position.z = km2u(_.wait.orbitRadius);
     this.pov.lock();
   }
 
   update() {
-    const distanceFromEarth = this.earth.position.z - this.pov.position.z;
-    const currentSpeed = this.pov.velocity.z;
-
     // check distance from Sun
     if (this.traveling && this.pov.position.z <= km2u(_.sol.slowAt)) {
       this.traveling = false;
       this.startSol();
     }
+
+    if (!(this.updating.distance || this.updating.speed || this.updating.eta)) return;
+
+    const distanceFromEarth = this.earth.position.z - this.pov.position.z;
+    const currentSpeed = this.pov.velocity.z;
 
     if (this.updating.distance) this.ui.updateDistance(u2km(distanceFromEarth));
     if (this.updating.speed) this.ui.updateSpeed(u2km(currentSpeed) * 3600);
@@ -41,7 +43,7 @@ class Director {
   startWait() {
     // turn Earth's orbit
     const orbit = new TWEEN.Tween(this.earth.leo.rotation)
-      .to({ x: 0, y: 2 * Math.PI, z: 0 }, _.wait.povOrbitPeriod)
+      .to({ x: 0, y: 2 * Math.PI, z: 0 }, _.wait.orbitPeriod)
       .repeat(Infinity)
       .start();
 
@@ -49,7 +51,7 @@ class Director {
     document.querySelector('.landing__pulse').addEventListener('click', () => {
       const el = document.querySelector('.landing');
       this.ui
-        .fade([el], 1, 0, _.wait.uiFadeOut)
+        .fade([el], 1, 0, 1000)
         .onComplete(() => el.style.setProperty('display', 'none'))
         .start();
 
@@ -66,13 +68,13 @@ class Director {
     const diff = 2 * Math.PI - ((this.earth.leo.rotation.y + Math.PI) % (2 * Math.PI));
 
     const orbit = new TWEEN.Tween({ y: this.earth.leo.rotation.y })
-      .to({ y: `+${diff}` }, _.intro.povOrbitDuration)
+      .to({ y: `+${diff}` }, _.intro.orbitDuration)
       .easing(TWEEN.Easing.Cubic.Out)
       .onUpdate(({ y }) => (this.earth.leo.rotation.y = y))
       .onComplete(() => this.sun.toggleLensflare(false));
 
     const cameraTurn = new TWEEN.Tween({ y: this.pov.camera.rotation.y })
-      .to({ y: -Math.PI }, _.intro.povRotationDuration)
+      .to({ y: -Math.PI }, _.intro.cameraTurnDuration)
       .easing(TWEEN.Easing.Cubic.InOut)
       .onUpdate(({ y }) => (this.pov.camera.rotation.y = y))
       .onComplete(() => this.pov.target.setFromEuler(new THREE.Euler(0, -Math.PI, 0)));
@@ -83,7 +85,7 @@ class Director {
     // intro lines
     for (const line of script.intro) await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
     // title card
-    await this.ui.subtitle('', 500, 3000, 3000, 0, 1, ['intro-title'], '<span>ONE</span><span>AU</span>');
+    await this.ui.subtitle('', 1500, 3000, 4000, 0, 1, ['intro-title'], '<span>ONE</span><span>AU</span>');
 
     this.startInstructions();
   }
@@ -97,7 +99,7 @@ class Director {
 
     // remove the pov from earth orbit and reset
     this.earth.leo.remove(this.pov.camera);
-    this.pov.position.set(0, 0, km2u(_.earth.orbitRadius - _.wait.povOrbitRadius));
+    this.pov.position.set(0, 0, km2u(_.earth.orbitRadius - _.wait.orbitRadius));
     this.pov.target.setFromEuler(new THREE.Euler(0, 0, 0));
     this.pov.rotation.set(0, 0, 0);
     this.pov.cameraCorrection = true;
@@ -113,7 +115,7 @@ class Director {
       // actions follow some lines
       switch (i) {
         case 1:
-          this.pov.setSpeed(0.12422);
+          this.pov.setSpeed(0.124167);
           this.ui.fade([document.querySelector(`.overlay__speed`)], 0, 0.5, 3000).start();
           break;
         case 4:
@@ -121,6 +123,9 @@ class Director {
           break;
         case 5:
           this.pov.scrollLocked = false;
+          break;
+        case 6:
+          this.ui.fade([document.querySelector(`.overlay__boost`)], 0, 0.5, 3000).start();
           break;
       }
     }
@@ -132,21 +137,19 @@ class Director {
   // - user travels towards the sun
   startAU() {
     this.traveling = true;
-    // add the eta display and boost button
+    // add the eta display and boost button listener
     this.ui.fade([document.querySelector(`.overlay__eta`)], 0, 0.3, 3000).start();
-    this.ui.fade([document.querySelector(`.overlay__boost`)], 0, 0.5, 3000).start();
-    document.querySelector('.overlay__boost').addEventListener('click', this.boost.bind(this));
-  }
+    document.querySelector('.overlay__boost').addEventListener('click', async () => {
+      if (document.querySelector('.overlay .speed-sub') || !this.traveling) return;
 
-  async boost() {
-    if (document.querySelector('.overlay .speed-sub') || !this.traveling) return;
+      // 5x the speed of light
+      this.pov.setSpeed(1498960, true);
 
-    this.pov.setSpeed(1498960, true);
-
-    const sub1 = "You're now moving at about five times the speed of light.";
-    await this.ui.subtitle(sub1, 0, 1000, 3500, 0, 0.6, ['speed-sub']);
-    const sub2 = "This really isn't possible, but for the sake of speeding things up a bit we'll ignore that.";
-    this.ui.subtitle(sub2, 0, 1000, 4500, 0, 0.6, ['speed-sub']);
+      const sub1 = "You're now moving at about five times the speed of light.";
+      const sub2 = "This really isn't possible, but for the sake of speeding things up a bit we'll ignore that.";
+      await this.ui.subtitle(sub1, 0, 1000, 4000, 0, 0.6, ['speed-sub']);
+      this.ui.subtitle(sub2, 0, 1000, 4000, 0, 0.6, ['speed-sub']);
+    });
   }
 
   // SOL phase
@@ -170,7 +173,7 @@ class Director {
       .onUpdate(({ z }) => this.pov.position.setZ(z));
 
     const orbit = new TWEEN.Tween({ y: this.sun.orbit.rotation.y })
-      .to({ y: 2 * Math.PI }, _.sol.povOrbitPeriod)
+      .to({ y: 2 * Math.PI }, _.sol.orbitPeriod)
       .onUpdate(({ y }) => {
         this.sun.orbit.rotation.y = y;
         this.sun.corona.rotation.y = y;

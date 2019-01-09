@@ -26,18 +26,13 @@
     "segments": 30,
     "orbitRadius": 149597500
   },
-  "load": {
-    "blur": 5,
-    "fadeOut": 1500
-  },
   "wait": {
-    "povOrbitRadius": 12000,
-    "povOrbitPeriod": 240000,
-    "uiFadeOut": 1000
+    "orbitRadius": 12000,
+    "orbitPeriod": 240000
   },
   "intro": {
-    "povOrbitDuration": 22000,
-    "povRotationDuration": 12000
+    "orbitDuration": 41000,
+    "cameraTurnDuration": 12000
   },
   "au": {
     "scrollBoostFactor": 0.00001,
@@ -49,6 +44,6 @@
     "slowAt": 6000000,
     "stopAt": 2500000,
     "driftDuration": 12000,
-    "povOrbitPeriod": 240000
+    "orbitPeriod": 240000
   }
 }
