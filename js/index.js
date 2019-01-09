@@ -28,29 +28,17 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 });
 
-let textures;
-let director;
-let pov;
-let galaxy;
-let sun;
-let earth;
+let textures, director, pov, galaxy, sun, earth;
 
-let lastTick;
-const animate = () => {
-  requestAnimationFrame(animate);
-  // scales speeds to 1 u/s regardless of frame rate
-  const ts = (performance.now() - lastTick) / 1000;
-  lastTick = performance.now();
-
-  TWEEN.update();
-  sun.update();
-  pov.update(ts);
-  director.update();
-
-  renderer.render(scene, camera);
+window.onload = () => {
+  const loader = new Loader();
+  loader.loadTextures().then(() => {
+    textures = loader.textures;
+    init();
+  });
 };
 
-const init = () => {
+function init() {
   pov = new POV(camera);
 
   galaxy = new Galaxy(textures);
@@ -65,32 +53,38 @@ const init = () => {
   scene.add(galaxy, sun, earth, ambientLight);
 
   director = new Director(pov, sun, earth);
-  director.preWait();
 
   lastTick = performance.now();
   animate();
 
-  // remove the placeholder image after the animation loop starts
-  const placeholder = document.querySelector('.loading__img');
-  const placeholderFadeOut = new TWEEN.Tween({ opacity: 1, blur: _.load.blur })
+  // remove the loading div when ready
+  const loadingImg = document.querySelector('.loading__img');
+  const fadeOut = new TWEEN.Tween({ opacity: 1, blur: _.load.blur })
     .to({ opacity: 0, blur: 0 }, _.load.fadeOut)
     .easing(TWEEN.Easing.Quadratic.InOut)
     .onUpdate(({ opacity, blur }) => {
-      placeholder.style.setProperty('opacity', opacity);
-      placeholder.style.setProperty('filter', `blur(${blur}px)`);
+      loadingImg.style.setProperty('opacity', opacity);
+      loadingImg.style.setProperty('filter', `blur(${blur}px)`);
     })
     .onComplete(() => {
-      director.startWait();
       document.querySelector('.loading').style.setProperty('display', 'none');
       document.querySelector('.landing__pulse').style.setProperty('display', 'block');
+      director.startWait();
     })
     .start();
-};
+}
 
-window.onload = () => {
-  const loader = new Loader();
-  loader.loadTextures().then(() => {
-    textures = loader.textures;
-    init();
-  });
-};
+let lastTick;
+function animate() {
+  requestAnimationFrame(animate);
+  // scales speeds to 1 u/s regardless of frame rate
+  const ts = (performance.now() - lastTick) / 1000;
+  lastTick = performance.now();
+
+  TWEEN.update();
+  sun.update();
+  pov.update(ts);
+  director.update();
+
+  renderer.render(scene, camera);
+}
