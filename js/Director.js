@@ -119,11 +119,11 @@ class Director {
       await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
 
       // add the distance overlay after the first line
-      if (i === 0) this.ui.fade([document.querySelector(`.overlay .distance`)], 0, 0.5, 3000).start();
+      if (i === 0) this.ui.fade([document.querySelector(`.overlay__distance`)], 0, 0.5, 3000).start();
       // start moving and show the speed after the second line (at 277.87mph or 0.12422km/s)
       if (i === 1) {
         this.pov.setSpeed(0.12422);
-        this.ui.fade([document.querySelector(`.overlay .speed`)], 0, 0.5, 3000).start();
+        this.ui.fade([document.querySelector(`.overlay__speed`)], 0, 0.5, 3000).start();
       }
       // unlock pov controls after line 5
       if (i === 4) this.pov.unlock();
@@ -138,9 +138,9 @@ class Director {
   // - user travels towards the sun with periodic subtitles
   startAU() {
     this.traveling = true;
-    this.ui.fade([document.querySelector(`.overlay .eta`)], 0, 0.3, 3000).start();
-    this.ui.fade([document.querySelector(`.overlay .boost`)], 0, 0.5, 3000).start();
-    document.querySelector('.overlay .boost').addEventListener('click', this.boost.bind(this));
+    this.ui.fade([document.querySelector(`.overlay__eta`)], 0, 0.3, 3000).start();
+    this.ui.fade([document.querySelector(`.overlay__boost`)], 0, 0.5, 3000).start();
+    document.querySelector('.overlay__boost').addEventListener('click', this.boost.bind(this));
   }
 
   // SOL phase
@@ -171,8 +171,10 @@ class Director {
 
     drift.chain(orbit).start();
 
-    this.ui.fade(document.querySelectorAll(`.distance, .speed, .boost`), 0.5, 0, 3000).start();
-    this.ui.fade([document.querySelector(`.eta`)], 0.3, 0, 3000).start();
+    this.ui
+      .fade(document.querySelectorAll(`.overlay__distance, .overlay__speed, .overlay__boost`), 0.5, 0, 3000)
+      .start();
+    this.ui.fade([document.querySelector(`.overlay__eta`)], 0.3, 0, 3000).start();
 
     await this.ui.subtitle('', 3000, 4000, 4000, 0, 1, ['sol-title'], '<span>THE</span><span>SUN</span>');
 
@@ -180,7 +182,7 @@ class Director {
       await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, ['black']);
     }
 
-    this.ui.fade(document.querySelectorAll('.end-title, .end-by'), 0, 1, 5000).start();
+    this.ui.fade([document.querySelector('.overlay__end')], 0, 1, 5000).start();
   }
 
   // start moving real fast

@@ -35,23 +35,23 @@
     </div>
 
     <div class="overlay">
-      <p class="distance">
+      <p class="overlay__distance">
         <span>0</span>
         km from Earth
       </p>
 
-      <p class="speed">
+      <p class="overlay__speed">
         <span>0</span>
         km/h
       </p>
 
-      <p class="eta">
+      <p class="overlay__eta">
         ETA
         <span>00:00:00</span>
       </p>
 
       <!-- prettier-ignore -->
-      <svg class="boost" viewBox="0 0 265 201" xmlns="http://www.w3.org/2000/svg">
+      <svg class="overlay__boost" viewBox="0 0 265 201" xmlns="http://www.w3.org/2000/svg">
         <circle cx="165.01" cy="100.809" r="50" />
         <path d="M169.01,4.81c0,-2.207 -1.793,-4 -4,-4c-2.208,0 -4,1.793 -4,4l0,37c0,2.208 1.792,4 4,4c2.207,0 4,-1.792 4,-4l0,-37Z" />
         <path d="M169.01,159.786c0,-2.207 -1.793,-4 -4,-4c-2.208,0 -4,1.793 -4,4l0,37c0,2.208 1.792,4 4,4c2.207,0 4,-1.792 4,-4l0,-37Z" />
@@ -65,11 +65,13 @@
         <path d="M106.01,84.8c2.207,0 4,-1.792 4,-4c0,-2.208 -1.793,-4 -4,-4l-102,0c-2.208,0 -4,1.792 -4,4c0,2.208 1.792,4 4,4l102,0Z" />
       </svg>
 
-      <p class="end-title">
-        <span>ONE</span>
-        <span>AU</span>
-      </p>
-      <p class="end-by">A project by Jonathan Olaleye</p>
+      <div class="overlay__end">
+        <p class="end__title">
+          <span>ONE</span>
+          <span>AU</span>
+        </p>
+        <p class="end__by">A project by Jonathan Olaleye</p>
+      </div>
     </div>
 
     <script src="js/index.js"></script>

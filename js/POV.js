@@ -35,7 +35,7 @@ class POV {
 
     // mousing over a hud element is equivalent to a mouseleave
     // this is so you dont start rotating fast while trying to click boost for example
-    document.querySelectorAll('.distance, .speed, .eta, .boost').forEach(el => {
+    document.querySelectorAll('.overlay__distance, .overlay__speed, .overlay__eta, .overlay__boost').forEach(el => {
       el.addEventListener('mouseover', () => this.mouse.set(0, 0));
     });
   }

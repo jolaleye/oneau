@@ -3,9 +3,9 @@ import TWEEN from '@tweenjs/tween.js';
 class UI {
   constructor() {
     this.overlay = document.querySelector('.overlay');
-    this.distance = document.querySelector('.distance span');
-    this.speed = document.querySelector('.speed span');
-    this.eta = document.querySelector('.eta span');
+    this.distance = document.querySelector('.overlay__distance span');
+    this.speed = document.querySelector('.overlay__speed span');
+    this.eta = document.querySelector('.overlay__eta span');
   }
 
   fade(els = [], o1 = 0, o2 = 1, duration = 3000) {
@@ -21,8 +21,8 @@ class UI {
 
   subtitle(text = '', delay = 0, fadeFor = 2000, showFor = 3000, o1 = 0, o2 = 1, classes = [], html) {
     const el = document.createElement('div');
+    el.classList.add('overlay__subtitle', ...classes);
     el.innerHTML = html ? html : `<p>${text}</p>`;
-    el.classList.add('subtitle', ...classes);
     el.style.setProperty('opacity', o1);
     this.overlay.appendChild(el);
 
