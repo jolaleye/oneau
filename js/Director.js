@@ -92,19 +92,15 @@ class Director {
       .start();
 
     // run through the intro lines
-    for (const line of script.intro) {
-      await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
-    }
-
-    // title line
-    await this.ui.subtitle('ONE AU', 500, 3000, 3000, 0, 1, '<span>ONE</span><span>AU</span>', ['intro-title']);
+    for (const line of script.intro) await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
+    // title card
+    await this.ui.subtitle('', 500, 3000, 3000, 0, 1, ['intro-title'], '<span>ONE</span><span>AU</span>');
 
     this.startInstructions();
   }
 
   // INSTRUCTIONS phase
-  // - subtitles explain the thing
-  // - hud appears w/ distance & speed
+  // - hud appears, prep for travel
   async startInstructions() {
     this.updating.distance = true;
     this.updating.speed = true;
@@ -123,11 +119,11 @@ class Director {
       await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
 
       // add the distance overlay after the first line
-      if (i === 0) this.ui.show('distance');
+      if (i === 0) this.ui.fade([document.querySelector(`.overlay .distance`)], 0, 0.5, 3000).start();
       // start moving and show the speed after the second line (at 277.87mph or 0.12422km/s)
       if (i === 1) {
         this.pov.setSpeed(0.12422);
-        this.ui.show('speed');
+        this.ui.fade([document.querySelector(`.overlay .speed`)], 0, 0.5, 3000).start();
       }
       // unlock pov controls after line 5
       if (i === 4) this.pov.unlock();
@@ -142,8 +138,8 @@ class Director {
   // - user travels towards the sun with periodic subtitles
   startAU() {
     this.traveling = true;
-    this.ui.show('eta', 0.3);
-    this.ui.show('boost');
+    this.ui.fade([document.querySelector(`.overlay .eta`)], 0, 0.3, 3000).start();
+    this.ui.fade([document.querySelector(`.overlay .boost`)], 0, 0.5, 3000).start();
     document.querySelector('.overlay .boost').addEventListener('click', this.boost.bind(this));
   }
 
@@ -175,15 +171,16 @@ class Director {
 
     drift.chain(orbit).start();
 
-    this.ui.hideHUD();
+    this.ui.fade(document.querySelectorAll(`.distance, .speed, .boost`), 0.5, 0, 3000).start();
+    this.ui.fade([document.querySelector(`.eta`)], 0.3, 0, 3000).start();
 
-    await this.ui.subtitle('', 3000, 4000, 4000, 0, 1, '<span>THE</span><span>SUN</span>', ['sol-title']);
+    await this.ui.subtitle('', 3000, 4000, 4000, 0, 1, ['sol-title'], '<span>THE</span><span>SUN</span>');
 
     for (const line of script.sol) {
-      await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, null, ['black']);
+      await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, ['black']);
     }
 
-    this.ui.endTitle();
+    this.ui.fade(document.querySelectorAll('.end-title, .end-by'), 0, 1, 5000).start();
   }
 
   // start moving real fast
@@ -193,9 +190,9 @@ class Director {
     this.pov.setSpeed(1498960, true);
 
     const sub1 = "You're now moving at about five times the speed of light.";
-    await this.ui.subtitle(sub1, 0, 1000, 3500, 0, 0.6, null, ['speed-sub']);
+    await this.ui.subtitle(sub1, 0, 1000, 3500, 0, 0.6, ['speed-sub']);
     const sub2 = "This really isn't possible, but for the sake of speeding things up a bit we'll ignore that.";
-    this.ui.subtitle(sub2, 0, 1000, 4500, 0, 0.6, null, ['speed-sub']);
+    this.ui.subtitle(sub2, 0, 1000, 4500, 0, 0.6, ['speed-sub']);
   }
 }
 
