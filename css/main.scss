@@ -153,6 +153,7 @@ canvas {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 300;
   opacity: 0.3;
+  text-align: center;
 }
 
 .overlay {
@@ -178,6 +179,7 @@ canvas {
   font-size: 1.2em;
   letter-spacing: 0.02em;
   text-shadow: 0 0 5px black;
+  text-align: center;
 
   span {
     font-family: 'Roboto Mono', monospace;
@@ -221,6 +223,7 @@ canvas {
   font-size: 0.9em;
   letter-spacing: 0.02em;
   text-shadow: 0 0 5px black;
+  text-align: center;
   bottom: 1.5em;
 
   span {
@@ -334,4 +337,5 @@ canvas {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 300;
   font-size: 1.1em;
+  text-align: center;
 }
