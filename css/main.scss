@@ -156,6 +156,30 @@ canvas {
   text-align: center;
 }
 
+.donate {
+  color: white;
+  text-decoration: none;
+  position: absolute;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  opacity: 0.5;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+  svg {
+    margin-left: 0.3em;
+    width: 1em;
+    stroke: white;
+    stroke-width: 2px;
+  }
+}
+
+.landing__donate {
+  right: 2em;
+  bottom: 1.5em;
+}
+
 .overlay {
   &__distance,
   &__speed,
@@ -338,4 +362,17 @@ canvas {
   font-weight: 300;
   font-size: 1.1em;
   text-align: center;
+}
+
+.end__donate {
+  color: black;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 11em;
+  opacity: 1;
+
+  svg {
+    stroke: black;
+    stroke-width: 0.1px;
+  }
 }
