@@ -23,7 +23,7 @@
   },
   "earth": {
     "radius": 6371,
-    "segments": 30,
+    "segments": 40,
     "orbitRadius": 149597500
   },
   "wait": {
