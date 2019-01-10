@@ -11,7 +11,7 @@ import Director from './Director';
 import Loader from './Loader';
 
 const scene = new THREE.Scene();
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 const camera = new THREE.PerspectiveCamera(
   _.camera.fov,
   window.innerWidth / window.innerHeight,
