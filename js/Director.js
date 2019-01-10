@@ -21,17 +21,25 @@ class Director {
     this.pov.lock();
   }
 
-  update() {
+  async update() {
     // check distance from Sun
     if (this.traveling && this.pov.position.z <= km2u(_.sol.slowAt)) {
       this.traveling = false;
       this.startSol();
     }
 
-    if (!(this.updating.distance || this.updating.speed || this.updating.eta)) return;
-
     const distanceFromEarth = this.earth.position.z - this.pov.position.z;
     const currentSpeed = this.pov.velocity.z;
+
+    // check checkpoints
+    if (this.traveling && script.checkpoints.length && distanceFromEarth >= km2u(script.checkpoints[0].at)) {
+      const checkpoint = script.checkpoints.shift();
+      for (const line of checkpoint.subs) {
+        await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
+      }
+    }
+
+    if (!(this.updating.distance || this.updating.speed || this.updating.eta)) return;
 
     if (this.updating.distance) this.ui.updateDistance(u2km(distanceFromEarth));
     if (this.updating.speed) this.ui.updateSpeed(u2km(currentSpeed) * 3600);
