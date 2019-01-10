@@ -1,11 +1,16 @@
 import TWEEN from '@tweenjs/tween.js';
 
+import _ from '../settings.json';
+
 class UI {
   constructor() {
     this.overlay = document.querySelector('.overlay');
     this.distance = document.querySelector('.overlay__distance span');
     this.speed = document.querySelector('.overlay__speed span');
     this.eta = document.querySelector('.overlay__eta span');
+
+    // object used for storing current subtitle
+    this.sub = { el: null, in: null, out: null };
   }
 
   fade(els = [], o1 = 0, o2 = 1, duration = 3000) {
@@ -19,12 +24,30 @@ class UI {
     return tween;
   }
 
-  subtitle(text = '', delay = 0, fadeFor = 2000, showFor = 3000, o1 = 0, o2 = 1, classes = [], html) {
+  overrideSubtitle() {
+    this.sub.in.stop();
+    this.sub.out.stop();
+    return new Promise(resolve => {
+      this.fade([this.sub.el], this.sub.el.style.opacity, 0, _.subtitleOverride)
+        .onComplete(() => {
+          this.overlay.removeChild(this.sub.el);
+          this.sub.el = null;
+          resolve();
+        })
+        .start();
+    });
+  }
+
+  async subtitle(text = '', delay = 0, fadeFor = 2000, showFor = 3000, o1 = 0, o2 = 1, classes = [], html) {
+    // override the current subtitle if necessary
+    if (this.sub.el) await this.overrideSubtitle();
+
     const el = document.createElement('div');
     el.classList.add('overlay__subtitle', ...classes);
     el.innerHTML = html ? html : `<p>${text}</p>`;
     el.style.setProperty('opacity', o1);
     this.overlay.appendChild(el);
+    this.sub.el = el;
 
     return new Promise(resolve => {
       const fadeIn = this.fade([el], o1, o2, fadeFor).delay(delay);
@@ -32,8 +55,11 @@ class UI {
         .delay(showFor)
         .onComplete(() => {
           this.overlay.removeChild(el);
+          this.sub.el = null;
           resolve();
         });
+      this.sub.in = fadeIn;
+      this.sub.out = fadeOut;
       fadeIn.chain(fadeOut).start();
     });
   }

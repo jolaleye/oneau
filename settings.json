@@ -45,5 +45,6 @@
     "stopAt": 2500000,
     "driftDuration": 12000,
     "orbitPeriod": 240000
-  }
+  },
+  "subtitleOverride": 500
 }
