@@ -42,25 +42,23 @@ class UI {
     // override the current subtitle if necessary
     if (this.sub.el) await this.overrideSubtitle();
 
-    const el = document.createElement('div');
-    el.classList.add('overlay__subtitle', ...classes);
-    el.innerHTML = html ? html : `<p>${text}</p>`;
-    el.style.setProperty('opacity', o1);
-    this.overlay.appendChild(el);
-    this.sub.el = el;
+    this.sub.el = document.createElement('div');
+    this.sub.el.classList.add('overlay__subtitle', ...classes);
+    this.sub.el.innerHTML = html ? html : `<p>${text}</p>`;
+    this.sub.el.style.setProperty('opacity', o1);
+    this.overlay.appendChild(this.sub.el);
 
     return new Promise(resolve => {
-      const fadeIn = this.fade([el], o1, o2, fadeFor).delay(delay);
-      const fadeOut = this.fade([el], o2, o1, fadeFor)
+      this.sub.in = this.fade([this.sub.el], o1, o2, fadeFor).delay(delay);
+      this.sub.out = this.fade([this.sub.el], o2, o1, fadeFor)
         .delay(showFor)
         .onComplete(() => {
-          this.overlay.removeChild(el);
+          if (!this.sub.el) return;
+          this.overlay.removeChild(this.sub.el);
           this.sub.el = null;
           resolve();
         });
-      this.sub.in = fadeIn;
-      this.sub.out = fadeOut;
-      fadeIn.chain(fadeOut).start();
+      this.sub.in.chain(this.sub.out).start();
     });
   }
 
