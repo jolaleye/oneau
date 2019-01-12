@@ -99,6 +99,69 @@
       "showFor": 5000
     }
   ],
+  "checkpoints": [
+    {
+      "at": 384000,
+      "subs": [
+        {
+          "text": "This is about how far away the moon is. It took the Apollo 11 crew about 3 days to get here.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 4000
+        }
+      ]
+    },
+    {
+      "at": 1000000,
+      "subs": [
+        {
+          "text": "Woohoo! You just crossed the 1 million km mark! You're 1/149th of the way there... *sigh*",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 10000000,
+      "subs": [
+        {
+          "text": "Are we there yet?",
+          "delay": 0,
+          "fadeFor": 500,
+          "showFor": 2000
+        }
+      ]
+    },
+    {
+      "at": 20000000,
+      "subs": [
+        {
+          "text": "Space is pretty empty...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 60000000,
+      "subs": [
+        {
+          "text": "This is about how far away Mars is during Close Approach (if Mars were between Earth and the Sun).",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "Even during Close Approach, it took NASA's InSight lander over 6 months to reach the Red Planet in 2018.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    }
+  ],
   "sol": [
     {
       "text": "You just traveled 149,597,500 km (92,955,577 mi).",
