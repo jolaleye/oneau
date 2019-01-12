@@ -8,9 +8,6 @@ class UI {
     this.distance = document.querySelector('.overlay__distance span');
     this.speed = document.querySelector('.overlay__speed span');
     this.eta = document.querySelector('.overlay__eta span');
-
-    // object used for storing current subtitle
-    this.sub = { el: null, in: null, out: null };
   }
 
   fade(els = [], o1 = 0, o2 = 1, duration = 3000) {
@@ -24,41 +21,37 @@ class UI {
     return tween;
   }
 
-  overrideSubtitle() {
-    this.sub.in.stop();
-    this.sub.out.stop();
-    return new Promise(resolve => {
-      this.fade([this.sub.el], this.sub.el.style.opacity, 0, _.subtitleOverride)
-        .onComplete(() => {
-          this.overlay.removeChild(this.sub.el);
-          this.sub.el = null;
-          resolve();
-        })
-        .start();
-    });
-  }
-
   async subtitle(text = '', delay = 0, fadeFor = 2000, showFor = 3000, o1 = 0, o2 = 1, classes = [], html) {
-    // override the current subtitle if necessary
-    if (this.sub.el) await this.overrideSubtitle();
+    // check if a checkpoint subtitle is already present and needs to be overwritten
+    const previousSub = document.querySelector('.overlay__subtitle.checkpoint');
+    if (previousSub && classes.includes('checkpoint')) {
+      previousSub.tweenIn.stop();
+      previousSub.tweenOut.stop();
+      await new Promise(resolve => {
+        this.fade([previousSub], previousSub.style.opacity, 0, 500)
+          .onComplete(() => {
+            this.overlay.removeChild(previousSub);
+            resolve();
+          })
+          .start();
+      });
+    }
 
-    this.sub.el = document.createElement('div');
-    this.sub.el.classList.add('overlay__subtitle', ...classes);
-    this.sub.el.innerHTML = html ? html : `<p>${text}</p>`;
-    this.sub.el.style.setProperty('opacity', o1);
-    this.overlay.appendChild(this.sub.el);
+    const el = document.createElement('div');
+    el.classList.add('overlay__subtitle', ...classes);
+    el.innerHTML = html ? html : `<p>${text}</p>`;
+    el.style.setProperty('opacity', o1);
+    this.overlay.appendChild(el);
 
     return new Promise(resolve => {
-      this.sub.in = this.fade([this.sub.el], o1, o2, fadeFor).delay(delay);
-      this.sub.out = this.fade([this.sub.el], o2, o1, fadeFor)
+      el.tweenIn = this.fade([el], o1, o2, fadeFor).delay(delay);
+      el.tweenOut = this.fade([el], o2, o1, fadeFor)
         .delay(showFor)
         .onComplete(() => {
-          if (!this.sub.el) return;
-          this.overlay.removeChild(this.sub.el);
-          this.sub.el = null;
+          this.overlay.removeChild(el);
           resolve();
         });
-      this.sub.in.chain(this.sub.out).start();
+      el.tweenIn.chain(el.tweenOut).start();
     });
   }
 
