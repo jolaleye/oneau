@@ -9,11 +9,17 @@ class UI {
     this.speed = document.querySelector('.overlay__speed span');
     this.eta = document.querySelector('.overlay__eta span');
 
+    this.unit = 'km';
+    // unit selection
     document.querySelector('.unit-arrow').addEventListener('click', () => {
       const unitSelect = document.querySelector('.unit-selection');
       const toggleTo = unitSelect.style.display === 'none' ? 'initial' : 'none';
       unitSelect.style.setProperty('display', toggleTo);
     });
+
+    for (const option of document.querySelector('.unit-selection ul').children) {
+      option.addEventListener('click', () => (this.unit = option.dataset.unit));
+    }
   }
 
   fade(els = [], o1 = 0, o2 = 1, duration = 3000) {
