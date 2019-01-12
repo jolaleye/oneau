@@ -46,5 +46,6 @@
     "driftDuration": 12000,
     "orbitPeriod": 240000
   },
-  "subtitleOverride": 500
+  "subtitleOverride": 500,
+  "boostSpeed": 1246546
 }

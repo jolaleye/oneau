@@ -150,10 +150,9 @@ class Director {
     document.querySelector('.overlay__boost').addEventListener('click', async () => {
       if (document.querySelector('.overlay .speed-sub') || !this.traveling) return;
 
-      // 5x the speed of light
-      this.pov.setSpeed(1498960, true);
+      this.pov.setSpeed(_.boostSpeed, true);
 
-      const sub1 = "You're now moving at about five times the speed of light.";
+      const sub1 = "You're now moving at about four times the speed of light.";
       const sub2 = "This really isn't possible, but for the sake of speeding things up a bit we'll ignore that.";
       await this.ui.subtitle(sub1, 0, 1000, 4000, 0, 0.6, ['speed-sub']);
       this.ui.subtitle(sub2, 0, 1000, 4000, 0, 0.6, ['speed-sub']);
