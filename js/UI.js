@@ -1,7 +1,7 @@
 import TWEEN from '@tweenjs/tween.js';
 
 import _ from '../settings.json';
-import { u2km } from './utils';
+import { u2km, u2mi } from './utils';
 
 class UI {
   constructor() {
@@ -19,7 +19,11 @@ class UI {
     });
 
     for (const option of document.querySelector('.unit-selection ul').children) {
-      option.addEventListener('click', () => (this.unit = option.dataset.unit));
+      option.addEventListener('click', () => {
+        const { unit } = option.dataset;
+        this.unit = unit;
+        for (const el of document.querySelectorAll('.unit')) el.innerHTML = unit;
+      });
     }
   }
 
@@ -69,12 +73,12 @@ class UI {
   }
 
   updateDistance(distance) {
-    const converted = u2km(distance);
+    let converted = this.toCurrentUnit(distance);
     this.distance.innerHTML = converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   updateSpeed(speed) {
-    const converted = u2km(speed);
+    const converted = this.toCurrentUnit(speed);
     const perHr = converted * 3600;
     this.speed.innerHTML = perHr.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
@@ -85,6 +89,17 @@ class UI {
     const mins = Math.floor((eta % 3600) / 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
     const secs = Math.floor((eta % 3600) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
     this.eta.innerHTML = `${hours}:${mins}:${secs}`;
+  }
+
+  toCurrentUnit(value) {
+    switch (this.unit) {
+      case 'km':
+        return u2km(value);
+      case 'mi':
+        return u2mi(value);
+      default:
+        return u2km(value);
+    }
   }
 }
 
