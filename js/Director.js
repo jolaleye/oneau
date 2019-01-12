@@ -35,7 +35,7 @@ class Director {
     if (this.traveling && script.checkpoints.length && distanceFromEarth >= km2u(script.checkpoints[0].at)) {
       const checkpoint = script.checkpoints.shift();
       for (const line of checkpoint.subs) {
-        await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8);
+        await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, ['checkpoint']);
       }
     }
 
