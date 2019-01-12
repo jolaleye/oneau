@@ -1,6 +1,7 @@
 import TWEEN from '@tweenjs/tween.js';
 
 import _ from '../settings.json';
+import { u2km } from './utils';
 
 class UI {
   constructor() {
@@ -68,11 +69,14 @@ class UI {
   }
 
   updateDistance(distance) {
-    this.distance.innerHTML = distance.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const converted = u2km(distance);
+    this.distance.innerHTML = converted.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   updateSpeed(speed) {
-    this.speed.innerHTML = speed.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    const converted = u2km(speed);
+    const perHr = converted * 3600;
+    this.speed.innerHTML = perHr.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   // eta in seconds

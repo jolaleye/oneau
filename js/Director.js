@@ -41,9 +41,9 @@ class Director {
 
     if (!(this.updating.distance || this.updating.speed || this.updating.eta)) return;
 
-    if (this.updating.distance) this.ui.updateDistance(u2km(distanceFromEarth));
-    if (this.updating.speed) this.ui.updateSpeed(u2km(currentSpeed) * 3600);
-    if (this.updating.eta) this.ui.updateETA(u2km(this.pov.position.z - km2u(_.sol.slowAt)) / u2km(currentSpeed));
+    if (this.updating.distance) this.ui.updateDistance(distanceFromEarth);
+    if (this.updating.speed) this.ui.updateSpeed(currentSpeed);
+    if (this.updating.eta) this.ui.updateETA((this.pov.position.z - km2u(_.sol.slowAt)) / currentSpeed);
   }
 
   // WAIT phase
