@@ -43,10 +43,22 @@
     </div>
 
     <div class="overlay">
-      <p class="overlay__distance">
-        <span>0</span>
-        km from Earth
-      </p>
+      <div class="overlay__distance">
+        <p>
+          <span>0</span>
+          km from Earth
+        </p>
+
+        <svg class="unit-arrow" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 7 10 L 12 15 L 17 10 Z "></path>
+        </svg>
+        <div class="unit-selection">
+          <ul>
+            <li data-unit="km">km</li>
+            <li data-unit="mi">mi</li>
+          </ul>
+        </div>
+      </div>
 
       <p class="overlay__speed">
         <span>0</span>

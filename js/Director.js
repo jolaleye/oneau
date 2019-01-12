@@ -114,6 +114,7 @@ class Director {
 
     // add the distance display
     this.ui.fade([document.querySelector(`.overlay__distance`)], 0, 0.5, 3000).start();
+    document.querySelector(`.overlay__distance`).style.setProperty('display', 'flex');
 
     // instruction lines
     for (let i = 0; i < script.instructions.length; i++) {
@@ -132,9 +133,6 @@ class Director {
         case 5:
           this.pov.scrollLocked = false;
           break;
-        case 6:
-          this.ui.fade([document.querySelector(`.overlay__boost`)], 0, 0.5, 3000).start();
-          break;
       }
     }
 
@@ -145,8 +143,9 @@ class Director {
   // - user travels towards the sun
   startAU() {
     this.traveling = true;
-    // add the eta display and boost button listener
+    // add the eta display and boost button
     this.ui.fade([document.querySelector(`.overlay__eta`)], 0, 0.3, 3000).start();
+    this.ui.fade([document.querySelector(`.overlay__boost`)], 0, 0.5, 3000).start();
     document.querySelector('.overlay__boost').addEventListener('click', async () => {
       if (document.querySelector('.overlay .speed-sub') || !this.traveling) return;
 

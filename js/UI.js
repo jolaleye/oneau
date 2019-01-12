@@ -5,9 +5,15 @@ import _ from '../settings.json';
 class UI {
   constructor() {
     this.overlay = document.querySelector('.overlay');
-    this.distance = document.querySelector('.overlay__distance span');
+    this.distance = document.querySelector('.overlay__distance > p > span');
     this.speed = document.querySelector('.overlay__speed span');
     this.eta = document.querySelector('.overlay__eta span');
+
+    document.querySelector('.unit-arrow').addEventListener('click', () => {
+      const unitSelect = document.querySelector('.unit-selection');
+      const toggleTo = unitSelect.style.display === 'none' ? 'initial' : 'none';
+      unitSelect.style.setProperty('display', toggleTo);
+    });
   }
 
   fade(els = [], o1 = 0, o2 = 1, duration = 3000) {
