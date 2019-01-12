@@ -220,23 +220,23 @@ canvas {
   p {
     display: inline;
   }
+}
 
-  svg {
-    width: 1.1em;
-    fill: white;
-    margin-left: 0.2em;
+.unit-arrow {
+  width: 1.1em;
+  fill: white;
+  padding: 0.3em;
 
-    &:hover {
-      cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
   }
 }
 
 .unit-selection {
   display: none;
   position: absolute;
-  right: 0;
-  top: 2.25em;
+  right: 0.5em;
+  top: 2.3em;
 
   ul {
     display: flex;
