@@ -83,7 +83,7 @@ class UI {
   updateETA(eta) {
     const hours = Math.floor(eta / 3600).toLocaleString('en-US', { minimumIntegerDigits: 2 });
     const mins = Math.floor((eta % 3600) / 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
-    const secs = Math.round((eta % 3600) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
+    const secs = Math.floor((eta % 3600) % 60).toLocaleString('en-US', { minimumIntegerDigits: 2 });
     this.eta.innerHTML = `${hours}:${mins}:${secs}`;
   }
 }
