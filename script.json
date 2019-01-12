@@ -87,12 +87,6 @@
       "showFor": 3000
     },
     {
-      "text": "If you want to speed things up, try the button in the lower right corner.",
-      "delay": 0,
-      "fadeFor": 1000,
-      "showFor": 3000
-    },
-    {
       "text": "Enjoy the ride :)",
       "delay": 1000,
       "fadeFor": 2000,
