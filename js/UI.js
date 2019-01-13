@@ -1,7 +1,7 @@
 import TWEEN from '@tweenjs/tween.js';
 
 import _ from '../settings.json';
-import { u2km, u2mi, u2people } from './utils';
+import { u2km, u2mi, u2people, u2bananas } from './utils';
 
 class UI {
   constructor() {
@@ -99,6 +99,8 @@ class UI {
         return u2mi(value);
       case 'people':
         return u2people(value);
+      case 'bananas':
+        return u2bananas(value);
       default:
         return u2km(value);
     }
