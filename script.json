@@ -367,12 +367,6 @@
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3500
-        },
-        {
-          "text": "Parker Solar Probe will continue to break its own records, reaching a top speed of about 430,000 mph in 2024.",
-          "delay": 0,
-          "fadeFor": 1000,
-          "showFor": 3500
         }
       ]
     },
