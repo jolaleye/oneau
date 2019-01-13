@@ -13,3 +13,5 @@ export const u2bananas = u => u * 562429700; // 7 in banana
 export const u2ggb = u => u * 36530.89856; // golden gate bridges
 
 export const u2gw = u => u * 4.71787; // great walls of china
+
+export const u2et = u => u * 308641.975; // eiffel towers
