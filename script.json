@@ -109,7 +109,7 @@
       "at": 1000000,
       "subs": [
         {
-          "text": "Woohoo! You just crossed the 1 million km mark! You're 1/149th of the way there... *sigh*",
+          "text": "Woohoo! You just crossed the 1 million km mark! You're 1/149th of the way there...",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
@@ -120,10 +120,10 @@
       "at": 10000000,
       "subs": [
         {
-          "text": "Are we there yet?",
+          "text": "Space is pretty empty, isn't it?",
           "delay": 0,
-          "fadeFor": 500,
-          "showFor": 2000
+          "fadeFor": 1000,
+          "showFor": 3000
         }
       ]
     },
@@ -131,7 +131,58 @@
       "at": 20000000,
       "subs": [
         {
-          "text": "Space is pretty empty...",
+          "text": "If you were driving in a straight line at 60mph, it would take you 177 years to get here...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "...and you're only like 13% of the way to the Sun...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 30000000,
+      "subs": [
+        {
+          "text": "Imagine being an alien looking for some Earthlings in all this emptiness.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 41389500,
+      "subs": [
+        {
+          "text": "Venus's orbit lies somewhere around here.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "I would say look for it, but in all this emptiness you'll never find it.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 50000000,
+      "subs": [
+        {
+          "text": "Ooo, I think I saw something...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "Just kidding, just more emptiness.",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
@@ -149,6 +200,45 @@
         },
         {
           "text": "Even during Close Approach, it took NASA's InSight lander over 6 months to reach the Red Planet in 2018.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "And that thing moves fast... like 10,000 km/h fast.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 70000000,
+      "subs": [
+        {
+          "text": "All this space makes Earth seem pretty insignificant...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 80000000,
+      "subs": [
+        {
+          "text": "We can look at the numbers, but we can't really comprehend how massive this scale is.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 120000000,
+      "subs": [
+        {
+          "text": "Getting pretty close now...",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
