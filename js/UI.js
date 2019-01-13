@@ -38,21 +38,26 @@ class UI {
     return tween;
   }
 
+  override(previousSub) {
+    previousSub.tweenIn.stop();
+    previousSub.tweenOut.stop();
+    return new Promise(resolve => {
+      this.fade([previousSub], previousSub.style.opacity, 0, 500)
+        .onComplete(() => {
+          this.overlay.removeChild(previousSub);
+          resolve();
+        })
+        .start();
+    });
+  }
+
   async subtitle(text = '', delay = 0, fadeFor = 2000, showFor = 3000, o1 = 0, o2 = 1, classes = [], html) {
     // check if a checkpoint subtitle is already present and needs to be overwritten
     const previousSub = document.querySelector('.overlay__subtitle.checkpoint');
-    if (previousSub && classes.includes('checkpoint')) {
-      previousSub.tweenIn.stop();
-      previousSub.tweenOut.stop();
-      await new Promise(resolve => {
-        this.fade([previousSub], previousSub.style.opacity, 0, 500)
-          .onComplete(() => {
-            this.overlay.removeChild(previousSub);
-            resolve();
-          })
-          .start();
-      });
-    }
+    if (previousSub && classes.includes('checkpoint')) await this.override(previousSub);
+    // do the same for speed subtitles
+    const previousSpeedSub = document.querySelector('.overlay__subtitle.speed-sub');
+    if (previousSpeedSub && classes.includes('speed-sub')) await this.override(previousSpeedSub);
 
     const el = document.createElement('div');
     el.classList.add('overlay__subtitle', ...classes);
