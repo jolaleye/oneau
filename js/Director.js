@@ -21,7 +21,7 @@ class Director {
     this.pov.lock();
 
     this.pov.on('speedCheckpoint', async checkpoint => {
-      if (document.querySelector('.overlay .speed-sub') || !this.traveling) return;
+      if (!this.traveling) return;
       for (const line of checkpoint.subs) {
         await this.ui.subtitle(line.text, line.delay, line.fadeFor, line.showFor, 0, 0.8, ['speed-sub']);
       }
