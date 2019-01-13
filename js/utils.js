@@ -11,3 +11,5 @@ export const u2people = u => u * 59651636.364; // based on a person being about 
 export const u2bananas = u => u * 562429700; // 7 in banana
 
 export const u2ggb = u => u * 36530.89856; // golden gate bridges
+
+export const u2gw = u => u * 4.71787; // great walls of china
