@@ -35,7 +35,6 @@
     "cameraTurnDuration": 12000
   },
   "au": {
-    "scrollBoostFactor": 0.00001,
     "scrollBoostExpiry": 500,
     "maxSpeed": 299792,
     "minSpeed": 0.1

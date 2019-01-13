@@ -72,9 +72,11 @@ class POV extends EventEmitter {
     this.velocity.setZ(km2u(override ? speed : s));
 
     // check if we just crossed a checkpoint
-    const checkpoint = speedCheckpoints.find(
-      cp => oldSpeed <= cp.at && cp.at <= s && !(oldSpeed === cp.at && s === cp.at)
-    );
+    const checkpoint = speedCheckpoints.find(cp => {
+      const between = (oldSpeed <= cp.at && cp.at <= s) || (s <= cp.at && cp.at <= oldSpeed);
+      const different = oldSpeed !== s;
+      return between && different;
+    });
     if (checkpoint) this.emit('speedCheckpoint', checkpoint);
   }
 
@@ -82,17 +84,19 @@ class POV extends EventEmitter {
     if (this.scrollLocked) return;
 
     if (!this.scrollStart) this.scrollStart = performance.now();
-    // scrolling has a greater effect the longer you've been scrolling
-    const boost = (performance.now() - this.scrollStart) * _.au.scrollBoostFactor;
+
     // clear and reset the expiration timer
     clearTimeout(this.scrollBoost);
     this.scrollBoost = setTimeout(() => {
       this.scrollStart = null;
     }, _.au.scrollBoostExpiry);
 
-    const ds = -event.deltaY * boost;
+    // scroll delta is the product of how long you've been scrolling and the percentage of the max speed
+    const scrollDuration = performance.now() - this.scrollStart;
+    const perOfMax = this.velocity.z / km2u(_.au.maxSpeed);
+    const delta = scrollDuration * Math.min(perOfMax, 0.5) * 0.1 * -Math.sign(event.deltaY);
 
-    const newSpeed = u2km(this.velocity.z) + ds;
+    const newSpeed = u2km(this.velocity.z) + delta;
     this.setSpeed(newSpeed);
   }
 
