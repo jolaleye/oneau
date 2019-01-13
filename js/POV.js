@@ -1,11 +1,14 @@
 import * as THREE from 'three';
+import EventEmitter from 'events';
 
 import _ from '../settings.json';
+import { speedCheckpoints } from '../script.json';
 import { km2u, u2km, clamp } from './utils';
 
 // user point of view
-class POV {
+class POV extends EventEmitter {
   constructor(camera) {
+    super();
     this.camera = camera;
     this.camera.rotation.order = 'YXZ';
 
@@ -64,8 +67,15 @@ class POV {
 
   // speed passed as km/s
   setSpeed(speed, override = false) {
+    const oldSpeed = u2km(this.velocity.z);
     const s = clamp(speed, _.au.minSpeed, _.au.maxSpeed);
     this.velocity.setZ(km2u(override ? speed : s));
+
+    // check if we just crossed a checkpoint
+    const checkpoint = speedCheckpoints.find(
+      cp => oldSpeed <= cp.at && cp.at <= s && !(oldSpeed === cp.at && s === cp.at)
+    );
+    if (checkpoint) this.emit('speedCheckpoint', checkpoint);
   }
 
   onScroll(event) {

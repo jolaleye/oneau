@@ -246,6 +246,19 @@
       ]
     }
   ],
+  "speedCheckpoints": [
+    {
+      "at": 299792,
+      "subs": [
+        {
+          "text": "You just hit the universe's speed limit: light.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    }
+  ],
   "sol": [
     {
       "text": "You just traveled 149,597,500 km (92,955,577 mi).",
