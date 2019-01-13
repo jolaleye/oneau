@@ -235,7 +235,7 @@ canvas {
 .unit-selection {
   display: none;
   position: absolute;
-  left: 90%;
+  left: calc(100% - 1.6em);
   top: 2.3em;
 
   ul {
@@ -249,8 +249,9 @@ canvas {
     list-style: none;
 
     li {
-      padding: 0.15em 0;
+      padding: 0.175em 0;
       opacity: 0.8;
+      white-space: nowrap;
 
       &:hover {
         cursor: pointer;
