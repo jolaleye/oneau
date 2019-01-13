@@ -131,10 +131,10 @@
       "at": 20000000,
       "subs": [
         {
-          "text": "If you were driving in a straight line at 60mph, it would take you 177 years to get here...",
+          "text": "If you were driving in a straight line at 60mph without any bathroom breaks, it would take you 177 years to get here...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 3500
         },
         {
           "text": "...and you're only like 13% of the way to the Sun...",
@@ -165,7 +165,7 @@
           "showFor": 3000
         },
         {
-          "text": "I would say look for it, but in all this emptiness you'll never find it.",
+          "text": "I would say look for it, but you'll never find it.",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
@@ -176,13 +176,13 @@
       "at": 50000000,
       "subs": [
         {
-          "text": "Ooo, I think I saw something...",
+          "text": "Oooh, I think I saw something...",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
         },
         {
-          "text": "Just kidding, just more emptiness.",
+          "text": "Just kidding, just more space.",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
@@ -196,13 +196,13 @@
           "text": "This is about how far away Mars is during Close Approach (if Mars were between Earth and the Sun).",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 3500
         },
         {
           "text": "Even during Close Approach, it took NASA's InSight lander over 6 months to reach the Red Planet in 2018.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 3500
         },
         {
           "text": "And that thing moves fast... like 10,000 km/h fast.",
@@ -235,7 +235,75 @@
       ]
     },
     {
+      "at": 89000000,
+      "subs": [
+        {
+          "text": "Even this huge distance is nothing on the scale of the Milky Way...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "And our galaxy is just one of many...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "There's an existential crisis for you.",
+          "delay": 1000,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 98000000,
+      "subs": [
+        {
+          "text": "By the way, we passed Mercury just a little bit ago...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "It's pretty hot there.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 107565200,
+      "subs": [
+        {
+          "text": "This is about where Parker Solar Probe broke the record for the closest approach to the Sun by a man-made object.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 4250
+        },
+        {
+          "text": "That was in 2018 and the little guy is still going.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
       "at": 120000000,
+      "subs": [
+        {
+          "text": "Congrats on coming this far :)",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 130000000,
       "subs": [
         {
           "text": "Getting pretty close now...",
@@ -244,9 +312,92 @@
           "showFor": 3000
         }
       ]
+    },
+    {
+      "at": 140000000,
+      "subs": [
+        {
+          "text": "Justtt about there...",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
+    {
+      "at": 143000000,
+      "subs": [
+        {
+          "text": "FINALLY! WOOHOO!",
+          "delay": 0,
+          "fadeFor": 750,
+          "showFor": 1500
+        }
+      ]
     }
   ],
   "speedCheckpoints": [
+    {
+      "at": 2.0206,
+      "subs": [
+        {
+          "text": "This is the world record for the highest speed ever recorded by a manned aircraft, set by the X-15 in 1967.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3500
+        }
+      ]
+    },
+    {
+      "at": 11.083,
+      "subs": [
+        {
+          "text": "This is the highest speed ever attained by humans, achieved by the Apollo 10 crew in 1969.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3500
+        }
+      ]
+    },
+    {
+      "at": 68.6,
+      "subs": [
+        {
+          "text": "This was the speed reached by Parker Solar Probe in October 2018 when it broke the record for fastest man-made object relative to the Sun.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3500
+        },
+        {
+          "text": "Parker Solar Probe will continue to break its own records, reaching a top speed of about 430,000 mph in 2024.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3500
+        }
+      ]
+    },
+    {
+      "at": 308.571,
+      "subs": [
+        {
+          "text": "This is how fast the Andromeda Galaxy is approaching our own Milky Way. Spooky right?",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3250
+        }
+      ]
+    },
+    {
+      "at": 100000,
+      "subs": [
+        {
+          "text": "This is the typical speed of the brightest part of a lightning strike.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        }
+      ]
+    },
     {
       "at": 299792,
       "subs": [
@@ -273,7 +424,7 @@
       "showFor": 4000
     },
     {
-      "text": "Finally... you have reached the Sun... our very own star.",
+      "text": "Finally... you've reached the Sun... our very own star.",
       "delay": 1000,
       "fadeFor": 1000,
       "showFor": 4000
@@ -295,6 +446,12 @@
       "delay": 500,
       "fadeFor": 1000,
       "showFor": 4000
+    },
+    {
+      "text": "Pretty neat right?",
+      "delay": 0,
+      "fadeFor": 1000,
+      "showFor": 2500
     },
     {
       "text": "\"Remember to look up at the stars and not down at your feet. Try to make sense of what you see and wonder about what makes the universe exist. Be curious.\" - Stephen Hawking",
