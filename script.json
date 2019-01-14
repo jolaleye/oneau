@@ -106,17 +106,6 @@
       ]
     },
     {
-      "at": 1000000,
-      "subs": [
-        {
-          "text": "Woohoo! You just crossed the 1 million km mark! You're 1/149th of the way there...",
-          "delay": 0,
-          "fadeFor": 1000,
-          "showFor": 3000
-        }
-      ]
-    },
-    {
       "at": 10000000,
       "subs": [
         {
@@ -131,10 +120,10 @@
       "at": 20000000,
       "subs": [
         {
-          "text": "If you were driving in a straight line at 60mph without any bathroom breaks, it would take you 177 years to get here...",
+          "text": "If you were driving in a straight line at 60mph, without any bathroom breaks, it would take you 177 years to get here...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 4000
         },
         {
           "text": "...and you're only like 13% of the way to the Sun...",
@@ -173,7 +162,7 @@
       ]
     },
     {
-      "at": 50000000,
+      "at": 48000000,
       "subs": [
         {
           "text": "Oooh, I think I saw something...",
@@ -183,7 +172,7 @@
         },
         {
           "text": "Just kidding, just more space.",
-          "delay": 0,
+          "delay": 1500,
           "fadeFor": 1000,
           "showFor": 3000
         }
@@ -202,7 +191,7 @@
           "text": "Even during Close Approach, it took NASA's InSight lander over 6 months to reach the Red Planet in 2018.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 4000
         },
         {
           "text": "And that thing moves fast... like 10,000 km/h fast.",
@@ -241,7 +230,7 @@
           "text": "Even this huge distance is nothing on the scale of the Milky Way...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 3500
         },
         {
           "text": "And our galaxy is just one of many...",
@@ -251,7 +240,7 @@
         },
         {
           "text": "There's an existential crisis for you.",
-          "delay": 1000,
+          "delay": 2000,
           "fadeFor": 1000,
           "showFor": 3000
         }
@@ -289,7 +278,7 @@
       "at": 120000000,
       "subs": [
         {
-          "text": "Congrats on coming this far :)",
+          "text": "Not too far now...",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
@@ -300,7 +289,7 @@
       "at": 130000000,
       "subs": [
         {
-          "text": "Getting pretty close now...",
+          "text": "Congrats on coming this far :)",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
@@ -322,7 +311,7 @@
       "at": 143000000,
       "subs": [
         {
-          "text": "FINALLY! WOOHOO!",
+          "text": "Finally!",
           "delay": 0,
           "fadeFor": 750,
           "showFor": 1500
@@ -391,6 +380,12 @@
       "subs": [
         {
           "text": "You just hit the universe's speed limit: light.",
+          "delay": 0,
+          "fadeFor": 1000,
+          "showFor": 3000
+        },
+        {
+          "text": "We can even comprehend how fast this really is.",
           "delay": 0,
           "fadeFor": 1000,
           "showFor": 3000
