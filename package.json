@@ -20,6 +20,7 @@
     "three": "^0.99.0"
   },
   "devDependencies": {
+    "cssnano": "^4.1.8",
     "sass": "^1.15.2"
   }
 }
