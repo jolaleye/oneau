@@ -16,6 +16,7 @@
     "@babel/polyfill": "^7.2.5",
     "@tweenjs/tween.js": "^17.2.0",
     "events": "^3.0.0",
+    "howler": "^2.1.1",
     "three": "^0.99.0"
   },
   "devDependencies": {
