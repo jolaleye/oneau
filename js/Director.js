@@ -64,10 +64,12 @@ class Director {
 
     // fade out landing, stop orbiting, and start intro on pulse click
     document.querySelector('.landing__pulse').addEventListener('click', () => {
-      const el = document.querySelector('.landing');
+      const els = [document.querySelector('.landing'), document.querySelector('.info-trigger')];
       this.ui
-        .fade([el], 1, 0, 1000)
-        .onComplete(() => el.style.setProperty('display', 'none'))
+        .fade(els, 1, 0, 1000)
+        .onComplete(() => {
+          for (const el of els) el.style.setProperty('display', 'none');
+        })
         .start();
 
       orbit.stop();
