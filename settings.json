@@ -46,5 +46,11 @@
     "orbitPeriod": 240000
   },
   "subtitleOverride": 500,
-  "boostSpeed": 831097
+  "boostSpeed": 831097,
+  "music": {
+    "increaseOver": 5000,
+    "rate": 0.8,
+    "lowVolume": 0.1,
+    "normalVolume": 0.3
+  }
 }

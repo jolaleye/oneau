@@ -1,10 +1,20 @@
 import * as THREE from 'three';
 import TWEEN from '@tweenjs/tween.js';
+import { Howl } from 'howler';
 
 import _ from '../settings.json';
 import script from '../script.json';
 import { km2u, u2km } from './utils';
 import UI from './UI';
+import musicWebm from '../audio/music.webm';
+import musicMp3 from '../audio/music.mp3';
+
+const music = new Howl({
+  src: [musicWebm, musicMp3],
+  loop: true,
+  volume: 0,
+  rate: _.music.rate
+});
 
 // coordinates phases and flow
 class Director {
@@ -74,6 +84,13 @@ class Director {
 
       orbit.stop();
       this.startIntro();
+
+      // start the music silently and increase to low volume
+      music.play();
+      const volumeUp = new TWEEN.Tween({ v: 0 })
+        .to({ v: _.music.lowVolume }, _.music.increaseOver)
+        .onUpdate(({ v }) => music.volume(v))
+        .start();
     });
   }
 
@@ -165,6 +182,12 @@ class Director {
       await this.ui.subtitle(sub1, 0, 1000, 4000, 0, 0.6, ['speed-sub']);
       this.ui.subtitle(sub2, 0, 1000, 4000, 0, 0.6, ['speed-sub']);
     });
+
+    // increase music volume
+    const volumeUp = new TWEEN.Tween({ v: _.music.lowVolume })
+      .to({ v: _.music.normalVolume }, _.music.increaseOver)
+      .onUpdate(({ v }) => music.volume(v))
+      .start();
   }
 
   // SOL phase
