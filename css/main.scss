@@ -180,6 +180,79 @@ canvas {
   bottom: 1.5em;
 }
 
+.info-trigger {
+  position: absolute;
+  left: 1.3em;
+  bottom: 1em;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 1.5em;
+  opacity: 0.5;
+  color: white;
+
+  transition: opacity 0.3s linear;
+  &:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+}
+
+.info {
+  position: absolute;
+  left: 0;
+  bottom: 6em;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-top-right-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  padding: 2em 1em 3em 1em;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 300;
+  font-size: 0.9em;
+  max-width: 40em;
+  transform: translateX(-100%);
+  opacity: 0;
+
+  transition: all 0.5s ease-out;
+  &.visible {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  a {
+    color: white;
+  }
+
+  ul li {
+    margin-left: 1em;
+    line-height: 1.75em;
+  }
+
+  p {
+    margin-top: 1em;
+    text-align: center;
+  }
+}
+
+.info__title {
+  text-align: center;
+  letter-spacing: 0.2em;
+  font-family: 'GeoNMS', sans-serif;
+  margin-bottom: 0.8em;
+
+  span {
+    vertical-align: middle;
+
+    &:nth-child(1) {
+      font-size: 2em;
+      margin-right: 0.05em;
+    }
+    &:nth-child(2) {
+      font-size: 3.5em;
+    }
+  }
+}
+
 .overlay {
   &__distance,
   &__speed,

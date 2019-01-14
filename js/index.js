@@ -28,6 +28,10 @@ window.addEventListener('resize', () => {
   camera.updateProjectionMatrix();
 });
 
+document.querySelector('.info-trigger').addEventListener('click', () => {
+  document.querySelector('.info').classList.toggle('visible');
+});
+
 let textures, director, pov, galaxy, sun, earth;
 
 window.onload = () => {
