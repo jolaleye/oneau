@@ -78,13 +78,13 @@
       "text": "You can use your mouse to look around now.",
       "delay": 2000,
       "fadeFor": 1000,
-      "showFor": 3000
+      "showFor": 3500
     },
     {
       "text": "Scroll to adjust your speed.",
       "delay": 0,
       "fadeFor": 1000,
-      "showFor": 3000
+      "showFor": 3500
     },
     {
       "text": "Enjoy the ride :)",
@@ -101,7 +101,7 @@
           "text": "This is about how far away the moon is. It took the Apollo 11 crew about 3 days to get here.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 4000
+          "showFor": 5000
         }
       ]
     },
@@ -112,7 +112,7 @@
           "text": "Space is pretty empty, isn't it?",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -123,13 +123,13 @@
           "text": "If you were driving in a straight line at 60mph, without any bathroom breaks, it would take you 177 years to get here...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 4000
+          "showFor": 5000
         },
         {
           "text": "...and you're only like 13% of the way to the Sun...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -140,7 +140,7 @@
           "text": "Imagine being an alien looking for some Earthlings in all this emptiness.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -151,13 +151,13 @@
           "text": "Venus's orbit lies somewhere around here.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         },
         {
           "text": "I would say look for it, but you'll never find it.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -168,13 +168,13 @@
           "text": "Oooh, I think I saw something...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         },
         {
           "text": "Just kidding, just more space.",
           "delay": 1500,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         }
       ]
     },
@@ -185,19 +185,19 @@
           "text": "This is about how far away Mars is during Close Approach (if Mars were between Earth and the Sun).",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 5000
         },
         {
           "text": "Even during Close Approach, it took NASA's InSight lander over 6 months to reach the Red Planet in 2018.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 4000
+          "showFor": 5000
         },
         {
           "text": "And that thing moves fast... like 10,000 km/h fast.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         }
       ]
     },
@@ -208,7 +208,7 @@
           "text": "All this space makes Earth seem pretty insignificant...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -219,30 +219,30 @@
           "text": "We can look at the numbers, but we can't really comprehend how massive this scale is.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
     {
-      "at": 89000000,
+      "at": 88000000,
       "subs": [
         {
           "text": "Even this huge distance is nothing on the scale of the Milky Way...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 5000
         },
         {
           "text": "And our galaxy is just one of many...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         },
         {
           "text": "There's an existential crisis for you.",
           "delay": 2000,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -253,7 +253,7 @@
           "text": "By the way, we passed Mercury just a little bit ago...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 5000
         }
       ]
     },
@@ -264,13 +264,13 @@
           "text": "This is about where Parker Solar Probe broke the record for the closest approach to the Sun by a man-made object.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 4250
+          "showFor": 5000
         },
         {
           "text": "That was in 2018 and the little guy is still going.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         }
       ]
     },
@@ -281,7 +281,7 @@
           "text": "Not too far now...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         }
       ]
     },
@@ -292,7 +292,7 @@
           "text": "Congrats on coming this far :)",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         }
       ]
     },
@@ -303,7 +303,7 @@
           "text": "Justtt about there...",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4500
         }
       ]
     },
@@ -327,7 +327,7 @@
           "text": "This is the world record for the highest speed ever recorded by a manned aircraft, set by the X-15 in 1967.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 4000
         }
       ]
     },
@@ -338,7 +338,7 @@
           "text": "This is the highest speed ever attained by humans, achieved by the Apollo 10 crew in 1969.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 4000
         }
       ]
     },
@@ -349,7 +349,7 @@
           "text": "This was the speed reached by Parker Solar Probe in October 2018 when it broke the record for fastest man-made object relative to the Sun.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3500
+          "showFor": 4000
         }
       ]
     },
@@ -360,7 +360,7 @@
           "text": "This is how fast the Andromeda Galaxy is approaching our own Milky Way. Spooky right?",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3250
+          "showFor": 4000
         }
       ]
     },
@@ -371,7 +371,7 @@
           "text": "This is the typical speed of the brightest part of a lightning strike.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4000
         }
       ]
     },
@@ -382,13 +382,13 @@
           "text": "You just hit the universe's speed limit: light.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4000
         },
         {
           "text": "We can even comprehend how fast this really is.",
           "delay": 0,
           "fadeFor": 1000,
-          "showFor": 3000
+          "showFor": 4000
         }
       ]
     }
